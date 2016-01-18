@@ -1,0 +1,80 @@
+<!-- /templates/blog.liquid -->
+{% paginate blog.articles by 5 %}
+
+<div class="grid">
+
+  <div class="grid__item large--five-sixths push--large--one-twelfth">
+
+    <header class="section-header text-center">
+      <h1>
+        {% if current_tags %}
+          {{ blog.title | link_to: blog.url }} &mdash; {{ current_tags.first }}
+        {% else %}
+          {{ blog.title }}
+        {% endif %}
+        <a href="{{ shop.url }}{{ blog.url }}.atom" class="icon-fallback-text rss-link">
+          <span class="icon icon-rss" aria-hidden="true"></span>
+          <span class="fallback-text">RSS</span>
+        </a>
+      </h1>
+      <hr class="hr--small">
+    </header>
+
+    {% for article in blog.articles %}
+
+      {% assign article_content = article.excerpt_or_content %}
+      {% assign featured_image_src = '' %}
+
+      {% if article.image %}
+        {% assign featured_image_src = article | img_url: '1024x1024' %}
+      {% elsif article_content contains '<img' %}
+        {% assign featured_image_src = article_content | split: 'src="' %}
+        {% assign featured_image_src = featured_image_src[1] | split: '"' | first %}
+      {% endif %}
+
+      <article class="article grid small--text-center">
+
+        {% unless featured_image_src == blank %}
+          <div class="grid__item">
+            <a class="article__featured-image" href="{{ article.url }}">
+              {{ featured_image_src | img_tag: article.title }}
+            </a>
+          </div>
+        {% endunless %}
+
+        <div class="grid__item large--two-tenths push--large--one-tenth">
+          <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}" class="date">{{ article.published_at | date: format: 'month_day_year' }}</time>
+          <hr class="hr--small hr--left small--hide">
+        </div>
+        <div class="grid__item large--six-tenths push--large--one-tenth">
+          <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
+          <div class="rte rte--indented-images">
+            {{ article_content | strip_html | truncatewords: 120 }}
+          </div>
+
+          <p>
+            <a href="{{ article.url }}" class="text-link">{{ 'blogs.article.read_more' | t }} <span class="icon icon-arrow-right" aria-hidden="true"></span></a>
+          </p>
+
+          {% if article.tags.size > 0 %}
+            <ul class="tags tags--article inline-list">
+              {% include 'tags-article' %}
+            </ul>
+          {% endif %}
+        </div>
+      </article>
+
+      {% unless forloop.last %}<hr class="hr--clear">{% endunless %}
+
+    {% endfor %}
+
+    {% if paginate.pages > 1 %}
+      <div class="pagination">
+        {{ paginate | default_pagination | replace: '&laquo; Previous', '<span class="icon icon-arrow-left" aria-hidden="true"></span>' | replace: 'Next &raquo;', '<span class="icon icon-arrow-right" aria-hidden="true"></span>' }}
+      </div>
+    {% endif %}
+
+  </div>
+</div>
+
+{% endpaginate %}

@@ -1,0 +1,10 @@
+---
+:api_key: af608acaf70b20396b8248232fa3f360
+:password: 79aa7d4755d930c4deb7e37b6c9192b7
+:store: m1849.myshopify.com
+:theme_id: 85688643
+:whitelist_files:
+- directoryToUpload/
+- importantFile.txt
+:ignore_files:
+- config/settings.html

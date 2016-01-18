@@ -1,0 +1,47 @@
+<!-- /snippets/collection-grid-item.liquid -->
+{% comment %}
+
+  This snippet is used to showcase each collection during the loop,
+  'for product in collections[collection_handle].products' in list-collections.liquid.
+
+{% endcomment %}
+
+{% comment %}
+  Set the default grid_item_width if no variable is set
+{% endcomment %}
+{% unless grid_item_width %}
+  {% assign grid_item_width = 'medium--one-half large--one-third' %}
+{% endunless %}
+
+{% comment %}
+  Set the default image_size if no variable is set
+{% endcomment %}
+{% unless image_size %}
+  {% assign image_size = 'grande' %}
+{% endunless %}
+
+{% assign no_collection_image = true %}
+
+<div class="grid__item {{ grid_item_width }} collection-collage__item text-center">
+  <a href="{{ collections[collection_handle].url }}" class="collection-grid__item-link collection-collage__item-wrapper">
+    {% comment %}
+      Use capture to put the collection title in a variable that is used in liquid filters
+    {% endcomment %}
+    {% capture collection_title %}{{ collections[collection_handle].title | escape }}{% endcapture %}
+    {% if collections[collection_handle].image %}
+      {% assign no_collection_image = false %}
+      {% capture collection_image_url %}{{ collections[collection_handle] | img_url: image_size }}{% endcapture %}
+    {% else %}
+      {% capture collection_image_url %}{{ collections[collection_handle].products.first | img_url: image_size }}{% endcapture %}
+    {% endif %}
+
+    <div class="collection-grid__item-overlay grid__image" style="background-image: url({{ collection_image_url }})">
+    </div>
+
+    <div class="collection-grid__item-title--wrapper">
+      <span class="collection-grid__item-title">
+        {{ collections[collection_handle].title }}
+      </span>
+    </div>
+  </a>
+</div>

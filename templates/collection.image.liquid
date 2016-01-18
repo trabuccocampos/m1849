@@ -1,0 +1,19 @@
+<!-- /templates/collection.image.liquid -->
+
+{% comment %}
+  If a collection image exists:
+  Close wrapper, insert featured image, then open it back up
+{% endcomment %}
+{% if collection.image %}
+  </div><!-- //wrapper -->
+  <div class="collection-hero">
+    <div class="collection-hero__image" style="background-image: url({{ collection.image | collection_img_url: '1024x1024' }});"></div>
+  </div>
+{% endif %}
+
+{% if collection.image %}
+  <div class="wrapper">
+
+{% endif %}
+
+{% include 'collection-template' %}

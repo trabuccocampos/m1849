@@ -1,0 +1,63 @@
+<!-- snippets/featured-products.liquid -->
+
+{% if section_number > 1 and number_of_index_sections > 1 %}
+ <hr class="hr--medium hr--clear">
+{% endif %}
+
+<div class="section-header text-center">
+  <h1>{{ 'home_page.sections.featured_products' | t }}</h1>
+  <hr class="hr--small">
+</div>
+
+<div class="{% if settings.collection_products_grid == 'collage' %}grid grid-collage{% else %}grid-uniform{% endif %}">
+
+  {% comment %}
+    Loop through products in your Frontpage collection.
+    This collection is created by default, but you must add products to it.
+
+    See the snippet 'snippets/product-grid-collage.liquid'.
+
+    `is_reverse_row_product`, `three_row_index_product`, `collection_product_count_product`, and `divisible_by_three_product` are
+    all used by 'snippets/product-grid-collage.liquid'
+  {% endcomment %}
+
+  {% if settings.home_featured_products == blank or collections[settings.home_featured_products].empty? or collections[settings.home_featured_products].products_count == 0 %}
+
+    {% comment %}
+      For onboarding new users to your theme, we add some default products and onboarding tutorials to help populate their store
+    {% endcomment %}
+    {% unless emptyState %}
+      {{ 'theme-onboarding.css' | global_asset_url | stylesheet_tag }}
+      {% assign emptyState = true %}
+    {% endunless %}
+
+    {% include 'onboarding-featured-products' %}
+
+  {% else %}
+
+    {% if settings.collection_products_grid == 'collage' %}
+
+      {% assign is_reverse_row__product = false %}
+      {% assign three_row_index__product = 0 %}
+      {% if collections[settings.home_featured_products].products_count > 50 %}
+        {% assign collection_product_count__product = 50 %}
+      {% else %}
+        {% assign collection_product_count__product = collections[settings.home_featured_products].products_count %}
+      {% endif %}
+      {% assign divisible_by_three__product = collection_product_count__product | modulo:3 %}
+
+      {% for product in collections[settings.home_featured_products].products %}
+        {% include 'product-grid-collage' %}
+      {% endfor %}
+
+    {% else %}
+
+      {% assign grid_item_width = 'medium--one-half large--one-third' %}
+      {% for product in collections[settings.home_featured_products].products %}
+        {% include 'product-grid-item' %}
+      {% endfor %}
+
+    {% endif %}
+
+  {% endif %}
+</div>

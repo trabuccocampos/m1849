@@ -1,0 +1,26 @@
+<!-- /templates/index.liquid -->
+
+{% comment %}
+  Track how many sections are shown
+{% endcomment %}
+{% assign number_of_index_sections = 0 %}
+
+{% if settings.home_section_1 != blank %}
+  {% assign number_of_index_sections = number_of_index_sections | plus: 1 %}
+  {% include settings.home_section_1, section_number: 1 %}
+{% endif %}
+
+{% if settings.home_section_2 != blank %}
+  {% assign number_of_index_sections = number_of_index_sections | plus: 1 %}
+  {% include settings.home_section_2, section_number: 2 %}
+{% endif %}
+
+{% if settings.home_section_3 != blank %}
+  {% assign number_of_index_sections = number_of_index_sections | plus: 1 %}
+  {% include settings.home_section_3, section_number: 3 %}
+{% endif %}
+
+{% if settings.home_section_4 != blank %}
+  {% assign number_of_index_sections = number_of_index_sections | plus: 1 %}
+  {% include settings.home_section_4, section_number: 4 %}
+{% endif %}

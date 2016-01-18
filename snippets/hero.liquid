@@ -1,0 +1,79 @@
+{% if section_number > 1 and number_of_index_sections > 1 %}
+  <hr class="hr--medium hr--clear">
+{% endif %}
+
+{% comment %}
+  Set hero as enabled so JS is loaded at end of index.liquid.
+  Also set variables to control JS settings and appearance.
+{% endcomment %}
+{% assign hero_enabled = true %}
+{% assign hero_full_height = false %}
+{% assign hero_full_width = true %}
+{% assign hero_parallax = true %}
+{% assign hero_first_on_page = false %}
+
+{% comment %}
+  If hero is first section on homepage, add class that sets
+  negative top-margin for alignment and force full height.
+{% endcomment %}
+{% if section_number == 1 %}
+  {% assign hero_first_on_page = true %}
+  {% assign hero_full_height = true %}
+{% endif %}
+
+<!-- Hero is full width, so close .wrapper -->
+{% if hero_full_width %}
+  </div>
+{% endif %}
+
+  <div class="hero{% if hero_full_height %} hero--full-height{% endif %}{% if hero_first_on_page %} hero--first{% endif %}" id="Hero"{% if hero_full_height %} data-fullscreen="true"{% endif %}{% if hero_parallax %}data-parallax="true"{% endif %}>
+    {% for i in (1..6) %}
+      {% capture slide %}hero_slide_{{ i }}_enable{% endcapture %}
+      {% capture slide_img %}hero_slide_{{ i }}.jpg{% endcapture %}
+      {% capture slide_text_color %}hero_slide_{{ i }}_text_color{% endcapture %}
+      {% capture slide_heading %}hero_slide_{{ i }}_heading{% endcapture %}
+      {% capture slide_subheading %}hero_slide_{{ i }}_subheading{% endcapture %}
+      {% capture slide_cta %}hero_slide_{{ i }}_cta{% endcapture %}
+      {% capture slide_link %}hero_slide_{{ i }}_link{% endcapture %}
+      {% if settings[slide] %}
+        <div class="hero__slide {{ settings[slide_text_color] }}" data-color="{{ settings[slide_text_color] }}">
+          {% if hero_full_height %}
+            {% comment %}
+              Full-screen styles use CSS background images
+            {% endcomment %}
+            <div class="hero__image" style="background-image: url('{{ slide_img | asset_url }}');" data-image="{{ slide_img | asset_url }}"></div>
+          {% else %}
+            <div class="hero__image">
+              <img src="{{ slide_img | asset_url }}" alt="{{ settings[slide_heading] }}">
+            </div>
+          {% endif %}
+          <div class="hero__text-wrap">
+            <div class="hero__text-align">
+              <div class="hero__text-content">
+                {% unless settings[slide_subheading] == blank %}
+                  <p class="hero__subtitle">
+                    {{ settings[slide_subheading] }}
+                  </p>
+                {% endunless %}
+                {% unless settings[slide_heading] == blank %}
+                  <h1 class="hero__title">
+                    {{ settings[slide_heading] }}
+                  </h1>
+                {% endunless %}
+                {% unless settings[slide_cta] == blank %}
+                  <a href="{{ settings[slide_link] }}" class="btn hero__cta">
+                    {{ settings[slide_cta] }} <span class="icon icon-arrow-right" aria-hidden="true"></span>
+                  </a>
+                {% endunless %}
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+
+<!-- Reopen .wrapper after full-width hero -->
+{% if hero_full_width %}
+  <div class="wrapper">
+{% endif %}

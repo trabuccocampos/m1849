@@ -1,0 +1,104 @@
+<!-- snippets/featured-collections.liquid -->
+
+{% if section_number > 1 and number_of_index_sections > 1 %}
+ <hr class="hr--medium hr--clear">
+{% endif %}
+
+<div class="section-header text-center">
+  <h1>{{ 'home_page.sections.featured_collections' | t }}</h1>
+  <hr class="hr--small">
+</div>
+
+<div class="grid collection-grid">
+
+  {% comment %}
+    Show up to 9 collections.
+    Frontpage will be excluded if collections defined automatically.
+  {% endcomment %}
+  {% assign isEmpty = true %}
+  {% assign collection_index = 0 %}
+  {% assign collection_count = 0 %}
+  {% assign collection_limit = 9 %}
+
+  {% comment %}
+    Manual sort of Featured Collections
+  {% endcomment %}
+  {% if settings.home_featured_collections_sort == 'manual' %}
+
+    {% comment %}
+      We loop through the first 9 settings so we have a way
+      to iterate over an object we can be certain will be big enough
+    {% endcomment %}
+    {% for i in (1..collection_limit) %}
+      {% assign collection_setting = "collection_" | append:i %}
+      {% if settings[collection_setting] != blank %}
+        {% assign collection_count = collection_count | plus: 1 %}
+      {% endif %}
+    {% endfor %}
+
+    {% comment %}
+      Once we know how many settings are not blank and a 'collection_count' to pass
+      into the collage grid, loop over the custom collections again and add them
+      to the grid.
+    {% endcomment %}
+    {% if collection_count > 0 %}
+      {% assign isEmpty = false %}
+    {% endif %}
+    {% assign divisible_by_three = collection_count | modulo:3 %}
+    {% assign divisible_by_two = collection_count | modulo:2 %}
+
+    {% for i in (1..collection_limit) %}
+      {% assign collection_setting = "collection_" | append:i %}
+      {% if settings[collection_setting] != blank %}
+        {% assign collection_handle = settings[collection_setting] %}
+        {% assign collection_index = forloop.index %}
+        {% include 'collection-grid-collage' %}
+      {% endif %}
+    {% endfor %}
+  {% else %}
+    {% comment %}
+      Add one to the collection limit to offset chance of Frontpage being included
+    {% endcomment %}
+    {% assign collection_limit = collection_limit | plus: 1 %}
+
+    {% comment %}
+      Calculate number of collections to show, making sure Frontpage isn't one
+    {% endcomment %}
+    {% for collection in collections limit: collection_limit %}
+      {% unless collection.handle == 'frontpage' %}
+        {% assign collection_count = collection_count | plus: 1 %}
+      {% endunless %}
+    {% endfor %}
+
+    {% if collection_count > 0 %}
+      {% assign isEmpty = false %}
+    {% endif %}
+
+    {% assign divisible_by_three = collection_count | modulo: 3 %}
+    {% assign divisible_by_two = collection_count | modulo: 2 %}
+
+    {% comment %}
+      Loop through the collections to display
+    {% endcomment %}
+    {% for collection in collections limit: collection_limit %}
+      {% unless collection.handle == 'frontpage' %}
+        {% assign collection_index = collection_index | plus: 1 %}
+        {% assign collection_handle = collection.handle %}
+        {% include 'collection-grid-collage' %}
+      {% endunless %}
+    {% endfor %}
+  {% endif %}
+
+  {% if isEmpty %}
+    {% comment %}
+      Add default collections to help with onboarding
+    {% endcomment %}
+    {% unless emptyState %}
+      {{ 'theme-onboarding.css' | global_asset_url | stylesheet_tag }}
+      {% assign emptyState = true %}
+    {% endunless %}
+
+    {% include 'onboarding-featured-collections' %}
+  {% endif %}
+
+</div>

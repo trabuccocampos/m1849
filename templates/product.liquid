@@ -1,0 +1,169 @@
+<!-- /templates/product.liquid -->
+
+<div itemscope itemtype="http://schema.org/Product">
+
+  <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
+  <meta itemprop="image" content="{{ product.featured_image.src | img_url: 'grande' }}">
+
+  {% assign current_variant = product.selected_or_first_available_variant %}
+
+  <div class="grid product-single">
+    <div class="grid__item large--seven-twelfths medium--seven-twelfths text-center">
+      <div class="product-single__photos">
+        {% assign featured_image = current_variant.featured_image | default: product.featured_image %}
+
+        {% comment %}
+          Display current variant image, or default first
+        {% endcomment %}
+        <div class="product-single__photo-wrapper">
+          <img class="product-single__photo" id="ProductPhotoImg" src="{{ featured_image | img_url: 'grande' }}" {% if settings.product_zoom_enable %}data-mfp-src="{{ featured_image | img_url: '1024x1024' }}"{% endif %} alt="{{ featured_image.alt | escape }}" data-image-id="{{ featured_image.id }}">
+        </div>
+
+        {% comment %}
+          Display rest of product images, not repeating the featured one
+        {% endcomment %}
+        {% for image in product.images %}
+          {% unless image contains featured_image %}
+            <div class="product-single__photo-wrapper">
+              <img class="product-single__photo" src="{{ image.src | img_url: 'grande' }}" {% if settings.product_zoom_enable %}data-mfp-src="{{ image.src | img_url: '1024x1024' }}"{% endif %} alt="{{ image.alt | escape }}" data-image-id="{{ image.id }}">
+            </div>
+          {% endunless %}
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="grid__item product-single__meta--wrapper medium--five-twelfths large--five-twelfths">
+      <div class="product-single__meta">
+        {% if settings.product_vendor_enable %}
+          <h2 class="product-single__vendor" itemprop="brand">{{ product.vendor }}</h2>
+        {% endif %}
+
+        <h1 class="product-single__title" itemprop="name">{{ product.title }}</h1>
+
+        <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+          {% comment %}
+            Optionally show the 'compare at' or original price of the product.
+          {% endcomment %}
+
+          {% if product.compare_at_price > product.price %}
+            <span class="product-single__price--wrapper">
+              <span class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
+              <span id="ComparePrice" class="product-single__price--compare-at">
+                {{ product.compare_at_price | money }}
+              </span>
+              <span class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
+            </span>
+          {% endif %}
+
+          <span id="ProductPrice" class="product-single__price{% if product.compare_at_price > product.price %} on-sale{% endif %}" itemprop="price">
+            {{ current_variant.price | money }}
+          </span>
+
+          <hr class="hr--small">
+
+          <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+          <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
+
+          <form action="/cart/add" method="post" enctype="multipart/form-data" class="product-single__form" id="AddToCartForm">
+            <select name="id" id="ProductSelect" class="product-single__variants">
+              {% for variant in product.variants %}
+                {% if variant.available %}
+                  <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
+                {% else %}
+                  <option disabled="disabled">
+                    {{ variant.title }} - {{ 'products.product.sold_out' | t }}
+                  </option>
+                {% endif %}
+              {% endfor %}
+            </select>
+
+            {% comment %}
+            <div class="product-single__quantity">
+              <label for="Quantity" class="product-single__quantity-label js-quantity-selector">{{ 'products.product.quantity' | t }}</label>
+              <input type="number" hidden="hidden" id="Quantity" name="quantity" value="1" min="1" class="js-quantity-selector">
+            </div>
+            {% endcomment %}
+
+            <div class="product-single__add-to-cart">
+              <button type="submit" name="add" id="AddToCart" class="btn">
+                <span id="AddToCartText">{{ 'products.product.add_to_cart' | t }}</span>
+              </button>
+            </div>
+          </form>
+
+        </div>
+
+        <div class="product-single__description rte" itemprop="description">
+          {{ product.description }}
+        </div>
+
+        {% if settings.social_sharing_products %}
+          {% include 'social-sharing' %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  {% if collection %}
+    <hr class="hr--clear">
+    <div class="text-center">
+      <a href="{{ collection.url }}" class="return-link">&larr; {{ 'products.general.collection_return' | t: collection: collection.title }}</a>
+    </div>
+  {% endif %}
+
+</div>
+
+{% comment %}
+
+  *IMPORTANT:*
+  This theme uses a customized version of `option_selection.js` to support using radio inputs for
+  color and size variants. The custom version is in `variant_selection.js`.
+
+  If you wish to enable the default dropdowns for size and color
+  you can change the liquid asset tag below from:
+
+  {{ 'variant_selection.js' | asset_url | script_tag }}
+
+  to
+
+  {{ 'option_selection.js' | shopify_asset_url | script_tag }}
+
+  If you use the default `option_selection.js` the labels for the dropdowns will
+  appear outside the dropdown.
+
+  You will also need to change `.radio-wrapper` to `.selector-wrapper` below.
+
+{% endcomment %}
+{{ 'variant_selection.js' | asset_url | script_tag }}
+<script>
+  var selectCallback = function(variant, selector) {
+    timber.productPage({
+      money_format: "{{ shop.money_format }}",
+      variant: variant,
+      selector: selector,
+      translations: {
+        addToCart : {{ 'products.product.add_to_cart' | t | json }},
+        soldOut : {{ 'products.product.sold_out' | t | json }},
+        unavailable : {{ 'products.product.unavailable' | t | json }}
+      }
+    });
+  };
+
+  jQuery(function($) {
+    new Shopify.OptionSelectors('ProductSelect', {
+      product: {{ product | json }},
+      onVariantSelected: selectCallback,
+      enableHistoryState: true
+    });
+
+    // Add label if only one product option and it isn't 'Title'. Could be 'Size'.
+    {% if product.options.size == 1 and product.options.first != 'Title' %}
+      $('.radio-wrapper:eq(0)').prepend('<label for="ProductSelect-option-0" class="single-option-radio__label">{{ product.options.first | escape }}</label>');
+    {% endif %}
+
+    // Hide drop-down selectors if we only have 1 variant and its title contains 'Default'.
+    {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
+      $('.selector-wrapper').hide();
+    {% endif %}
+  });
+</script>
