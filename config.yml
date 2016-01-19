@@ -4,7 +4,6 @@
 :store: m1849.myshopify.com
 :theme_id: 85688643
 :whitelist_files:
-- directoryToUpload/
-- importantFile.txt
 :ignore_files:
 - config/settings.html
+- config.yml

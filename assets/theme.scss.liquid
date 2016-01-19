@@ -1,5 +1,5 @@
 /*============================================================================
-  Brooklyn by Shopify
+  m1849 by A.A. Trabucco-Campos
 ==============================================================================*/
 
 /*================ Variables, theme settings, and Sass mixins from Timber ================*/
@@ -318,6 +318,60 @@ $collectionCollageRowHeightSmall: 280px;
 // Password page
 $passwordPageUseBgImage: true;
 
+
+
+/*================ Custom Typography ================*/
+
+/*
+        This font software is the property of Commercial Type.
+
+        You may not modify the font software, use it on another website, or install it on a computer.
+
+        License information is available at http://commercialtype.com/eula
+        For more information please visit Commercial Type at http://commercialtype.com or email us at info[at]commercialtype.com
+
+        Copyright (C) 2013 Schwartzco Inc.
+        License: 1510-ABXLSM
+*/
+
+
+@font-face {
+  font-family: 'Graphik Web';
+  src: url('Graphik-Semibold-Web.eot');
+  src: url('Graphik-Semibold-Web.eot?#iefix') format('embedded-opentype'),
+     url('Graphik-Semibold-Web.woff') format('woff'),
+     url('Graphik-Semibold-Web.ttf') format('truetype'),
+     url('Graphik-Semibold-Web.svg#Graphik-Semibold') format('svg');
+  font-weight:  600;
+  font-style:   normal;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: 'Graphik Web';
+  src: url('Graphik-RegularItalic-Web.eot');
+  src: url('Graphik-RegularItalic-Web.eot?#iefix') format('embedded-opentype'),
+     url('Graphik-RegularItalic-Web.woff') format('woff'),
+     url('Graphik-RegularItalic-Web.ttf') format('truetype'),
+     url('Graphik-RegularItalic-Web.svg#Graphik-RegularItalic') format('svg');
+  font-weight:  400;
+  font-style:   italic;
+  font-stretch: normal;
+}
+
+@font-face {
+  font-family: 'Graphik Web';
+  src: url('Graphik-Regular-Web.eot');
+  src: url('Graphik-Regular-Web.eot?#iefix') format('embedded-opentype'),
+     url('Graphik-Regular-Web.woff') format('woff'),
+     url('Graphik-Regular-Web.ttf') format('truetype'),
+     url('Graphik-Regular-Web.svg#Graphik-Regular') format('svg');
+  font-weight:  400;
+  font-style:   normal;
+  font-stretch: normal;
+}
+
+
 /*================ Typography ================*/
 {% if settings.type_base_family contains 'Google' %}
   {% assign type_base_parts = settings.type_base_family | split: '_' %}
@@ -344,7 +398,7 @@ $passwordPageUseBgImage: true;
   {% assign accent_weight = type_accent_parts[2] | split: ',' %}
 {% else %}
   {% assign accent_family = settings.type_accent_family %}
-  {% assign accent_weight = 700 %}
+  {% assign accent_weight = 400 %}
 {% endif %}
 
 $headerFontStack: {{ header_family }};
@@ -1618,7 +1672,7 @@ $shareCountBg: $colorBody;
   margin-right: -2px;
   font-size: 14px;
   line-height: $shareButtonHeight - 2;
-  
+
   @if $passwordPageUseBgImage {
     color: #ffffff;
   } @else {
@@ -1983,7 +2037,8 @@ $shareCountBg: $colorBody;
 
   @include at-query($min, $postSmall) {
     .hero__title {
-      font-size: em(60px);
+      font-size: em(70px);
+      font-weight: 400;
     }
 
     .hero__subtitle {
@@ -1993,7 +2048,7 @@ $shareCountBg: $colorBody;
 
   @include at-query($min, $large) {
     .hero__title {
-      font-size: em(64px);
+      font-size: em(80px);
     }
   }
 }
@@ -2430,7 +2485,7 @@ $slick-opacity-not-active: 0.25;
 .site-nav__link {
   @include transition('color 0.2s, opacity 0.1s');
   @include accentFontStack;
-  font-size: em(14px);
+  font-size: em(16px);
 
   .is-light & {
     color: #fff;
@@ -3353,5 +3408,3 @@ button.mfp-arrow {
     @include visuallyHidden;
   }
 }
-
-
