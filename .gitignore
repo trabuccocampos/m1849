@@ -47,7 +47,6 @@ Thumbs.db
 grunt-config.json
 /_site
 assets/logo.png
-config.yml
 
 # Fonts #
 ######################
@@ -59,3 +58,5 @@ config.yml
 /assets/Graphik-Semibold-Web.svg
 /assets/Graphik-RegularItalic-Web.svg
 /assets/Graphik-Regular-Web.svg
+
+config.yml
