@@ -47,6 +47,7 @@ Thumbs.db
 grunt-config.json
 /_site
 assets/logo.png
+config.yml
 
 # Fonts #
 ######################
