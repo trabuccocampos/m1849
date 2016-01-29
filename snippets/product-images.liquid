@@ -3,30 +3,56 @@
   <div class="stacked-images">
     <section class="stacked-container">
       {% for image in product.images reversed %}
-        <img data-image-count="{{ image_count }}" src="{{ image.src | img_url: 'grande' }}" alt="{{ image.alt | escape }}" data-image-id="{{ image.id }}">
+        <img data-image-count="{{ image_count }}" src="{{ image.src | img_url: 'large' }}" alt="{{ image.alt | escape }}" data-image-id="{{ image.id }}">
       {% endfor %}
     </section>
-    <footer>Frontal layer view</footer>
+    <footer>
+      <span class="image-view-title">Frontal layer view</span>
+    </footer>
   </div>
   <div class="side-view-images" data-image-count="{{ image_count }}">
     <section class="side-view-container">
       {% for image in product.images %}
         <figure>
-          <img src="{{ image.src | img_url: 'grande' }}">
+          <img src="{{ image.src | img_url: 'large' }}">
         </figure>
       {% endfor %}
     </section>
-    <footer>Side view</footer>
+    <footer>
+      <span class="image-view-title">Side view</span>
+    </footer>
+  </div>
+  <div class="back-view-image" data-image-count="{{ image_count }}">
+    <section class="back-view-container">
+      {{ product.images.last | img_url: "large" | img_tag }}
+    </section>
+    <footer>
+      <span class="image-view-title">Back view</span>
+    </footer>
   </div>
 </div>
 <script type="text/javascript">
   (function($) {
+    // Fix for setting specific height on container
     function set_stack_height() {
       var stack_height = $('.stacked-images').outerHeight();
-      $('.product-images').height(stack_height);
+      $('.product-images').css('height', stack_height + "px");
     }
-    
-    $(set_stack_height);
+        
+    $(window).load(set_stack_height);
     $(window).resize(set_stack_height);
+    
+    $(function() {
+      // Toggle front and back switches
+      var $product_images = $('.product-images');
+
+      $('.switch-image-view').click(function() {
+        var direction = $(this).attr('data-direction');
+
+        $product_images.attr('data-direction', direction);
+        $('.switch-image-view').addClass('active');
+        $(this).removeClass('active');
+      });
+    });
   })(jQuery);
 </script>
