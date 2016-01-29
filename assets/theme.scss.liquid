@@ -3409,3 +3409,65 @@ button.mfp-arrow {
     @include visuallyHidden;
   }
 }
+
+// Product images
+.product-single {
+  .product-images {
+    position: relative;
+  }
+  
+  .stacked-images {
+    $offset: 80;
+    float: left;
+    width: 70%;
+    
+    img {
+      display: inline-block;
+      position: relative;
+      vertical-align: top;
+      margin-left: -#{$offset}px;
+      border-radius: 13px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+      
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+    
+    @for $i from 1 through 10 {
+      img[data-image-count="#{$i}"] {
+        $inset: (($i - 1) * $offset) / $i;
+        $width: percentage(1/$i);
+        width: calc(#{$width} + #{$inset - 4}px);
+      }
+      
+      img:nth-child(#{$i}) {
+        $offset-y: ($i - 1)*$offset;
+        margin-top: #{$offset-y}px;
+      }
+    }
+  }
+  
+  .side-view-images {
+    float: right;
+    height: 100%;
+    font-size: 0;
+    border-radius: 10px;
+    
+    figure {
+      display: inline-block;
+      overflow: hidden;
+      height: 100%;
+      width: 20px;
+      margin: 0;
+      padding: 0;
+      
+      img {
+        height: 100%;
+        max-width: none;
+        position: relative;
+        left: -50%;
+      }
+    }
+  }
+}
