@@ -3414,6 +3414,14 @@ button.mfp-arrow {
 .product-single {
   .product-images {
     position: relative;
+    
+    footer {
+      position: absolute;
+      top: 100%;
+      padding-top: 40px;
+      font-size: 16px;
+      color: #d0d2d3;
+    }
   }
   
   .stacked-images {
@@ -3446,13 +3454,26 @@ button.mfp-arrow {
         margin-top: #{$offset-y}px;
       }
     }
+
+    footer {
+      width: 70%;
+      text-align: center;
+    }
   }
   
   .side-view-images {
     float: right;
     height: 100%;
     font-size: 0;
-    border-radius: 10px;
+    width: 30%;
+    
+    .side-view-container {
+      display: inline-block;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 100%;
+      border-radius: 10px;
+    }
     
     figure {
       display: inline-block;
@@ -3468,6 +3489,10 @@ button.mfp-arrow {
         position: relative;
         left: -50%;
       }
+    }
+  
+    footer {
+      width: 30%;
     }
   }
 }
