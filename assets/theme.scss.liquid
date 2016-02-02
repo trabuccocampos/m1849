@@ -3483,6 +3483,21 @@ button.mfp-arrow {
   .product-images {
     height: 430px;
     position: relative;
+        
+    .toggle-views {
+      position: absolute;
+      bottom: -65px;
+      right: -115px;
+    }
+    
+    @media (max-width: $small) {
+      margin-bottom: 120px;
+      
+      .toggle-views {
+        right: 34px;
+        bottom: -110px;
+      }
+    }
     
     footer {
       position: absolute;
