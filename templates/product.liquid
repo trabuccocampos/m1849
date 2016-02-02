@@ -82,37 +82,38 @@
 
   You will also need to change `.radio-wrapper` to `.selector-wrapper` below.
 
+  {{ 'variant_selection.js' | asset_url | script_tag }}
 {% endcomment %}
-{{ 'variant_selection.js' | asset_url | script_tag }}
+
 <script>
-  var selectCallback = function(variant, selector) {
-    timber.productPage({
-      money_format: "{{ shop.money_format }}",
-      variant: variant,
-      selector: selector,
-      translations: {
-        addToCart : {{ 'products.product.add_to_cart' | t | json }},
-        soldOut : {{ 'products.product.sold_out' | t | json }},
-        unavailable : {{ 'products.product.unavailable' | t | json }}
-      }
-    });
-  };
-
-  jQuery(function($) {
-    new Shopify.OptionSelectors('ProductSelect', {
-      product: {{ product | json }},
-      onVariantSelected: selectCallback,
-      enableHistoryState: true
-    });
-
-    // Add label if only one product option and it isn't 'Title'. Could be 'Size'.
-    {% if product.options.size == 1 and product.options.first != 'Title' %}
-      $('.radio-wrapper:eq(0)').prepend('<label for="ProductSelect-option-0" class="single-option-radio__label">{{ product.options.first | escape }}</label>');
-    {% endif %}
-
-    // Hide drop-down selectors if we only have 1 variant and its title contains 'Default'.
-    {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
-      $('.selector-wrapper').hide();
-    {% endif %}
-  });
+  // var selectCallback = function(variant, selector) {
+  //   timber.productPage({
+  //     money_format: "{{ shop.money_format }}",
+  //     variant: variant,
+  //     selector: selector,
+  //     translations: {
+  //       addToCart : {{ 'products.product.add_to_cart' | t | json }},
+  //       soldOut : {{ 'products.product.sold_out' | t | json }},
+  //       unavailable : {{ 'products.product.unavailable' | t | json }}
+  //     }
+  //   });
+  // };
+  // 
+  // jQuery(function($) {
+  //   new Shopify.OptionSelectors('ProductSelect', {
+  //     product: {{ product | json }},
+  //     onVariantSelected: selectCallback,
+  //     enableHistoryState: true
+  //   });
+  // 
+  //   // Add label if only one product option and it isn't 'Title'. Could be 'Size'.
+  //   {% if product.options.size == 1 and product.options.first != 'Title' %}
+  //     $('.radio-wrapper:eq(0)').prepend('<label for="ProductSelect-option-0" class="single-option-radio__label">{{ product.options.first | escape }}</label>');
+  //   {% endif %}
+  // 
+  //   // Hide drop-down selectors if we only have 1 variant and its title contains 'Default'.
+  //   {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
+  //     $('.selector-wrapper').hide();
+  //   {% endif %}
+  // });
 </script>

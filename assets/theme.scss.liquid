@@ -3482,6 +3482,7 @@ button.mfp-arrow {
   
   .product-images {
     height: 430px;
+    position: relative;
     
     footer {
       position: absolute;
@@ -3492,15 +3493,15 @@ button.mfp-arrow {
     
     &[data-direction="back"] {
       .stacked-images {
-        width: 0;
-        
-        .image-view-title {
-          visibility: hidden;
-        }
+        display: none;
+      }
+      
+      .side-view-images {
+        left: 0;
       }
       
       .back-view-image {
-        width: 70%;
+        display: block;
         
         .image-view-title {
           visibility: visible;
@@ -3511,9 +3512,10 @@ button.mfp-arrow {
   
   .stacked-images {
     $offset: 80;
-    position: relative;
-    float: left;
+    position: absolute;
     width: 70%;
+    box-sizing: border-box;
+    padding-right: 40px;
     
     img {
       display: inline-block;
@@ -3543,8 +3545,8 @@ button.mfp-arrow {
   }
   
   .side-view-images {
-    position: relative;
-    float: left;
+    position: absolute;
+    right: 0;
     height: 100%;
     font-size: 0;
     width: 30%;
@@ -3575,10 +3577,11 @@ button.mfp-arrow {
   }
   
   .back-view-image {
-    position: relative;
-    width: 0;
+    display: none;
+    position: absolute;
+    right: 0;
     height: 100%;
-    float: right;
+    width: 70%;
     
     .image-view-title {
       visibility: hidden;
