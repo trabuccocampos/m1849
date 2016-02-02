@@ -3429,6 +3429,57 @@ button.mfp-arrow {
 }
 
 .product-single {
+  text-align: left;
+  color: #a3a5a9;
+  
+  .product-single__meta {
+    padding-top: 0;
+  }
+  
+  .product-single__title {
+    margin-bottom: 0;
+  }
+  
+  .product-single__description {
+    margin-top: 0;
+    
+    h2, h3, h4, h5 {
+      text-align: left;
+      margin: 0;
+    }
+    
+    h2 {
+      margin-bottom: 40px;
+      font-size: 1.3em;
+    }
+    
+    h3 {
+      font-weight: bold;
+    }
+    
+    table {
+      background: transparent;
+      width: 100%;
+      margin-top: 10px;
+      font-size: 0.9em;
+      
+      td {
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+        
+        &:after {
+          display: none;
+        }
+      }
+      
+      tr:first-child {
+        td {
+          border-top: 1px solid #eee;
+        }
+      }
+    }
+  }
+  
   .product-images {
     height: 430px;
     

@@ -8,11 +8,10 @@
   {% assign current_variant = product.selected_or_first_available_variant %}
 
   <div class="grid product-single">
-    <div class="grid__item large--seven-twelfths medium--seven-twelfths text-center">
+    <div class="grid__item large--eight-twelfths medium--seven-twelfths text-center">
       {% include 'product-images' %}
     </div>
-
-    <div class="grid__item product-single__meta--wrapper medium--five-twelfths large--five-twelfths">
+    <div class="grid__item product-single__meta--wrapper medium--five-twelfths large--four-twelfths">
       <div class="product-single__meta">
         {% if settings.product_vendor_enable %}
           <h2 class="product-single__vendor" itemprop="brand">{{ product.vendor }}</h2>
@@ -34,43 +33,6 @@
               <span class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
             </span>
           {% endif %}
-
-          <span id="ProductPrice" class="product-single__price{% if product.compare_at_price > product.price %} on-sale{% endif %}" itemprop="price">
-            {{ current_variant.price | money }}
-          </span>
-
-          <hr class="hr--small">
-
-          <meta itemprop="priceCurrency" content="{{ shop.currency }}">
-          <link itemprop="availability" href="http://schema.org/{% if product.available %}InStock{% else %}OutOfStock{% endif %}">
-
-          <form action="/cart/add" method="post" enctype="multipart/form-data" class="product-single__form" id="AddToCartForm">
-            <select name="id" id="ProductSelect" class="product-single__variants">
-              {% for variant in product.variants %}
-                {% if variant.available %}
-                  <option {% if variant == product.selected_or_first_available_variant %} selected="selected" {% endif %} data-sku="{{ variant.sku }}" value="{{ variant.id }}">{{ variant.title }} - {{ variant.price | money_with_currency }}</option>
-                {% else %}
-                  <option disabled="disabled">
-                    {{ variant.title }} - {{ 'products.product.sold_out' | t }}
-                  </option>
-                {% endif %}
-              {% endfor %}
-            </select>
-
-            {% comment %}
-            <div class="product-single__quantity">
-              <label for="Quantity" class="product-single__quantity-label js-quantity-selector">{{ 'products.product.quantity' | t }}</label>
-              <input type="number" hidden="hidden" id="Quantity" name="quantity" value="1" min="1" class="js-quantity-selector">
-            </div>
-            {% endcomment %}
-
-            <div class="product-single__add-to-cart">
-              <button type="submit" name="add" id="AddToCart" class="btn">
-                <span id="AddToCartText">{{ 'products.product.add_to_cart' | t }}</span>
-              </button>
-            </div>
-          </form>
-
         </div>
 
         <div class="product-single__description rte" itemprop="description">
@@ -84,8 +46,8 @@
     </div>
   </div>
   <div class="grid">
-    <div class="grid__item large--seven-twelfths medium--seven-twelfths text-center"></div>
-    <div class="grid__item product-single__meta--wrapper medium--five-twelfths large--five-twelfths">
+    <div class="grid__item large--eight-twelfths medium--seven-twelfths text-center"></div>
+    <div class="grid__item product-single__meta--wrapper medium--five-twelfths large--four-twelfths">
       <span class="image-view-title switch-image-view active" data-direction="back">See back</span>
       <span class="image-view-title switch-image-view" data-direction="front">See front</span>
     </div>
