@@ -2395,10 +2395,13 @@ $slick-opacity-not-active: 0.25;
 }
 
 /*================ Module | Theme Header and Navigation Overrides ================*/
+.site-header{
+  border-bottom: 1px solid {{ settings.color_drawer_border }};
+}
+
 @include at-query($max, $medium) {
   .site-header {
     padding: 0;
-
     .grid--table {
       height: $drawerHeaderHeight;
     }

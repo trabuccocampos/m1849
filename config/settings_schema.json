@@ -37,6 +37,12 @@
       },
       {
         "type": "color",
+        "id": "light_color_body_text",
+        "label": "Light Text",
+        "default": "#333333"
+      },
+      {
+        "type": "color",
         "id": "color_borders",
         "label": "Line color",
         "default": "#e5e5e5"

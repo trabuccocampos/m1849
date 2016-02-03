@@ -1,0 +1,50 @@
+<aside class="grid__item large--one-fifth">
+  <h2><a href="/collections">Categories</a></h2>
+  <ul>
+    {% for link in linklists.collections.links %}
+      <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+    {% endfor %}
+  </ul>
+  <form class="filters" action="/collections/all">
+    <h2>Filters</h2>
+    <ul>
+      <li>
+        <span class="filter">Type</span>
+        <section>
+          <label>
+            <input type="checkbox" name="large">
+            Large
+          </label>
+          <label>
+            <input type="checkbox" name="medium">
+            Medium
+          </label>
+          <label>
+            <input type="checkbox" name="small">
+            Small
+          </label>
+        </section>
+      </li>
+      <li>
+        <span class="filter">Color</span>
+        <section>
+          <label>
+            <input type="checkbox" name="red">
+            Red
+          </label>
+          <label>
+            <input type="checkbox" name="blue">
+            Blue
+          </label>
+          <label>
+            <input type="checkbox" name="Green">
+            Green
+          </label>
+        </section>
+      </li>
+    </ul>
+  </form>
+</aside>
+<script type="text/javascript">
+  Shopify.current_tags = {{ current_tags | json }};
+</script>

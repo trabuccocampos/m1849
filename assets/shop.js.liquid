@@ -1,0 +1,27 @@
+jQuery(function($) {
+  // Filters
+  $filters = $('.filters');
+  $filters.find('.filter').click(function() {
+    $(this).toggleClass('active').next().slideToggle(200);
+  });
+  
+  $(Shopify.current_tags).each(function() {
+    $('.filters input[name="'+this+'"]').prop('checked', true).
+    closest('li').find('.filter').addClass('active').next().show();
+  });
+  
+  $filters.find('input[type="checkbox"]').change(function() {
+    var fields = [];
+    
+    $filters.find('input[type="checkbox"]:checked').each(function() {
+      fields.push($(this).attr('name'));
+    });
+    
+    var url = $filters.attr('action') + "/" + fields.join("+");
+    window.location = url;
+  });
+  
+  $filters.submit(function(event) {
+    event.preventDefault();
+  });
+});
