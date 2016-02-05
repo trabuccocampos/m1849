@@ -32,6 +32,7 @@
   <!-- CSS ================================================== -->
   {{ 'timber.scss.css' | asset_url | stylesheet_tag }}
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'catalog.scss.css' | asset_url | stylesheet_tag }}
 
   <!-- Header hook for plugins ================================================== -->
   {{ content_for_header }}
@@ -574,6 +575,7 @@
 
 
   {{ 'theme.js' | asset_url | script_tag }}
+  {{ 'shop.js' | asset_url | script_tag }}
 
   {% comment %}
     Template-specific js

@@ -2846,4 +2846,15 @@ $socialIconFontStack: 'icons';
     display: block;
   }
 }
-
+.button {
+  background: {{ settings.light_color_body_text }};
+  color: white;
+  font-size: 0.7em;
+  padding: 7px 20px;
+  border-radius: 3px;
+  
+  &:hover {
+    color: white;
+    background: darken({{ settings.light_color_body_text }}, 10%);
+  }
+}

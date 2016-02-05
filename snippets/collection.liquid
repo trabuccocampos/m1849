@@ -1,0 +1,17 @@
+<div class="collection">
+  <h2>{{ collection.title }}</h2>
+  {% if collection.products == blank %}
+    <p>{{ 'collections.general.no_matches' | t }}</p>
+  {% else %}
+    <section class="collection-products">
+      {% for product in collection.products %}
+        <a href="{{ product.url }}">
+          <img src="{{ product.featured_image | img_url: "small" }}" alt="">
+        </a>
+      {% endfor %}
+    </section>
+    <footer>
+      <a href="{{ collection.url }}" class="button">See more +</a>
+    </footer>
+  {% endif %}
+</div>

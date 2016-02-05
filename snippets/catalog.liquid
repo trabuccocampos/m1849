@@ -1,0 +1,13 @@
+<div class="grid catalog">
+  {% include 'sidebar' %}
+  <div class="catalog-content grid__item large--four-fifths">
+    {% if template == 'list-collections' %}
+      {% for link in linklists.collections.links %}
+        {% assign collection = link.object %}
+        {% include 'collection' with collection: collection %}
+      {% endfor %}
+    {% else %}
+      {% include 'collection' %}
+    {% endif %}
+  </div>
+</div>
