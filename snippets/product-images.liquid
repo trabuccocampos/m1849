@@ -1,5 +1,13 @@
 {% assign image_count = product.images.size %}
 <div class="product-images">
+  <div class="front-view-image">
+    <section class="front-view-container">
+      {{ product.featured_image | img_url: "large" | img_tag }}
+    </section>
+    <footer>
+      <span class="image-view-title">Frontal view</span>
+    </footer>
+  </div>
   <div class="stacked-images">
     <section class="stacked-container">
       {% for image in product.images reversed %}
