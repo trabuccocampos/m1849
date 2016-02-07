@@ -2,7 +2,9 @@
 <div class="product-images">
   <div class="front-view-image">
     <section class="front-view-container">
-      {{ product.featured_image | img_url: "large" | img_tag }}
+      <figure class="product-card">
+        {{ product.featured_image | img_url: "large" | img_tag }}
+      </figure>
     </section>
     <footer>
       <span class="image-view-title">Frontal view</span>
@@ -11,7 +13,9 @@
   <div class="stacked-images">
     <section class="stacked-container">
       {% for image in product.images reversed %}
-        <img data-image-count="{{ image_count }}" src="{{ image.src | img_url: 'large' }}" alt="{{ image.alt | escape }}" data-image-id="{{ image.id }}">
+        <figure class="product-card" data-image-count="{{ image_count }}">
+          <img  src="{{ image.src | img_url: 'large' }}" alt="{{ image.alt | escape }}" data-image-id="{{ image.id }}">
+        </figure>
       {% endfor %}
     </section>
     <footer>
@@ -32,7 +36,9 @@
   </div>
   <div class="back-view-image" data-image-count="{{ image_count }}">
     <section class="back-view-container">
-      {{ product.images.last | img_url: "large" | img_tag }}
+      <figure class="product-card">
+        {{ product.images.last | img_url: "large" | img_tag }}
+      </figure>
     </section>
     <footer>
       <span class="image-view-title">Back view</span>
@@ -45,10 +51,23 @@
 </div>
 <script type="text/javascript">
   (function($) {
+    var zoomed = false;
+    
     // Fix for setting specific height on container
     function set_stack_height() {
       var stack_height = $('.stacked-images').outerHeight();
       $('.product-images').css('height', stack_height + "px");
+      
+      if (zoomed) {
+        document.body.style.zoom = zoom = 1.0000000;
+        zoomed = false;
+      } else {
+        document.body.style.zoom = zoom = 1.0000001;
+        zoomed = true;
+      }
+      
+      console.log(zoomed);
+      
     }
         
     $(window).load(set_stack_height);

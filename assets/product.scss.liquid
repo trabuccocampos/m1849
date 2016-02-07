@@ -1,0 +1,229 @@
+$small: 590px;
+
+.product-single {
+  text-align: left;
+  color: #a3a5a9;
+  
+  .product-single__meta {
+    padding-top: 0;
+  }
+  
+  .product-single__title {
+    margin-bottom: 0;
+  }
+  
+  .product-single__description {
+    margin-top: 0;
+    
+    h2, h3, h4, h5 {
+      text-align: left;
+      margin: 0;
+    }
+    
+    h2 {
+      margin-bottom: 40px;
+      font-size: 1.3em;
+    }
+    
+    h3 {
+      font-weight: bold;
+    }
+    
+    table {
+      background: transparent;
+      width: 100%;
+      margin-top: 10px;
+      font-size: 0.9em;
+      
+      td {
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+        
+        &:after {
+          display: none;
+        }
+      }
+      
+      tr:first-child {
+        td {
+          border-top: 1px solid #eee;
+        }
+      }
+    }
+  }
+  
+  .product-images {
+    height: 430px;
+    position: relative;
+        
+    .toggle-views {
+      position: absolute;
+      bottom: -65px;
+      right: -115px;
+    }
+    
+    @media (max-width: $small) {
+      margin-bottom: 120px;
+      
+      .toggle-views {
+        right: 34px;
+        bottom: -110px;
+      }
+    }
+    
+    footer {
+      position: absolute;
+      top: 100%;
+      width: 100%;
+      text-align: center;
+    }
+    
+    &[data-direction="back"] {
+      .front-view-image {
+        opacity: 0;
+        transition: none;
+      }
+      
+      .side-view-images {
+        left: 0;
+      }
+      
+      .back-view-image {
+        display: block;
+        
+        .image-view-title {
+          visibility: visible;
+        }
+      }
+    }
+  }
+  
+  .product-card {
+    height: 100%;
+    display: inline-block;
+    margin: 0;
+    font-size: 0;
+    
+    img {
+      height: 100%;
+      max-width: none;
+    }
+  }
+  
+  .front-view-image {
+    display: none;
+    z-index: 2;
+    position: absolute;
+    left: 0;
+    height: 100%;
+    width: 70%;
+    transition: opacity 0.3s ease;
+    
+    &:hover {
+      opacity: 0;
+      
+      & ~ .stacked-images {
+        opacity: 1;
+        
+        .product-card {
+          margin-left: -80px;
+        }
+      }
+    }
+    
+    .front-view-container {
+      height: 100%;
+    }
+  }
+  
+  .stacked-images {
+    opacity: 1;
+    $offset: 80;
+    position: absolute;
+    width: 70%;
+    box-sizing: border-box;
+    transition: opacity 0.3s ease;
+    
+    .product-card {
+      display: inline-block;
+      position: relative;
+      vertical-align: top;
+      margin-left: -80px;
+      transition: margin-left 0.3s ease;
+      border-radius: 13px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+      height: auto;
+      
+      img {
+        height: auto;
+        width: 100%;
+      }
+      
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+    
+    @for $i from 1 through 10 {
+      .product-card[data-image-count="#{$i}"] {
+        $inset: (($i - 1) * $offset) / $i;
+        $width: percentage(1/$i);
+        width: calc(#{$width} + #{$inset - 4}px);
+      }
+      
+      .product-card:nth-child(#{$i}) {
+        $offset-y: ($i - 1)*$offset;
+        margin-top: #{$offset-y}px;
+      }
+    }
+  }
+  
+  .side-view-images {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    font-size: 0;
+    width: 30%;
+    
+    .side-view-container {
+      display: inline-block;
+      border-radius: 10px;
+      overflow: hidden;
+      height: 100%;
+      border-radius: 10px;
+      -webkit-mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);
+    }
+    
+    figure {
+      display: inline-block;
+      overflow: hidden;
+      height: 100%;
+      width: 20px;
+      margin: 0;
+      padding: 0;
+      
+      img {
+        height: 100%;
+        max-width: none;
+        position: relative;
+        left: -50%;
+      }
+    }
+  }
+  
+  .back-view-image {
+    display: none;
+    position: absolute;
+    right: 0;
+    height: 100%;
+    width: 70%;
+    
+    .image-view-title {
+      visibility: hidden;
+    }
+    
+    .back-view-container {
+      height: 100%;
+    }
+  }
+}
