@@ -1,27 +1,38 @@
-jQuery(function($) {
+(function($) {
   // Filters
-  $filters = $('.filters');
-  $filters.find('.filter').click(function() {
-    $(this).toggleClass('active').next().slideToggle(200);
-  });
-  
-  $(Shopify.current_tags).each(function() {
-    $('.filters input[name="'+this+'"]').prop('checked', true).
-    closest('li').find('.filter').addClass('active').next().show();
-  });
-  
-  $filters.find('input[type="checkbox"]').change(function() {
-    var fields = [];
-    
-    $filters.find('input[type="checkbox"]:checked').each(function() {
-      fields.push($(this).attr('name'));
+  function catalog_filters() {
+    $filters = $('.filters');
+    $filters.find('.filter').click(function() {
+      $(this).toggleClass('active').next().slideToggle(200);
     });
-    
-    var url = $filters.attr('action') + "/" + fields.join("+");
-    window.location = url;
-  });
+
+    // For each tag, open up that category with input checked
+    $(Shopify.current_tags).each(function() {
+      $('.filters input[name="'+this+'"]').prop('checked', true).
+      closest('li').find('.filter').addClass('active').next().show();
+    });
+
+    // When a filter selection is made, grab all check marks and format
+    // the url to filter tags on products
+    $filters.find('input[type="checkbox"]').change(function() {
+      var fields = [];
+
+      $filters.find('input[type="checkbox"]:checked').each(function() {
+        fields.push($(this).attr('name'));
+      });
+
+      var url = $filters.attr('action') + "/" + fields.join("+");
+      window.location = url;
+    });
+
+    // Don't submit the form
+    $filters.submit(function(event) {
+      event.preventDefault();
+    });
+  };
   
-  $filters.submit(function(event) {
-    event.preventDefault();
+  // On DOM load
+  $(function() {
+    catalog_filters();
   });
-});
+})(jQuery);
