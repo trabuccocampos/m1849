@@ -79,8 +79,39 @@ var AssetImage = function(url, is_original) {
     });
   };
   
+  function tabs() {
+    var hash = window.location.hash;
+    
+    function activate_tab(tab) {
+      var selector = '*[data-tab="'+tab+'"]';
+      var $tab = $(selector);
+      
+      if ($tab.length < 1) {
+        return;
+      }
+      
+      var $tabular = $tab.first().closest('.tabular');
+
+      // Assign classes
+      $tabular.find('.active').removeClass('active').end()
+              .find(selector).addClass('active');
+              
+      window.location.hash = tab;
+    }
+    
+    if (hash) {
+      activate_tab(hash.replace("#",''));
+    }
+    
+    $('.tabular .tabs a').click(function(event) {
+      event.preventDefault();
+      activate_tab($(this).attr('data-tab'));
+    });
+  }
+  
   // On DOM load
   $(function() {
     catalog_filters();
+    tabs();
   });
 })(jQuery);

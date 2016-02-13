@@ -5,6 +5,26 @@ $stack_offset: 80;
   text-align: left;
   color: #a3a5a9;
   
+  .specs {
+    margin-bottom: 20px;
+    
+    table {
+      background: transparent;
+      width: 100%;
+      margin-top: 10px;
+      font-size: 0.9em;
+      
+      td {
+        padding: 10px 0;
+        border-bottom: 1px solid #eee;
+        
+        &:after {
+          display: none;
+        }
+      }
+    }
+  }
+  
   .product-single__meta {
     padding-top: 0;
   }
@@ -28,28 +48,6 @@ $stack_offset: 80;
     
     h3 {
       font-weight: bold;
-    }
-    
-    table {
-      background: transparent;
-      width: 100%;
-      margin-top: 10px;
-      font-size: 0.9em;
-      
-      td {
-        padding: 10px 0;
-        border-bottom: 1px solid #eee;
-        
-        &:after {
-          display: none;
-        }
-      }
-      
-      tr:first-child {
-        td {
-          border-top: 1px solid #eee;
-        }
-      }
     }
   }
   
@@ -113,17 +111,17 @@ $stack_offset: 80;
       border-radius: 10px;
     }
     
-    &:after {
-      content: '';
-      display: inline-block;
-      position: absolute;
-      background: red;
-      padding-top: 16%;
-      width: 16%;
-      left: 42%;
-      top: 8.6%;
-      border-radius: 100%;
-    }
+    //    &:after {
+    //      content: '';
+    //      display: inline-block;
+    //      position: absolute;
+    //      background: red;
+    //      padding-top: 16%;
+    //      width: 16%;
+    //      left: 42%;
+    //      top: 8.6%;
+    //      border-radius: 100%;
+    //    }
   }
   
   .front-view-image {
@@ -238,6 +236,34 @@ $stack_offset: 80;
     
     .back-view-container {
       height: 100%;
+    }
+  }
+}
+
+.tabular {
+  .tabs {
+    font-size: 0;
+    
+    a {
+      font-size: 1rem;
+      padding: 5px 15px;
+      opacity: 0.5;
+      border-bottom: 2px solid #ddd;
+      
+      &.active {
+        opacity: 1;
+        border-color: black;
+      }
+    }
+  }
+  
+  .tab-content {
+    .tab {
+      display: none;
+      
+      &.active {
+        display: block;
+      }
     }
   }
 }
