@@ -1,3 +1,51 @@
+// Used for resizing images based on the Shopify CDN
+var AssetImage = function(url, is_original) {
+  var self = this;
+  
+  this.url = url;
+  this.is_original = is_original;
+  
+  var image_sizes =  "pico icon thumb small compact medium large grande 1024x1024 2048x2048 master original".split(" "); 
+  
+  function resize(size) {
+    // Don't resize images that aren't from Shopify, duh!
+    if (!self.url.indexOf("cdn.shopify.com") < 0) {
+      return self.url;
+    }
+
+    // Set size to nothing if no size is provided
+    size = size ? size : "";
+
+    // Pick apart the url and rebuild it
+    var sizes = "_" + image_sizes.join("|_");
+    var filetype = "(\\.(jpg|jpeg|png|gif)+\\??.*)";
+    
+    if (self.is_original) {
+      var format = new RegExp(filetype, "i");
+      
+      return {
+        original: self.url,
+        resized: url.replace(format, "_"+size+"$1")
+      }
+    } else {
+      var format = new RegExp("("+sizes+")" + filetype, "i");
+       
+      return {
+        original: self.url.replace(format, "$2"),
+        resized: self.url.replace(format, "_" + size + "$2")
+      }
+    }
+  }
+
+  this.original = function() {
+    return resize().original;
+  }
+
+  this.resized = function(size) {
+    return resize(size).resized;
+  }
+};
+
 (function($) {
   // Filters
   function catalog_filters() {

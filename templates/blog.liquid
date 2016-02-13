@@ -35,10 +35,23 @@
       <article class="article grid small--text-center">
 
         {% unless featured_image_src == blank %}
-          <div class="grid__item">
-            <a class="article__featured-image" href="{{ article.url }}">
-              {{ featured_image_src | img_tag: article.title }}
-            </a>
+          <div class="grid lookbook">
+            <div class="grid__item large--three-quarters">
+              <img src="{{ article.image | img_url: "1024x1024" }}" alt="">
+            </div>
+            <div class="grid__item large--one-quarter">
+              <div data-relatable-kind="article" data-relatable-id="{{article.id}}" data-related-kind="product">
+                {% raw %}
+                  {{#.}}
+                    <a href="/products/{{handle}}" class="lookbook-product">
+                      <img src="{{#img_url.medium}}{{{image.src}}}{{/img_url.medium}}" alt="">
+                      <p>{{title}}</p>
+                      <p>{{product_type}}</p>
+                    </a>
+                  {{/.}}
+                {% endraw %}
+              </div>
+            </div>
           </div>
         {% endunless %}
 
