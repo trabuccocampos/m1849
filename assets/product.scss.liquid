@@ -245,16 +245,47 @@ $stack_offset: 80;
     }
   }
 }
-
-.related-products {
+.product-extras {
   border-top: 1px solid #eee;
-  padding-top: 20px;
-  margin-top: 40px;
+  padding: 20px 0;
+  margin: 20px 0;
   
   h3 {
     color: {{ settings.light_color_body_text }};
   }
+}
+
+.related-lookbooks {
+  .lookbooks-container {
+    font-size: 0;
+  }
   
+  .product-lookbook {
+    display: inline-block;
+    width: 33.33%;
+    font-size: 1rem;
+    vertical-align: top;
+    padding-right: 10px;
+    box-sizing: border-box;
+    
+    h3 {
+      margin: 0;
+      font-size: 1em;
+    }
+    
+    p {
+      font-size: 0.8em;
+    }
+    
+    img {
+      width: 50%;
+      float: left;
+      margin: 0 10px 10px 0;
+    }
+  }
+}
+
+.related-products {
   .more-styles {
     float: right;
     font-size: 0.8em;
