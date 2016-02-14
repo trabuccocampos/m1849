@@ -23,26 +23,25 @@
             Optionally show the 'compare at' or original price of the product.
           {% endcomment %}
 
-          {% if product.compare_at_price > product.price %}
-            <span class="product-single__price--wrapper">
-              <span class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
-              <span id="ComparePrice" class="product-single__price--compare-at">
-                {{ product.compare_at_price | money }}
+          {% comment %}
+            {% if product.compare_at_price > product.price %}
+              <span class="product-single__price--wrapper">
+                <span class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
+                <span id="ComparePrice" class="product-single__price--compare-at">
+                  {{ product.compare_at_price | money }}
+                </span>
+                <span class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
               </span>
-              <span class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
-            </span>
-          {% endif %}
+            {% endif %}
+          {% endcomment %}
         </div>
 
         <div class="product-single__description rte" itemprop="description">
           <h2>{{ product.collections.first.title }}</h2>
           {{ product.description }}
         </div>
-        {% assign made_in_places = "italy,china" | split: "," %}
-        
         <div class="specs tabular">
-          {% assign italy = product.metafields.italy | size %}
-          {% assign china = product.metafields.china | size %}
+          {% assign made_in_places = "italy,china" | split: "," %}
           <div class="tabs">
             {% for place in made_in_places %}
               {% assign place_fields = product.metafields[place] | size %}
@@ -72,7 +71,8 @@
             {% endfor %}
           </div>
         </div>
-        
+          
+        {% include 'product-form' %}
         {% if settings.social_sharing_products %}
           {% include 'social-sharing' %}
         {% endif %}

@@ -1410,8 +1410,12 @@ a {
 .btn,
 .btn--secondary {
   @include accentFontStack;
-  padding: 12px 20px;
-  font-size: em(13px);
+  font-style: normal;
+  color: white;
+  background: {{ settings.light_color_body_text }};
+  padding: 5px 16px;
+  border-radius: 3px;
+  font-size: em(14px);
 }
 
 .input-group .btn,
