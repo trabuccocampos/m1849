@@ -31,25 +31,11 @@
                     {{/each}}
                   {{/properties}}
                 </div>
-
-                <div class="grid--full display-table">
-                  <div class="grid__item display-table-cell one-half">
-                    <div class="ajaxcart__qty">
-                      <button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--minus icon-fallback-text" data-id="{{id}}" data-qty="{{itemMinus}}" data-line="{{line}}">
-                        <span class="icon icon-minus" aria-hidden="true"></span>
-                        <span class="fallback-text">&minus;</span>
-                      </button>
-                      <input type="text" name="updates[]" class="ajaxcart__qty-num" value="{{itemQty}}" min="0" data-id="{{id}}" data-line="{{line}}" aria-label="quantity" pattern="[0-9]*">
-                      <button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--plus icon-fallback-text" data-id="{{id}}" data-line="{{line}}" data-qty="{{itemAdd}}">
-                        <span class="icon icon-plus" aria-hidden="true"></span>
-                        <span class="fallback-text">+</span>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="grid__item display-table-cell one-half text-right">
-                    <span class="ajaxcart__price">
-                      {{{price}}}
-                    </span>
+                <div>
+                  <div class="ajaxcart__qty">
+                    <button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--minus icon-fallback-text" data-id="{{id}}" data-qty="0" data-line="{{line}}">
+                      <span class="icon icon-minus" aria-hidden="true"></span></button>
+                    <input type="hidden" name="updates[]" class="ajaxcart__qty-num" value="0" data-id="{{id}}" data-line="{{line}}" aria-label="quantity" pattern="[0-9]*">
                   </div>
                 </div>
               </div>
@@ -66,18 +52,7 @@
         {% endraw %}{% endif %}{% raw %}
       </div>
       <div class="ajaxcart__footer ajaxcart__footer--fixed">
-        <div class="grid--full">
-          <div class="grid__item two-thirds">
-            <p class="ajaxcart__subtotal">{% endraw %}{{ 'cart.general.subtotal' | t }}{% raw %}</p>
-          </div>
-          <div class="grid__item one-third text-right">
-            <p class="ajaxcart__subtotal">{{{totalPrice}}}</p>
-          </div>
-        </div>
-        <p class="text-center ajaxcart__note">{% endraw %}{{ 'cart.general.shipping_at_checkout' | t }}{% raw %}</p>
-        <button type="submit" class="btn--secondary btn--full cart__checkout" name="checkout">
-          {% endraw %}{{ 'cart.general.checkout' | t }}{% raw %} <span class="icon icon-arrow-right" aria-hidden="true"></span>
-        </button>
+        <a href="/cart" class="btn--secondary btn--full">View Wishlist</a>
       </div>
     </form>
   {% endraw %}
