@@ -34,7 +34,8 @@
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
   {{ 'catalog.scss.css' | asset_url | stylesheet_tag }}
   {{ 'product.scss.css' | asset_url | stylesheet_tag }}
-
+  {{ 'slick.css' | asset_url | stylesheet_tag }}
+  
   <!-- Header hook for plugins ================================================== -->
   {{ content_for_header }}
   {% include 'oldIE-js' %}
@@ -578,8 +579,7 @@
     </footer>
 
   </div>
-
-
+  {{ 'slick.js' | asset_url | script_tag }}
   {{ 'theme.js' | asset_url | script_tag }}
   {{ 'shop.js' | asset_url | script_tag }}
 

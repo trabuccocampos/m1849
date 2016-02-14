@@ -79,6 +79,22 @@
       </div>
     </div>
   </div>
+  <div class="related-products">
+    <h3>
+      Products in Category
+      <a href="{{ product.collections.first.url }}" class="more-styles">{{ product.collections.first.products.size }} more styles</a>
+    </h3>
+    
+    <div class="slick-items">
+      {% for _product in product.collections.first.products %}
+        <div class="related-product product-card">
+          <a href="{{ _product.url }}">
+            {{ _product.featured_image | img_url: "compact" | img_tag }}
+          </a>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
   {% if collection %}
     <hr class="hr--clear">
     <div class="text-center">

@@ -1,9 +1,37 @@
 $small: 590px;
 $stack_offset: 80;
 
+.product-card {
+  height: 100%;
+  display: inline-block;
+  margin: 0;
+  font-size: 0;
+  position: relative;
+  
+  img {
+    height: 100%;
+    max-width: none;
+    border-radius: 10px;
+    box-shadow: 0 5px 8px rgba(0,0,0,0.3);
+  }
+  
+  //    &:after {
+  //      content: '';
+  //      display: inline-block;
+  //      position: absolute;
+  //      background: red;
+  //      padding-top: 16%;
+  //      width: 16%;
+  //      left: 42%;
+  //      top: 8.6%;
+  //      border-radius: 100%;
+  //    }
+}
+
 .product-single {
   text-align: left;
   color: #a3a5a9;
+  margin-bottom: 100px;
   
   .specs {
     margin-bottom: 20px;
@@ -101,33 +129,7 @@ $stack_offset: 80;
       }
     }
   }
-  
-  .product-card {
-    height: 100%;
-    display: inline-block;
-    margin: 0;
-    font-size: 0;
-    position: relative;
     
-    img {
-      height: 100%;
-      max-width: none;
-      border-radius: 10px;
-    }
-    
-    //    &:after {
-    //      content: '';
-    //      display: inline-block;
-    //      position: absolute;
-    //      background: red;
-    //      padding-top: 16%;
-    //      width: 16%;
-    //      left: 42%;
-    //      top: 8.6%;
-    //      border-radius: 100%;
-    //    }
-  }
-  
   .front-view-image {
     z-index: 2;
     position: absolute;
@@ -240,6 +242,63 @@ $stack_offset: 80;
     
     .back-view-container {
       height: 100%;
+    }
+  }
+}
+
+.related-products {
+  border-top: 1px solid #eee;
+  padding-top: 20px;
+  margin-top: 40px;
+  
+  h3 {
+    color: {{ settings.light_color_body_text }};
+  }
+  
+  .more-styles {
+    float: right;
+    font-size: 0.8em;
+    color: {{ settings.light_color_body_text }};
+  }
+  
+  .slick-slider .slick-dots li  {
+    button:before {
+      border-color: black;
+    }
+
+    &.slick-active {
+      button:before {
+        background: black;
+        border-color: black;
+      }
+    }
+  }
+  
+  .slick-prev:before, .slick-next:before {
+    color: black;
+  }
+  .slick-dots {
+    bottom: -10px;
+  }
+  .slick-prev:before {
+    content: "\003c";
+    font-family: "Courier New";
+  }
+  .slick-next:before {
+    content: "\003e";
+    font-family: "Courier New";
+  }
+  .related-product {
+    display: inline-block;
+    
+    a {
+      display: inline-block;
+      padding: 10px;
+    }
+    
+    img {
+      height: 90px;
+      border-radius: 4px;
     }
   }
 }
