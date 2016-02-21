@@ -18,31 +18,94 @@
         {% endif %}
 
         <h1 class="product-single__title" itemprop="name">{{ product.title }}</h1>
-
         <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
           {% comment %}
             Optionally show the 'compare at' or original price of the product.
           {% endcomment %}
 
-          {% if product.compare_at_price > product.price %}
-            <span class="product-single__price--wrapper">
-              <span class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
-              <span id="ComparePrice" class="product-single__price--compare-at">
-                {{ product.compare_at_price | money }}
+          {% comment %}
+            {% if product.compare_at_price > product.price %}
+              <span class="product-single__price--wrapper">
+                <span class="visually-hidden">{{ 'products.general.regular_price' | t }}</span>
+                <span id="ComparePrice" class="product-single__price--compare-at">
+                  {{ product.compare_at_price | money }}
+                </span>
+                <span class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
               </span>
-              <span class="visually-hidden">{{ 'products.general.sale_price' | t }}</span>
-            </span>
-          {% endif %}
+            {% endif %}
+          {% endcomment %}
         </div>
 
         <div class="product-single__description rte" itemprop="description">
+          <h2>{{ product.collections.first.title }}</h2>
           {{ product.description }}
         </div>
-
+        <div class="specs tabular">
+          {% assign made_in_places = "italy,china" | split: "," %}
+          <div class="tabs">
+            {% for place in made_in_places %}
+              {% assign place_fields = product.metafields[place] | size %}
+              {% if place_fields > 0 %}
+                <a href="#{{place}}" class="{% if forloop.first %}active{% endif %}" data-tab="{{ place }}">{{ place | capitalize }}</a>
+              {% endif %}
+            {% endfor %}
+          </div>
+          <div class="tab-content">
+            {% for place in made_in_places %}
+              {% assign place_fields = product.metafields[place] | size %}
+              {% if place_fields > 0 %}
+                <div class="tab {% if forloop.first %}active{% endif %}" data-tab="{{ place }}">
+                  <table>
+                    <tbody>
+                      {% for field in product.metafields[place] %}
+                        <tr>
+                          {% assign key = field[0] | split: "_" %}
+                          <td>{% for word in key %}{{word | capitalize}} {% endfor %}</td>
+                          <td>{{ field[1] }}</td>
+                        </tr>
+                      {% endfor %}
+                    </tbody>
+                  </table>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        </div>
+          
+        {% include 'product-form' %}
         {% if settings.social_sharing_products %}
           {% include 'social-sharing' %}
         {% endif %}
       </div>
+    </div>
+  </div>
+  <div class="product-extras related-lookbooks">
+    <h3>Featured In</h3>
+    <div class="lookbooks-container" data-relatable-kind="article" data-related-id="{{product.id}}" data-related-kind="product">
+      {% raw %}
+        {{#.}}
+          <a href="/blogs/lookbook/{{id}}" class="product-lookbook">
+            <img src="{{#img_url.medium}}{{{image.src}}}{{/img_url.medium}}" alt="">
+            <h3>{{title}}</h3>
+            <p>{{{summary_html}}}</p>
+          </a>
+        {{/.}}
+      {% endraw %}
+    </div>
+  </div>
+  <div class="product-extras related-products">
+    <h3>
+      Products in Category
+      <a href="{{ product.collections.first.url }}" class="more-styles">{{ product.collections.first.products.size }} more styles</a>
+    </h3>
+    <div class="slick-items">
+      {% for _product in product.collections.first.products %}
+        <div class="related-product product-card">
+          <a href="{{ _product.url }}">
+            {{ _product.featured_image | img_url: "compact" | img_tag }}
+          </a>
+        </div>
+      {% endfor %}
     </div>
   </div>
   {% if collection %}
