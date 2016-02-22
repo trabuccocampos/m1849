@@ -66,6 +66,15 @@ $dark-color: {{ settings.light_color_body_text }};
             top: -0.6em;
           }
         }
+        
+      }
+      
+      a.filter {
+        &:after, &.active:after {
+          transform: rotate(90deg);
+          top: -0.4em;
+          right: 0.2em;
+        }
       }
       
       section {
@@ -95,11 +104,15 @@ $dark-color: {{ settings.light_color_body_text }};
           margin: 16px 16px 16px 0;
         }
       }
-      
-      footer {
-        text-align: center;
-      }
     }
+    
+    .collection-actionable {
+      float: right;
+    }
+  }
+  
+  .collection-footer {
+    text-align: center;
   }
 }
 
@@ -144,5 +157,31 @@ $dark-color: {{ settings.light_color_body_text }};
   .cart-footer {
     text-align: center;
     margin-top: 80px;
+  }
+}
+
+// Colors
+.catalog aside .filter-by-color {
+  section {
+    font-size: 0;
+  }
+  
+  label {
+    height: 20px;
+    width: 20px;
+    display: inline-block;
+    margin: 5px;
+  }
+  
+  input[type="checkbox"] {
+    display: none;
+  }
+  
+  .blue {
+    background: blue;
+  }
+  
+  .red {
+    background: red;
   }
 }

@@ -72,6 +72,15 @@ var AssetImage = function(url, is_original) {
       var url = $filters.attr('action') + "/" + fields.join("+");
       window.location = url;
     });
+    
+    // Create labels for colors
+    $('.filter-by-color input[type="checkbox"]').each(function() {
+      var color = $(this).attr('name');
+      var id = 'filter-by-' + color;
+      $(this).attr('id', id);
+      var $label = $('<label/>').attr('for', id).addClass(color);
+      $(this).before($label);
+    });
 
     // Don't submit the form
     $filters.submit(function(event) {

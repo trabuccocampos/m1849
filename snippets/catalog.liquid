@@ -4,10 +4,28 @@
     {% if template == 'list-collections' %}
       {% for link in linklists.collections.links %}
         {% assign collection = link.object %}
+        {% assign limit = 20 %}
         {% include 'collection' with collection: collection %}
+        <div class="collection-footer">
+          <a href="{{ collection.url }}" class="btn">See more +</a>
+        </div>
       {% endfor %}
     {% else %}
-      {% include 'collection' %}
+      {% if collection.handle == 'all' %}
+        {% include 'collection' %}
+      {% else %}
+        <div class="collection-actionable">
+          <a href="/collections" class="btn back-button">Return</a>
+        </div>
+        {% for type in collection.all_types %}
+          {% assign handle = type | handleize %}
+          {% assign collection = collections[handle] %}
+          {% include 'collection' %}
+        {% endfor %}
+        <div class="collection-footer">
+          <a href="/collections" class="btn back-button">Return</a>
+        </div>
+      {% endif %}
     {% endif %}
   </div>
 </div>

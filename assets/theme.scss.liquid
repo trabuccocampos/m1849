@@ -1413,9 +1413,32 @@ a {
   font-style: normal;
   color: white;
   background: {{ settings.light_color_body_text }};
-  padding: 5px 16px;
+  padding: 3px 16px;
   border-radius: 3px;
   font-size: em(14px);
+  
+  &.back-button {
+    position: relative;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    
+    &:before {
+      content: '';
+      position: absolute;
+      width: 30px;
+      background: url('{{ "left-cap.svg" | asset_url }}') no-repeat center center;
+      background-size: auto 100%;
+      height: calc(100% + 2px);
+      top: -1px;
+      left: -24px;
+    }
+    
+    &:hover {
+      background: {{ settings.light_color_body_text }};
+    }
+  }
 }
 
 .input-group .btn,
