@@ -150,10 +150,36 @@ var AssetImage = function(url, is_original) {
     });
   }
   
+  function search() {
+    var $results = $('.search-bar .results');
+    var template = $('#mustache-search-template').clone().html();
+    
+    $('.search-bar').submit(function(event) {
+      event.preventDefault();
+      
+      $.ajax({
+        url: '/search',
+        data: $(this).serialize(),
+        dataType: 'json',
+        success: function(response) {
+          $(response).each(function() {
+            if (this.featured_image) {
+              var image = new AssetImage(this.images[0], true);
+              this.thumbnail = image.resized("medium");
+            }
+          });
+          var rendered = Mustache.render(template, response);
+          $results.html(rendered);
+        }
+      })
+    });
+  }
+  
   // On DOM load
   $(function() {
     catalog_filters();
     tabs();
     slick();
+    search();
   });
 })(jQuery);

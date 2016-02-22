@@ -22,6 +22,8 @@
 {% endunless %}
 
 <form action="/search" method="get" class="input-group search-bar {{ search_bar_location }}" role="search">
+  <input type="hidden" name="view" value="json">
+  <input type="hidden" name="type" value="product">
   {% comment %}<input type="hidden" name="type" value="product">{% endcomment %}
   <input type="search" name="q" value="{{ search.terms | escape }}" placeholder="{{ 'general.search.placeholder' | t }}" class="input-group-field" aria-label="{{ 'general.search.placeholder' | t }}">
   <span class="input-group-btn">
@@ -30,4 +32,18 @@
       <span class="fallback-text">{{ 'general.search.submit' | t }}</span>
     </button>
   </span>
+  <div class="results"></div>
+  <script type="template/mustache" id="mustache-search-template">
+    {% raw %}
+      {{#.}}
+        <a href="/products/{{handle}}">
+          <img src="{{thumbnail}}" alt="">
+          {{title}}
+        </a>
+      {{/.}}
+      {{^.}}
+        <p>No results.</p>
+      {{/.}}
+    {% endraw %}
+  </script>
 </form>
