@@ -1,4 +1,8 @@
+$viewportIncrement: 1px;
+$siteWidth: 1050px;
 $small: 590px;
+$medium: 768px;
+$large: 769px;
 $stack_offset: 80;
 
 .product-card {
@@ -93,11 +97,12 @@ $stack_offset: 80;
       right: -115px;
     }
     
-    @media (max-width: $small) {
+    @media (max-width: $medium) {
       margin-bottom: 120px;
       
       .toggle-views {
-        right: 34px;
+        right: 0;
+        width: 30%;
         bottom: -110px;
       }
     }
