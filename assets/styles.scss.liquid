@@ -1,3 +1,7 @@
+$light-color: #fff;
+$dark-color: #333;
+
+
 /*------- Mixins --------*/
 @mixin aspect-ratio($width, $height) {
   position: relative;
@@ -16,10 +20,23 @@
   }
 }
 
-/*------ Site Styles -------*/
+/*================ SITE WIDE STYLES ================*/
+/*------ Typography -------*/
+.section-header h1 {
+  font-size: 3em;
+  margin-top: .5em;
+}
+.site-nav {
+  font-weight: 400;
+}
 
+/*------ Layout -------*/
 .site-header {
   border: none;
+}
+.hero__header {
+  z-index: 1000;
+  opacity: 1;
 }
 .site-header .wrapper {
   // padding: 0;
@@ -34,7 +51,16 @@
   border-left: 0;
 }
 
-/*================ BOX LAYOUT ================*/
+.btn {
+  background: transparent;
+  border: 1px solid $dark-color;
+  color: $dark-color;
+  padding: 6px 16px 5px;
+  border-radius: 4px;
+}
+
+
+/*================ HOME BOX LAYOUT ================*/
 @media screen and (min-width: 591px) {
   .box-layout.grid {
     padding-left: 25px;
@@ -87,9 +113,6 @@
 
 /*--- Text Colors --*/
 .box-layout .grid__item {
-  $light-color: #fff;
-  $dark-color: #333;
-
   &.is-light {
     color: $light-color;
 
@@ -200,3 +223,26 @@
  opacity: 1;
  transform: translateY(-5px);
 }
+/*================ HERITAGE ================*/
+.heritage .hero__image {
+  opacity: 0.6 !important;
+}
+
+/*================ CONTACT ================*/
+.contact .rte .p1 {
+  color: #F5321E;
+  margin-bottom: .5em;
+}
+.contact .rte .p2 {
+  margin-bottom: .5em;
+}
+.contact .rte td {
+  padding: 15px 30px;
+  vertical-align: top;
+}
+.contact tr:first-child th:after,
+.contact tr:first-child td:after {
+  border: 0;
+}
+
+/*================ FOOTER ================*/

@@ -31,7 +31,6 @@
 
   <!-- CSS ================================================== -->
   {{ 'timber.scss.css' | asset_url | stylesheet_tag }}
-  {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
   {{ 'catalog.scss.css' | asset_url | stylesheet_tag }}
   {{ 'product.scss.css' | asset_url | stylesheet_tag }}
   {{ 'slick.css' | asset_url | stylesheet_tag }}
@@ -558,24 +557,7 @@
                 </ul>
             </div>
           {% endif %}
-
-          <div class="grid__item {{ footer_column_width }} {% if num_footer_columns == 1 %}text-center{% else %}large--text-right{% endif %}">
-            <p>&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: '/' }}<br>{{ powered_by_link }}</p>
-            {% unless shop.enabled_payment_types == empty %}
-              <ul class="inline-list payment-icons">
-                {% for type in shop.enabled_payment_types %}
-                  <li>
-                    <span class="icon-fallback-text">
-                      <span class="icon icon-{{ type }}" aria-hidden="true"></span>
-                      <span class="fallback-text">{{ type | replace: '_',' ' }}</span>
-                    </span>
-                  </li>
-                {% endfor %}
-              </ul>
-            {% endunless %}
-          </div>
         </div>
-
       </div>
     </footer>
 
@@ -622,5 +604,6 @@
     </div>
   {% endif %}
 
+  {% include 'search-autocomplete' %}
 </body>
 </html>
