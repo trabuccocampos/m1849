@@ -1,3 +1,23 @@
+/*------- Mixins --------*/
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+  &:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+  }
+  > .box__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+/*------ Site Styles -------*/
+
 .site-header {
   border: none;
 }
@@ -5,11 +25,178 @@
   // padding: 0;
 }
 .main-content {
-  padding-top: 40px;
+  padding-top: 20px;
 }
 .grid.catalog {
   margin-left: 0;
 }
 .catalog .catalog-content {
   border-left: 0;
+}
+
+/*================ BOX LAYOUT ================*/
+@media screen and (min-width: 591px) {
+  .box-layout.grid {
+    padding-left: 25px;
+    padding-left: 30px; //layout no spacing
+
+    padding-right: 0;
+  }
+  .box-layout .grid__item {
+    margin-bottom: 4px;
+    padding-left: 4px !important;
+
+    margin-bottom: 0; //layout no spacing
+    padding-left: 0 !important; //layout no spacing
+  }
+}
+@media screen and (min-width: 769px) {
+  .box-layout .grid__item:nth-of-type(3n+1) {
+    clear: left;
+  }
+}
+.box-aspect-ratio,
+.box-aspect-ratio-long {
+  @include aspect-ratio(4, 3);
+  overflow: hidden;
+}
+@media screen and (min-width: 769px) {
+  .box-aspect-ratio-long {
+    @include aspect-ratio(4, 6);
+    overflow: hidden;
+  }
+}
+.box-layout .box__image {
+  line-height: 0;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-position: center center;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+  background-color: transparent;
+}
+.box__text-wrap {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  padding: 0 30px;
+  width: 100%;
+}
+
+/*--- Text Colors --*/
+.box-layout .grid__item {
+  $light-color: #fff;
+  $dark-color: #333;
+
+  &.is-light {
+    color: $light-color;
+
+    .box__content {
+    	background: $dark-color;
+    }
+    .btn {
+      color: $light-color;
+      border-color: $light-color;
+
+      &:hover {
+        background-color: $light-color;
+        color: $dark-color;
+      }
+    }
+  }
+  &.is-dark {
+    color: $dark-color;
+
+    .box__content {
+    	background: $light-color;
+    }
+    .btn {
+      color: $dark-color;
+      border-color: $dark-color;
+
+      &:hover {
+        background-color: $dark-color;
+        color: $light-color;
+      }
+    }
+  }
+}
+
+/*------- Typography -------*/
+.box__text-align {
+  text-align: center;
+}
+.box__title {
+  margin-bottom: 0;
+  line-height: 1.2;
+}
+.large--one-third .box__title {
+  font-size: 1.4em;
+  margin: .6em auto;
+}
+.large--two-thirds .box__title {
+  font-size: 2.65em;
+  margin: .2em auto;
+}
+.box__subtitle {
+  margin-top: 3em;
+  margin-bottom: 0;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-size: .7em;
+  font-weight: bold;
+}
+.box__cta {
+    margin-top: 1.5em;
+}
+
+
+/*-------- Overlay Effect ----------*/
+.box__content .box__image {
+	opacity: 0.9;
+  -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+	transition: opacity 0.35s, transform 0.35s;
+  -webkit-transform: scale(1,1);
+	transform: scale(1,1);
+}
+
+.box__content:hover .box__image {
+	opacity: 0.5;
+	-webkit-transform: scale(1.05,1.05);
+	transform: scale(1.05,1.05);
+}
+
+.box__content .box__subtitle,
+.box__content .box__cta {
+	font-style: normal;
+	opacity: 0;
+	-webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+	transition: opacity 0.35s, transform 0.35s;
+}
+
+.box__content:hover .box__subtitle,
+.box__content:hover .box__cta {
+	opacity: 1;
+	-webkit-transform: translate3d(0,-20%,0) translate3d(0,-10%,0);
+	transform: translate3d(0,-20%,0) translate3d(0,-10%,0);
+}
+
+.box__content::before {
+	position: absolute;
+	bottom: -5px;
+	left: 0;
+	width: 100%;
+	height: 5px;
+	background: #F5321E;
+	content: '';
+  opacity: 0;
+  -webkit-transition: opacity 0.35s, -webkit-transform 0.35s;
+	transition: opacity 0.35s, transform 0.35s;
+}
+
+.box-aspect-ratio:hover .box__content::before {
+ opacity: 1;
+ transform: translateY(-5px);
 }
