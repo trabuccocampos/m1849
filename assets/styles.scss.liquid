@@ -1,6 +1,8 @@
 $light-color: #fff;
+$soft-grey: #E6E7E8;
 $dark-color: #333;
-
+$red: #D23719;
+$red-bright: #F5321E;
 
 /*------- Mixins --------*/
 @mixin aspect-ratio($width, $height) {
@@ -320,11 +322,11 @@ $dark-color: #333;
   text-align: center;
 }
 .product-single__add-to-cart .btn {
-  border-color: #F5321E;
-  color: #F5321E;
+  border-color: $red;
+  color: $red;
 
   &:hover {
-    background-color: #F5321E;
+    background-color: $red;
     color: white;
   }
 }
@@ -361,6 +363,49 @@ $dark-color: #333;
   .product-single {
     margin-bottom: 2em;
   }
+}
+
+/*================ JOURNAL ================*/
+.journal__sections {
+  margin-top: 5em;
+}
+.journal__sections .grid__item-wrapper {
+  position: relative;
+  background-color: $soft-grey;
+  height: 100px;
+  -webkit-transition: -webkit-all 0.35s;
+  transition: all 0.35s;
+
+  &:hover {
+    background-color: $red;
+    color: white;
+  }
+}
+.journal__sections h3 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+.tags--article a {
+    padding-right: 10px;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+.journal {
+  .social-sharing.clean,
+  .tags--article.inline-list {
+    text-align: center;
+  }
+}
+
+/*================ DRAWER ================*/
+.drawer {
+  // background-color: #E6E7E8;
+}
+.ajaxcart__note+textarea {
+  background-color: #292929;
+  color: #fff;
 }
 
 /*================ FOOTER ================*/
