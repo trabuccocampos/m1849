@@ -59,6 +59,9 @@ $red-bright: #F5321E;
   color: $dark-color;
   padding: 6px 16px 5px;
   border-radius: 4px;
+
+  -webkit-transition: -webkit-all 0.35s;
+  transition: all 0.35s;
 }
 
 /*------ Navbar -------*/
@@ -365,6 +368,26 @@ $red-bright: #F5321E;
   }
 }
 
+/*================ HERITAGE ================*/
+.heritage h2 {
+  font-size: 2em;
+  font-weight: bold;
+}
+.heritage .rte h3,
+.heritage .rte .h3 {
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  font-weight: 600;
+}
+.heritage blockquote {
+  font-style: normal;
+  font-size: 2em;
+
+  h6 {
+    font-size: 16px;
+    font-weight: 600;
+  }
+}
 /*================ JOURNAL ================*/
 .journal__sections {
   margin-top: 5em;
@@ -407,5 +430,62 @@ $red-bright: #F5321E;
   background-color: #292929;
   color: #fff;
 }
+.ajaxcart__qty {
+  background: transparent;
+}
+.ajaxcart__qty .js-qty__adjust,
+.ajaxcart__qty .ajaxcart__qty-adjust {
+  border: 1px solid #888888;
+  color: #888888;
+  padding: 6px 16px 5px;
+  border-radius: 4px;
+  background: transparent;
+
+  -webkit-transition: -webkit-all 0.35s;
+  transition: all 0.35s;
+
+  &:hover {
+    background-color: $light-color;
+    color: black;
+  }
+}
+.ajaxcart__product-name {
+    font-size: 2em;
+    font-style: normal;
+}
+
+.drawer .btn--secondary {
+  font-size: 1.6em;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  border: 1px solid $light-color;
+  color: $light-color;
+  border-radius: 4px;
+  background: transparent;
+  -webkit-transition: -webkit-all 0.35s;
+  transition: all 0.35s;
+
+  &:hover {
+    background-color: $light-color;
+    color: black;
+  }
+}
+
+/*================ NEWSLETTER ================*/
+.newsletter .btn.newsletter__submit {
+  border-radius: 6px !important;
+}
 
 /*================ FOOTER ================*/
+body {
+  border-bottom: 20px solid $red;
+}
+.site-footer {
+  margin-top: 150px;
+  padding-bottom: 20px;
+
+  p {
+    color: #666;
+    font-size: 14px;
+  }
+}
