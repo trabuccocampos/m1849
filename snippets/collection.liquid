@@ -7,7 +7,7 @@
     </div>
     <h2>
       {% for tag in current_tags %}
-        {{ tag | capitalize }} 
+        {{ tag | capitalize }}
         {% unless forloop.last %}|{% endunless %}
       {% endfor %}
     </h2>
@@ -19,7 +19,8 @@
     <section class="collection-products">
       {% for product in collection.products limit: limit %}
         <a href="{{ product.url }}">
-          <img src="{{ product.featured_image | img_url: "small" }}" alt="">
+          <!-- <img src="{{ product.featured_image | img_url: "small" }}" alt=""> -->
+          <img src="{% if product.images.size > 0 %}{{ product.featured_image | img_url: "small" }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
         </a>
       {% endfor %}
     </section>

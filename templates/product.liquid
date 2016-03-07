@@ -71,7 +71,7 @@
             {% endfor %}
           </div>
         </div>
-          
+
         {% include 'product-form' %}
         {% if settings.social_sharing_products %}
           {% include 'social-sharing' %}
@@ -102,7 +102,7 @@
       {% for _product in product.collections.first.products %}
         <div class="related-product product-card">
           <a href="{{ _product.url }}">
-            {{ _product.featured_image | img_url: "compact" | img_tag }}
+            <img src="{% if product.images.size > 0 %}{{ _product.featured_image | img_url: "compact" }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
           </a>
         </div>
       {% endfor %}
@@ -153,19 +153,19 @@
   //     }
   //   });
   // };
-  // 
+  //
   // jQuery(function($) {
   //   new Shopify.OptionSelectors('ProductSelect', {
   //     product: {{ product | json }},
   //     onVariantSelected: selectCallback,
   //     enableHistoryState: true
   //   });
-  // 
+  //
   //   // Add label if only one product option and it isn't 'Title'. Could be 'Size'.
   //   {% if product.options.size == 1 and product.options.first != 'Title' %}
   //     $('.radio-wrapper:eq(0)').prepend('<label for="ProductSelect-option-0" class="single-option-radio__label">{{ product.options.first | escape }}</label>');
   //   {% endif %}
-  // 
+  //
   //   // Hide drop-down selectors if we only have 1 variant and its title contains 'Default'.
   //   {% if product.variants.size == 1 and product.variants.first.title contains 'Default' %}
   //     $('.selector-wrapper').hide();

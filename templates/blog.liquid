@@ -1,5 +1,5 @@
 <!-- /templates/blog.liquid -->
-{% paginate blog.articles by 5 %}
+{% paginate blog.articles by 4 %}
 
 <div class="grid">
 
@@ -86,3 +86,9 @@
 </div>
 
 {% endpaginate %}
+
+<div id="the_archives">
+  {% for article in blogs[blog.handle].articles limit: 10 offset:4 %}
+  <li>{{ article.title | link_to: article.url }}</li>
+{% endfor %}
+</div>
