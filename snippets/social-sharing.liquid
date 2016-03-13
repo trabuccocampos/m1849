@@ -35,7 +35,7 @@
   {% if template contains 'product' %}
 
     {% if settings.share_pinterest %}
-      <a target="_blank" href="//pinterest.com/pin/create/button/?url={{ permalinkURL }}&amp;media={{ product.featured_image | product_img_url: '1024x1024' }}&amp;description={{ shareTitle }}" class="share-pinterest">
+      <a target="_blank" href="//pinterest.com/pin/create/button/?url={{ permalinkURL }}&amp;media={{ product.featured_image | product_img_url: '1024x1024' }}&amp;description={{ shareTitle }} &ndash; {{ page_title }} &ndash; {{ shop.name }}" class="share-pinterest">
         <span class="icon icon-pinterest" aria-hidden="true"></span>
         <span class="share-title">{{ 'general.social.share_on_pinterest' | t }}</span>
         <span class="share-count">0</span>
@@ -49,6 +49,14 @@
       </a>
     {% endif %}
 
+  {% else %}
+    {% if settings.share_pinterest %}
+      <a target="_blank" href="//pinterest.com/pin/create/button/?url={{ shop.url }}{{ article.url }}&amp;media=http:{{ article.image | img_url: "1024x1024" }}&amp;description={{ article.title }} &#124; {{ page_title }} &#124; {{ shop.name }}" class="share-pinterest">
+        <span class="icon icon-pinterest" aria-hidden="true"></span>
+        <span class="share-title">{{ 'general.social.share_on_pinterest' | t }}</span>
+        <span class="share-count">0</span>
+      </a>
+    {% endif %}
   {% endif %}
 
   {% if settings.share_google %}
