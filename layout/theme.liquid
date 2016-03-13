@@ -621,6 +621,34 @@
   {{ 'theme.js' | asset_url | script_tag }}
   {{ 'shop.js' | asset_url | script_tag }}
 
+  {% if template == "blog" %}
+    {{ 'jquery.scrollNav.min.js' | asset_url | script_tag }}
+    <script>
+      $('.lookbook__articles').scrollNav({
+          sections: 'h3',
+          // subSections: false,
+          // sectionElem: 'section',
+          className: 'scroll-nav',
+          showHeadline: false,
+          // headlineText: 'Sections',
+          showTopLink: false,
+          // topLinkText: 'Top',
+          // fixedMargin: 40,
+          // scrollOffset: -400,
+          // animated: true,
+          speed: 500,
+          insertTarget: '.lookbook__list',
+          insertLocation: 'appendTo',
+          // activeClass: 'active',
+          arrowKeys: true
+          // scrollToHash: true,
+          // onInit: null,
+          // onRender: null,
+          // onDestroy: null
+      });
+    </script>
+  {% endif %}
+
   {% comment %}
     Template-specific js
   {% endcomment %}
