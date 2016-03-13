@@ -2,14 +2,8 @@
 {% paginate blog.articles by 4 %}
 
 <div class="grid">
-  <aside class="grid__item large--one-eighth">
-    {% for article in blog.articles %}
-      <ul class="lookbook__list">
-        <li class="lookbook__list-item">{{ article.title }}</li>
-      </ul>
-    {% endfor %}
-  </aside>
-  <div class="grid__item large--three-quarters">
+
+  <div class="grid__item large--five-sixths push--large--one-twelfth">
 
     <header class="section-header text-center">
       <h1>
@@ -37,14 +31,14 @@
 
         {% unless featured_image_src == blank %}
           <div class="grid lookbook">
-            <div class="grid__item">
+            <div class="grid__item large--three-quarters">
               <img src="{{ article.image | img_url: "1024x1024" }}" alt="">
             </div>
-            <div class="grid__item">
-              <div data-relatable-kind="article" data-relatable-id="{{article.id}}" data-related-kind="product" class="grid">
+            <div class="grid__item large--one-quarter">
+              <div data-relatable-kind="article" data-relatable-id="{{article.id}}" data-related-kind="product">
                 {% raw %}
                   {{#.}}
-                    <a href="/products/{{handle}}" class="lookbook-product grid__item large--one-fifth medium--one-third small--one-half">
+                    <a href="/products/{{handle}}" class="lookbook-product">
                       <img src="{{#img_url.medium}}{{{image.src}}}{{/img_url.medium}}" alt="">
                       <p>{{title}}</p>
                       <p>{{product_type}}</p>
@@ -77,7 +71,6 @@
           {% endif %}
         </div>
       </article>
-
 
       {% unless forloop.last %}<hr class="hr--clear">{% endunless %}
 
