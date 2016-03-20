@@ -1,16 +1,19 @@
 <div class="collection">
-  {% if current_tags == blank %}
-    <h2>{{ collection.title }}</h2>
-  {% else %}
+  <h2>{{ collection.title }}</h2>
+  {% if current_tags != blank %}
     <div class="collection-actionable">
-      <a href="/collections/all" class="btn">x Clear Filters</a>
+      {% if collection.handle == 'all' %}
+        <a href="/collections" class="btn">x Clear Filters</a>
+      {% else %}
+        <a href="/collections/{{ collection.handle }}" class="btn">x Clear Filters</a>
+      {% endif %}
     </div>
-    <h2>
+    <h4>
       {% for tag in current_tags %}
         {{ tag | capitalize }} 
         {% unless forloop.last %}|{% endunless %}
       {% endfor %}
-    </h2>
+    </h4>
   {% endif %}
 
   {% if collection.products == blank %}

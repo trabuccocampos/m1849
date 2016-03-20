@@ -11,9 +11,7 @@
         </div>
       {% endfor %}
     {% else %}
-      {% if collection.handle == 'all' %}
-        {% include 'collection' %}
-      {% else %}
+      {% if current_tags == blank %}
         <div class="collection-actionable">
           <a href="/collections" class="btn back-button">Return</a>
         </div>
@@ -25,6 +23,8 @@
         <div class="collection-footer">
           <a href="/collections" class="btn back-button">Return</a>
         </div>
+      {% else %}
+        {% include 'collection' %}
       {% endif %}
     {% endif %}
   </div>
