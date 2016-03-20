@@ -41,7 +41,7 @@
           {{ product.description }}
         </div>
         <div class="specs tabular">
-          {% assign made_in_places = "italy,china" | split: "," %}
+          {% assign made_in_places = "italy,asia" | split: "," %}
           <div class="tabs">
             {% for place in made_in_places %}
               {% assign place_fields = product.metafields[place] | size %}
