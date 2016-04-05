@@ -15,7 +15,7 @@
           <div class="ajaxcart__row" data-line="{{line}}">
             <div class="grid">
               <div class="grid__item one-quarter">
-                <a href="{{url}}" class="ajaxcart__product-image"><img src="{{img}}" alt="{{name}}"></a>
+                <a href="{{url}}" class="ajaxcart__product-image"><img src="{{ img }}" alt="{{name}}"></a>
               </div>
               <div class="grid__item three-quarters">
                 <div class="ajaxcart__product-name--wrapper">
@@ -34,7 +34,9 @@
                 <div>
                   <div class="ajaxcart__qty">
                     <button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--minus icon-fallback-text" data-id="{{id}}" data-qty="0" data-line="{{line}}">
-                      <span class="icon icon-minus" aria-hidden="true"></span></button>
+                      <!-- <span class="icon icon-minus" aria-hidden="true"></span> -->
+                      Remove
+                    </button>
                     <input type="hidden" name="updates[]" class="ajaxcart__qty-num" value="0" data-id="{{id}}" data-line="{{line}}" aria-label="quantity" pattern="[0-9]*">
                   </div>
                 </div>
@@ -45,7 +47,7 @@
         {{/items}}
 
         {% endraw %}{% if settings.cart_notes_enable %}{% raw %}
-          <div>
+          <div class="ajacart__note--wrap">
             <label for="CartSpecialInstructions" class="ajaxcart__note">{% endraw %}{{ 'cart.general.note' | t }}{% raw %}</label>
             <textarea name="note" class="input-full" id="CartSpecialInstructions">{{note}}</textarea>
           </div>

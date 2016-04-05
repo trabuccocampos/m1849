@@ -1,29 +1,34 @@
 <!-- /templates/blog.liquid -->
-{% paginate blog.articles by 5 %}
+{% paginate blog.articles by 4 %}
 
-<div class="grid">
+<div class="grid lookbook">
 
-  <div class="grid__item large--five-sixths push--large--one-twelfth">
+  <!-- Fixed Sidebar -->
+  <aside class="grid__item large--one-eighth lookbook__list">
+    <!-- <ul class="lookbook__list">
+      {% for article in blog.articles %}
+        <li class="lookbook__list-item">
+          <a href="#{{ article.id }}">{{ article.title }}</a>
+        </li>
+      {% endfor %}
+    </ul> -->
+  </aside>
+  <div class="grid__item large--three-quarters lookbook__articles">
 
-    <header class="section-header text-center">
+    <!-- <header class="section-header text-center">
       <h1>
         {% if current_tags %}
           {{ blog.title | link_to: blog.url }} &mdash; {{ current_tags.first }}
         {% else %}
           {{ blog.title }}
         {% endif %}
-        <a href="{{ shop.url }}{{ blog.url }}.atom" class="icon-fallback-text rss-link">
-          <span class="icon icon-rss" aria-hidden="true"></span>
-          <span class="fallback-text">RSS</span>
-        </a>
       </h1>
-      <hr class="hr--small">
-    </header>
-
+    </header> -->
     {% for article in blog.articles %}
 
       {% assign article_content = article.excerpt_or_content %}
       {% assign featured_image_src = '' %}
+      {% assign article.id = article.id %}
 
       {% if article.image %}
         {% assign featured_image_src = article | img_url: '1024x1024' %}
@@ -32,50 +37,62 @@
         {% assign featured_image_src = featured_image_src[1] | split: '"' | first %}
       {% endif %}
 
-      <article class="article grid small--text-center">
+      <!-- Lookbook Article List -->
+      <article class="grid" id="{{ article.id }}">
+
+        <div class="grid__item large--three-fifths medium--two-thirds small--one-third">
+          <h3 class="lookbook__microtrend--title">
+            <!-- <a href="{{ article.url }}"></a> -->
+            {{ article.title }}
+          </h3>
+
+          <!-- TAGS -->
+          <!-- {% if article.tags.size > 0 %}
+            <ul class="tags tags--article inline-list">
+              {% include 'tags-article' %}
+            </ul>
+          {% endif %} -->
+        </div>
+        <div class="grid__item large--two-fifths medium--one-third small--two-thirds">
+          <div class="grid">
+              <div class="grid__item one-half">
+                {% if settings.social_sharing_products %}
+                  {% include 'social-sharing' %}
+                {% endif %}
+              </div>
+              <div class="grid__item one-half">
+                <button type="print" name="print" class="btn">Print</button>
+              </div>
+          </div>
+        </div>
 
         {% unless featured_image_src == blank %}
-          <div class="grid lookbook">
-            <div class="grid__item large--three-quarters">
-              <img src="{{ article.image | img_url: "1024x1024" }}" alt="">
-            </div>
-            <div class="grid__item large--one-quarter">
-              <div data-relatable-kind="article" data-relatable-id="{{article.id}}" data-related-kind="product">
-                {% raw %}
-                  {{#.}}
-                    <a href="/products/{{handle}}" class="lookbook-product">
-                      <img src="{{#img_url.medium}}{{{image.src}}}{{/img_url.medium}}" alt="">
-                      <p>{{title}}</p>
-                      <p>{{product_type}}</p>
-                    </a>
-                  {{/.}}
-                {% endraw %}
+          <div class="grid__item">
+            <div class="grid">
+              <div class="grid__item">
+                <img src="{{ article.image | img_url: "1024x1024" }}" alt="">
+                <div class="rte rte--indented-images">
+                  {{ article_content }}
+                </div>
+              </div>
+              <div class="grid__item">
+                <div data-relatable="article.products" data-relatable-id="{{ article.id }}">
+                  {% raw %}
+                    {{#products}}
+                      <a href="/products/{{handle}}" class="lookbook-product">
+                        <img src="{{#img_url.medium}}{{{image.src}}}{{/img_url.medium}}" alt="">
+                        <p>{{title}}</p>
+                        <p>{{product_type}}</p>
+                      </a>
+                    {{/products}}
+                  {% endraw %}
+                </div>
               </div>
             </div>
           </div>
         {% endunless %}
-
-        <div class="grid__item large--two-tenths push--large--one-tenth">
-          <time datetime="{{ article.published_at | date: '%Y-%m-%d' }}" class="date">{{ article.published_at | date: format: 'month_day_year' }}</time>
-          <hr class="hr--small hr--left small--hide">
-        </div>
-        <div class="grid__item large--six-tenths push--large--one-tenth">
-          <h3><a href="{{ article.url }}">{{ article.title }}</a></h3>
-          <div class="rte rte--indented-images">
-            {{ article_content | strip_html | truncatewords: 120 }}
-          </div>
-
-          <p>
-            <a href="{{ article.url }}" class="text-link">{{ 'blogs.article.read_more' | t }} <span class="icon icon-arrow-right" aria-hidden="true"></span></a>
-          </p>
-
-          {% if article.tags.size > 0 %}
-            <ul class="tags tags--article inline-list">
-              {% include 'tags-article' %}
-            </ul>
-          {% endif %}
-        </div>
       </article>
+
 
       {% unless forloop.last %}<hr class="hr--clear">{% endunless %}
 
@@ -91,3 +108,9 @@
 </div>
 
 {% endpaginate %}
+
+<div id="the_archives">
+  {% for article in blogs[blog.handle].articles limit: 10 offset:4 %}
+  <li>{{ article.title | link_to: article.url }}</li>
+{% endfor %}
+</div>

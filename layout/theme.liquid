@@ -31,11 +31,11 @@
 
   <!-- CSS ================================================== -->
   {{ 'timber.scss.css' | asset_url | stylesheet_tag }}
-  {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
   {{ 'catalog.scss.css' | asset_url | stylesheet_tag }}
   {{ 'product.scss.css' | asset_url | stylesheet_tag }}
   {{ 'slick.css' | asset_url | stylesheet_tag }}
-  
+  {{ 'styles.scss.css' | asset_url | stylesheet_tag }}
+
   <!-- Header hook for plugins ================================================== -->
   {{ content_for_header }}
   {% include 'oldIE-js' %}
@@ -49,7 +49,7 @@
   {% if template contains 'customers' %}
     {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
   {% endif %}
-  
+
   <!-- Begin Relatable -->
   <style>*[data-relatable]{visibility:hidden;}*[data-relatable].rendered{visibility:visible;}</style>
   <script>var Relatable={base_url:"https://relatable.heliumdev.com/resources/99fdf5dc835b64fdbf67f79f3533d019"};</script>
@@ -304,10 +304,10 @@
                 <li class="site-nav__item">
                   <a href="/cart" class="site-nav__link site-nav__link--icon cart-link js-drawer-open-right" aria-controls="CartDrawer">
                     <span class="icon-fallback-text">
-                      <span class="icon icon-cart" aria-hidden="true"></span>
                       <span class="fallback-text">{{ 'layout.cart.title' | t }}</span>
-                    </span>
+                    {{ 'wishlist_icon.png' | asset_url | img_tag }}
                     <span class="cart-link__bubble{% if cart.item_count > 0 %} cart-link__bubble--visible{% endif %}"></span>
+                    </span>
                   </a>
                 </li>
 
@@ -318,9 +318,8 @@
               <div class="site-nav--mobile text-right">
                 <a href="/cart" class="site-nav__link cart-link js-drawer-open-right" aria-controls="CartDrawer">
                   <span class="icon-fallback-text">
-                    <span class="icon icon-cart" aria-hidden="true"></span>
                     <span class="fallback-text">{{ 'layout.cart.title' | t }}</span>
-                  </span>
+                  {{ 'wishlist_icon.png' | asset_url | img_tag }}
                   <span class="cart-link__bubble{% if cart.item_count > 0 %} cart-link__bubble--visible{% endif %}"></span>
                 </a>
               </div>
@@ -383,11 +382,67 @@
       </div>
     {% endif %}
 
-    <hr class="hr--large">
     <footer class="site-footer small--text-center" role="contentinfo">
       <div class="wrapper">
+        <div class="grid">
+           <div class="grid__item large--one-quarter medium--one-half">
+             {% comment %}
+               Use the uploaded logo from theme settings if enabled.
+               Site name gets precedence with H1 tag on homepage, div on other pages.
+             {% endcomment %}
+             {% if template == 'index' %}
+               <h1 class="site-header__logo large--left" itemscope itemtype="http://schema.org/Organization">
+             {% else %}
+               <div class="h1 site-header__logo large--left" itemscope itemtype="http://schema.org/Organization">
+             {% endif %}
+               {% if settings.logo_use_image %}
+                 {% comment %}
+                   .logo--has-inverted is only applied to the default logo if the inverted logo exists. That way it'll only be hidden on the slider when it has a backup.
+                 {% endcomment %}
+                 {% assign logo_inverted_url = 'logo-inverted.png' | asset_url %}
+                 <a href="/" itemprop="url" class="site-header__logo-link{% if settings.logo_use_inverted %} logo--has-inverted{% endif %}">
+                   <img src="{{ 'logo.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo">
+                 </a>
+                 {% if settings.logo_use_inverted %}
+                   <a href="/" itemprop="url" class="logo--inverted">
+                     <img src="{{ 'logo-inverted.png' | asset_url }}" alt="{{ shop.name }}" itemprop="logo">
+                   </a>
+                 {% endif %}
+               {% else %}
+                 <a href="/" itemprop="url">{{ shop.name }}</a>
+               {% endif %}
+             {% if template == 'index' %}
+               </h1>
+             {% else %}
+               </div>
+             {% endif %}
+           </div>
 
-        <div class="grid-uniform">
+           <div class="grid__item large--one-quarter medium--one-half">
+             <p>
+               via S. e P. Mazzucchelli <br>
+               Castiglione Olona <br>
+                Varese Italia
+             </p>
+           </div>
+
+           <div class="grid__item large--one-quarter medium--one-half">
+             <p>
+               info@mazzucchelli1849.it <br>
+               tel +39 0331 82611<br>
+               fax +39 0331 82613
+             </p>
+           </div>
+
+           <div class="grid__item large--one-quarter medium--one-half">
+            <p>
+              C.F. e P.IVA IT 02768280121 <br>
+               REA di Varese 286045 <br>
+             Capitale Sociale Euro 20.000.000
+            </p>
+           </div>
+        </div>
+        <!-- <div class="grid-uniform">
 
           {% comment %}
             Default to 1 footer column (copyright/powered_by/payment_types)
@@ -558,24 +613,7 @@
                 </ul>
             </div>
           {% endif %}
-
-          <div class="grid__item {{ footer_column_width }} {% if num_footer_columns == 1 %}text-center{% else %}large--text-right{% endif %}">
-            <p>&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: '/' }}<br>{{ powered_by_link }}</p>
-            {% unless shop.enabled_payment_types == empty %}
-              <ul class="inline-list payment-icons">
-                {% for type in shop.enabled_payment_types %}
-                  <li>
-                    <span class="icon-fallback-text">
-                      <span class="icon icon-{{ type }}" aria-hidden="true"></span>
-                      <span class="fallback-text">{{ type | replace: '_',' ' }}</span>
-                    </span>
-                  </li>
-                {% endfor %}
-              </ul>
-            {% endunless %}
-          </div>
-        </div>
-
+        </div> -->
       </div>
     </footer>
 
@@ -583,6 +621,34 @@
   {{ 'slick.js' | asset_url | script_tag }}
   {{ 'theme.js' | asset_url | script_tag }}
   {{ 'shop.js' | asset_url | script_tag }}
+
+  {% if template == "blog" %}
+    {{ 'jquery.scrollNav.min.js' | asset_url | script_tag }}
+    <script>
+      $('.lookbook__articles').scrollNav({
+          sections: 'h3',
+          // subSections: false,
+          // sectionElem: 'section',
+          className: 'scroll-nav',
+          showHeadline: false,
+          // headlineText: 'Sections',
+          showTopLink: false,
+          // topLinkText: 'Top',
+          // fixedMargin: 40,
+          // scrollOffset: -400,
+          // animated: true,
+          speed: 500,
+          insertTarget: '.lookbook__list',
+          insertLocation: 'appendTo',
+          // activeClass: 'active',
+          arrowKeys: true
+          // scrollToHash: true,
+          // onInit: null,
+          // onRender: null,
+          // onDestroy: null
+      });
+    </script>
+  {% endif %}
 
   {% comment %}
     Template-specific js
@@ -622,5 +688,6 @@
     </div>
   {% endif %}
 
+  {% include 'search-autocomplete' %}
 </body>
 </html>

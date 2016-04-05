@@ -3,18 +3,23 @@
   <div class="front-view-image" data-image-count="{{ product.images.size }}">
     <section class="front-view-container">
       <figure class="product-card">
-        {{ product.featured_image | img_url: "large" | img_tag }}
+        <!-- {{ product.featured_image | img_url: "large" | img_tag }} -->
+        <img src="{% if product.images.size > 0 %}{{ product.featured_image | img_url: "large" }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
       </figure>
     </section>
     <footer>
-      <span class="image-view-title">Frontal view</span>
+      <span class="image-view-title">Frontal view
+      <br>  
+        {{ 'icon_front.png' | asset_url | img_tag }}
+      </span>
     </footer>
   </div>
   <div class="stacked-images">
     <section class="stacked-container">
       {% for image in product.images reversed %}
         <figure class="product-card" data-image-count="{{ image_count }}">
-          <img  src="{{ image.src | img_url: 'large' }}" alt="{{ image.alt | escape }}" data-image-id="{{ image.id }}">
+          <!-- <img  src="{{ image.src | img_url: 'large' }}" alt="{{ image.alt | escape }}" data-image-id="{{ image.id }}"> -->
+          <img src="{% if product.images.size > 0 %}{{ image.src | img_url: 'large' }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
         </figure>
       {% endfor %}
     </section>
@@ -26,12 +31,14 @@
     <section class="side-view-container">
       {% for image in product.images %}
         <figure>
-          <img src="{{ image.src | img_url: 'large' }}">
+          <!-- <img src="{{ image.src | img_url: 'large' }}"> -->
+          <img src="{% if product.images.size > 0 %}{{ image.src | img_url: 'large' }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
         </figure>
       {% endfor %}
     </section>
     <footer>
-      <span class="image-view-title">Side view</span>
+      <span class="image-view-title">Side view <br>
+      {{ 'icon_side.png' | asset_url | img_tag }}</span>
     </footer>
   </div>
   {% if product.images.size > 1 %}
@@ -98,7 +105,7 @@
 
       $('.switch-image-view').click(function() {
         var direction = $(this).attr('data-direction');
-
+        
         $product_images.attr('data-direction', direction);
         $('.switch-image-view').addClass('active');
         $(this).removeClass('active');

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="67px" height="32px" viewBox="0 0 67 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 3.6.1 (26313) - http://www.bohemiancoding.com/sketch -->
+    <title>icon_side</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="02.-Catalog" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="02.04.a-Catalog-Fiche---209910-front" transform="translate(-720.000000, -654.000000)">
+            <g id="views-/-front" transform="translate(358.000000, 618.000000)">
+                <g id="icon_side" transform="translate(362.873130, 36.341668)">
+                    <g id="lens" transform="translate(0.000000, 0.062831)">
+                        <path d="M2.67002334,1.31335411 C-0.947124019,1.31335411 -0.822073896,29.2461648 2.67002334,29.2461642" id="Path-644" fill="#D0D2D3"></path>
+                        <rect id="Rectangle-1234" fill="#A6A8AB" x="2.51851852" y="0" width="4.01999998" height="30.752" rx="4"></rect>
+                    </g>
+                    <path d="M4.28148148,5.7668308 C4.28148148,5.7668308 28.8278067,5.7668308 42.4666667,5.7668308 C56.1055266,5.7668308 63.8342303,11.2212164 63.8342303,22.6330918 C63.8342303,24.5013262 62.9761985,26.6927995 62.4656467,27.3482403" id="temple" stroke="#A6A8AB" stroke-width="3" stroke-linecap="round"></path>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
