@@ -81,15 +81,15 @@
   </div>
   <div class="product-extras related-lookbooks">
     <h3>Featured In</h3>
-    <div class="lookbooks-container" data-relatable-kind="article" data-related-id="{{product.id}}" data-related-kind="product">
+    <div class="lookbooks-container" data-relatable="product.articles" data-relatable-id="{{product.id}}">
       {% raw %}
-        {{#.}}
+        {{#articles}}
           <a href="/blogs/lookbook/{{id}}" class="product-lookbook">
             <img src="{{#img_url.medium}}{{{image.src}}}{{/img_url.medium}}" alt="">
             <h3>{{title}}</h3>
             <p>{{{summary_html}}}</p>
           </a>
-        {{/.}}
+        {{/articles}}
       {% endraw %}
     </div>
   </div>
