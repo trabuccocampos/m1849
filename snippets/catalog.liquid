@@ -1,4 +1,8 @@
 <div class="grid catalog">
+  {% if current_tags contains 'm53' %}
+    {{ 'collection_m49_banner.jpg' | asset_url | img_tag }}
+  {% endif %}
+  
   {% include 'sidebar' %}
   <div class="catalog-content grid__item large--four-fifths">
     {% if template == 'list-collections' %}

@@ -1253,6 +1253,11 @@
             "label":"Show product vendor"
          },
          {
+            "type":"image",
+            "id":"collection_m49_banner.jpg",
+            "label":"M49 Banner"
+         },
+         {
            "type":"header",
            "content":"Filter 1"
          }, 

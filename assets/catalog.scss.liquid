@@ -45,6 +45,7 @@ $dark-color: {{ settings.light_color_body_text }};
 
   .filters {
     margin-top: 70px;
+    
     li {
       .filter {
         position: relative;
@@ -107,7 +108,7 @@ $dark-color: {{ settings.light_color_body_text }};
     }
 
     .collection-actionable {
-      margin-left: 10px;
+      margin-left: 10pxg;
       float: right;
     }
   }
@@ -172,5 +173,24 @@ $dark-color: {{ settings.light_color_body_text }};
 
   .red {
     background: red;
+  }
+}
+
+.check-buttons {
+  input[type="checkbox"] {
+    display: none;
+    
+    &:checked {
+      + label {
+        background: #333;
+        color: white;
+      }
+    }
+  }
+  
+  label {
+    background: #eee;
+    padding: 10px;
+    text-style: normal;
   }
 }

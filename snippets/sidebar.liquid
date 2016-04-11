@@ -12,6 +12,12 @@
   {% endif %}
   <form class="filters" action="/collections/{{collection_handle}}">
     <h2>Filters</h2>
+    <div class="check-buttons">
+      <input type="checkbox" id="classical" name="classical">
+      <label for="classical">Classical</label>
+      <input type="checkbox" id="m53" name="m53">
+      <label for="m53">M53</label>
+    </div>
     <ul>
       {% for filter in (1..5) %}
         {% assign filter_name = "filter_" | append: filter | append: "_name" %}
