@@ -1,10 +1,10 @@
-{% assign image_count = product.images.size %}
+{% assign image_count = product.images.size | divided_by: 2 %}
 <div class="product-images">
-  <div class="front-view-image" data-image-count="{{ product.images.size }}">
+  <div class="front-view-image" data-image-count="{{ image_count }}">
     <section class="front-view-container">
       <figure class="product-card">
         <!-- {{ product.featured_image | img_url: "large" | img_tag }} -->
-        <img src="{% if product.images.size > 0 %}{{ product.featured_image | img_url: "large" }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
+        <img src="{% if image_count > 0 %}{{ product.featured_image | img_url: "large" }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
       </figure>
     </section>
     <footer>
@@ -17,10 +17,13 @@
   <div class="stacked-images">
     <section class="stacked-container">
       {% for image in product.images reversed %}
-        <figure class="product-card" data-image-count="{{ image_count }}">
-          <!-- <img  src="{{ image.src | img_url: 'large' }}" alt="{{ image.alt | escape }}" data-image-id="{{ image.id }}"> -->
-          <img src="{% if product.images.size > 0 %}{{ image.src | img_url: 'large' }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
-        </figure>
+        {% assign index = forloop.index | modulo: 2 %}
+        {% if index == 0 %}
+          <figure class="product-card" data-image-count="{{ image_count }}">
+            <!-- <img  src="{{ image.src | img_url: 'large' }}" alt="{{ image.alt | escape }}" data-image-id="{{ image.id }}"> -->
+            <img src="{% if image_count > 0 %}{{ image.src | img_url: 'large' }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
+          </figure>
+        {% endif %}
       {% endfor %}
     </section>
     <footer>
@@ -30,10 +33,13 @@
   <div class="side-view-images" data-image-count="{{ image_count }}">
     <section class="side-view-container">
       {% for image in product.images %}
-        <figure>
-          <!-- <img src="{{ image.src | img_url: 'large' }}"> -->
-          <img src="{% if product.images.size > 0 %}{{ image.src | img_url: 'large' }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
-        </figure>
+        {% assign index = forloop.index | modulo: 2 %}
+        {% if index == 0 %}
+          <figure>
+            <!-- <img src="{{ image.src | img_url: 'large' }}"> -->
+            <img src="{% if image_count > 0 %}{{ image.src | img_url: 'large' }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
+          </figure>
+        {% endif %}
       {% endfor %}
     </section>
     <footer>
@@ -41,11 +47,12 @@
       {{ 'icon_side.png' | asset_url | img_tag }}</span>
     </footer>
   </div>
-  {% if product.images.size > 1 %}
+  {% if image_count > 1 %}
     <div class="back-view-image" data-image-count="{{ image_count }}">
       <section class="back-view-container">
         <figure class="product-card">
-          {{ product.images.last | img_url: "large" | img_tag }}
+          {% assign back_index = product.images.size | minus: 2 %}
+          {{ product.images[back_index] | img_url: "large" | img_tag }}
         </figure>
       </section>
       <footer>
@@ -58,7 +65,7 @@
     </div>
   {% endif %}
 </div>
-{% if product.images.size > 1 %}
+{% if image_count > 1 %}
   <script type="text/javascript">
     (function stack_images() {
       var zoomed = false;
