@@ -31,6 +31,7 @@
 
   <!-- CSS ================================================== -->
   {{ 'timber.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
   {{ 'catalog.scss.css' | asset_url | stylesheet_tag }}
   {{ 'product.scss.css' | asset_url | stylesheet_tag }}
   {{ 'slick.css' | asset_url | stylesheet_tag }}
@@ -81,10 +82,6 @@
 
       {% comment %}
         Remove comment tags below to add a search box at the top of your pull-out menu.
-      {% endcomment %}
-
-      {% comment %}
-      {% include 'search-bar', search_btn_style: 'btn--secondary', search_bar_location: 'search-bar--drawer' %}
       {% endcomment %}
 
       <!-- begin mobile-nav -->
@@ -184,6 +181,7 @@
 
     <div class="header-wrapper{% unless hero_full_height %} header-wrapper--over-hero{% endunless %}">
       <header class="site-header" role="banner">
+        {% include 'search-bar' %}
         <div class="wrapper">
           <div class="grid--full grid--table">
             <div class="grid__item large--hide one-quarter">
@@ -684,13 +682,5 @@
       });
     </script>
   {% endif %}
-
-  {% if settings.header_search_enable and search_modal %}
-    <div id="SearchModal" class="mfp-hide">
-      {% include 'search-bar', search_btn_style: 'btn', search_bar_location: 'search-bar--modal' %}
-    </div>
-  {% endif %}
-
-  {% include 'search-autocomplete' %}
 </body>
 </html>

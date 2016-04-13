@@ -1155,20 +1155,18 @@ theme.checkoutIndicator = function () {
   });
 };
 
-theme.searchModal = function() {
-  if (!theme.cache.$toggleSearchModal.length) {
-    return;
-  }
-
-  theme.cache.$toggleSearchModal.magnificPopup({
-    type: 'inline',
-    mainClass: 'mfp-fade',
-    closeOnBgClick: true,
-    closeBtnInside: false,
-    closeOnContentClick: false,
-    tClose: '{{ "products.zoom.close" | t }}',
-    alignTop: true,
-    removalDelay: 500
+theme.searchModal = function(event) {
+  var $bar = $('.site-header .search-bar');
+  
+  theme.cache.$toggleSearchModal.click(function(event) {
+    event.preventDefault();
+    
+    $bar.addClass('active');
+    $bar.find('input[name="q"]').focus();
+  });
+  
+  $bar.find('.close-search').click(function() {
+    $bar.removeClass('active');
   });
 }
 
