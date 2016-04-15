@@ -153,10 +153,25 @@ var AssetImage = function(url, is_original) {
     });
   }
   
+  function languages_select() {
+    var $fields = $('.language-select');
+    
+    $fields.change(function() {
+      // Set all other fields the same
+      $fields.val($(this).val());
+      
+      Localize.setLanguage($(this).val());
+    });
+    
+    // Set selects
+    $fields.val(Localize.getLanguage());
+  }
+  
   // On DOM load
   $(function() {
     catalog_filters();
     tabs();
     slick();
+    languages_select();
   });
 })(jQuery);

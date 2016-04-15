@@ -59,7 +59,15 @@
   </script>
   <script src="https://relatable.heliumdev.com/js/v1.0/relatable.min.js" async></script>
   <!-- End Relatable -->
+  <script src="https://cdn.localizejs.com/localize.js"></script>
+  <script>!function(a){if(!a.Localize){a.Localize={};for(var e=["translate","untranslate","phrase","initialize","translatePage","setLanguage","getLanguage","detectLanguage","getAvailableLanguages","untranslatePage","bootstrap","prefetch","on","off"],t=0;t<e.length;t++)a.Localize[e[t]]=function(){}}}(window);</script>
 
+  <script>
+    Localize.initialize({
+      key: 'edQYfyzt3muaK', 
+      rememberLanguage: true
+    });
+  </script>
 </head>
 
 {% comment %}
@@ -157,6 +165,7 @@
           <li class="mobile-nav__item mobile-nav__item--secondary"><a href="{{ link.url }}">{{ link.title }}</a></li>
         {% endfor %}
       </ul>
+      {% include 'language-select' %}
       <!-- //mobile-nav -->
     </div>
   </div>
@@ -182,6 +191,7 @@
     <div class="header-wrapper{% unless hero_full_height %} header-wrapper--over-hero{% endunless %}">
       <header class="site-header" role="banner">
         {% include 'search-bar' %}
+        {% include 'language-select' %}
         <div class="wrapper">
           <div class="grid--full grid--table">
             <div class="grid__item large--hide one-quarter">

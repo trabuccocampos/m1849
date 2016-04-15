@@ -57,3 +57,30 @@
     }
   }
 }
+
+.site-header {
+  .language-select {
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 2px 25px 2px 5px;
+    font-size: 0.8em;
+    
+    @media (max-width: 768px) {
+      display: none;
+    }
+  }
+}
+
+#NavDrawer {
+  .language-select {
+    padding: 5px 25px 5px 10px;
+    font-style: normal;
+    font-size: 0.9em;
+    margin-top: 10px;
+    
+    &:hover {
+      outline: none;
+    }
+  }
+}
