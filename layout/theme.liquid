@@ -31,6 +31,7 @@
 
   <!-- CSS ================================================== -->
   {{ 'timber.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
   {{ 'catalog.scss.css' | asset_url | stylesheet_tag }}
   {{ 'product.scss.css' | asset_url | stylesheet_tag }}
   {{ 'slick.css' | asset_url | stylesheet_tag }}
@@ -51,10 +52,22 @@
   {% endif %}
 
   <!-- Begin Relatable -->
-  <style>*[data-relatable-kind]{visibility:hidden;}*[data-relatable-kind].rendered{visibility:visible;}</style>
-  <script>var Relatable={base_url:"https://relatable.heliumdev.com/resources/99fdf5dc835b64fdbf67f79f3533d019"};</script>
-  <script async src="https://relatable.heliumdev.com/assets/relatable.js"></script>
+  <style>*[data-relatable]{visibility:hidden;}*[data-relatable].rendered{visibility:visible;}</style>
+  <script>
+    var Relatable={base_url:"https://relatable.heliumdev.com/resources/99fdf5dc835b64fdbf67f79f3533d019",
+    callbacks:[],ready:function(callback){if(this.loaded){callback();}else{this.callbacks.push(callback);}}};
+  </script>
+  <script src="https://relatable.heliumdev.com/js/v1.0/relatable.min.js" async></script>
   <!-- End Relatable -->
+  <script src="https://cdn.localizejs.com/localize.js"></script>
+  <script>!function(a){if(!a.Localize){a.Localize={};for(var e=["translate","untranslate","phrase","initialize","translatePage","setLanguage","getLanguage","detectLanguage","getAvailableLanguages","untranslatePage","bootstrap","prefetch","on","off"],t=0;t<e.length;t++)a.Localize[e[t]]=function(){}}}(window);</script>
+
+  <script>
+    Localize.initialize({
+      key: 'edQYfyzt3muaK', 
+      rememberLanguage: true
+    });
+  </script>
 </head>
 
 {% comment %}
@@ -77,10 +90,6 @@
 
       {% comment %}
         Remove comment tags below to add a search box at the top of your pull-out menu.
-      {% endcomment %}
-
-      {% comment %}
-      {% include 'search-bar', search_btn_style: 'btn--secondary', search_bar_location: 'search-bar--drawer' %}
       {% endcomment %}
 
       <!-- begin mobile-nav -->
@@ -156,6 +165,7 @@
           <li class="mobile-nav__item mobile-nav__item--secondary"><a href="{{ link.url }}">{{ link.title }}</a></li>
         {% endfor %}
       </ul>
+      {% include 'language-select' %}
       <!-- //mobile-nav -->
     </div>
   </div>
@@ -180,6 +190,8 @@
 
     <div class="header-wrapper{% unless hero_full_height %} header-wrapper--over-hero{% endunless %}">
       <header class="site-header" role="banner">
+        {% include 'search-bar' %}
+        {% include 'language-select' %}
         <div class="wrapper">
           <div class="grid--full grid--table">
             <div class="grid__item large--hide one-quarter">
@@ -680,13 +692,5 @@
       });
     </script>
   {% endif %}
-
-  {% if settings.header_search_enable and search_modal %}
-    <div id="SearchModal" class="mfp-hide">
-      {% include 'search-bar', search_btn_style: 'btn', search_bar_location: 'search-bar--modal' %}
-    </div>
-  {% endif %}
-
-  {% include 'search-autocomplete' %}
 </body>
 </html>

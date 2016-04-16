@@ -5,25 +5,39 @@
       <li><a href="{{ link.url }}">{{ link.title }}</a></li>
     {% endfor %}
   </ul>
-  <form class="filters" action="/collections/all">
+  {% if collection %}
+    {% assign collection_handle = collection.handle %}
+  {% else %}
+    {% assign collection_handle = "all" %}
+  {% endif %}
+  <form class="filters" action="/collections/{{collection_handle}}">
     <h2>Filters</h2>
+    <div class="check-buttons">
+      <input type="checkbox" id="classical" name="classical">
+      <label for="classical">Classical</label>
+      <input type="checkbox" id="m53" name="m53">
+      <label for="m53">M53</label>
+    </div>
     <ul>
-      <li>
-        <span class="filter">Type</span>
-        <section>
-          <label>
-            <a href="/collections/all/havanas">Havanas</a>
-          </label>
-          <label>
-            <input type="checkbox" name="medium">
-            Medium
-          </label>
-          <label>
-            <input type="checkbox" name="small">
-            Small
-          </label>
-        </section>
-      </li>
+      {% for filter in (1..5) %}
+        {% assign filter_name = "filter_" | append: filter | append: "_name" %}
+        {% unless settings[filter_name] == blank %}
+          <li>
+            <span class="filter">{{ settings[filter_name] }}</span>
+            <section>
+              {% for option in (1..10) %}
+                {% assign option_field = "filter_" | append: filter | append: "_option_" | append: option %}
+                {% unless settings[option_field] == blank %}
+                  <label>
+                    <input type="checkbox" name="{{ settings[option_field] }}">
+                    {{ settings[option_field] }}
+                  </label>
+                {% endunless %}
+              {% endfor %}
+            </section>
+          </li>
+        {% endunless %}
+      {% endfor %}
       <li class="filter-by-color">
         <span class="filter">Color</span>
         <section>

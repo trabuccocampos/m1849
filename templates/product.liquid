@@ -41,7 +41,7 @@
           {{ product.description }}
         </div>
         <div class="specs tabular">
-          {% assign made_in_places = "italy,china" | split: "," %}
+          {% assign made_in_places = "italy,asia" | split: "," %}
           <div class="tabs">
             {% for place in made_in_places %}
               {% assign place_fields = product.metafields[place] | size %}
@@ -81,15 +81,13 @@
   </div>
   <div class="product-extras related-lookbooks">
     <h3>Featured In</h3>
-    <div class="lookbooks-container" data-relatable-kind="article" data-related-id="{{product.id}}" data-related-kind="product">
+    <div class="lookbooks-container" data-relatable="product.article" data-relatable-id="{{product.id}}">
       {% raw %}
-        {{#.}}
-          <a href="/blogs/lookbook/{{id}}" class="product-lookbook">
-            <img src="{{#img_url.medium}}{{{image.src}}}{{/img_url.medium}}" alt="">
-            <h3>{{title}}</h3>
-            <p>{{{summary_html}}}</p>
-          </a>
-        {{/.}}
+        <a href="/blogs/lookbook/{{article.id}}" class="product-lookbook">
+          <img src="{{article.image.src}}" alt="">
+          <h3>{{article.title}}</h3>
+          <p>{{{article.summary_html}}}</p>
+        </a>
       {% endraw %}
     </div>
   </div>

@@ -1,4 +1,8 @@
 <div class="grid catalog">
+  {% if current_tags contains 'm53' %}
+    {{ 'collection_m49_banner.jpg' | asset_url | img_tag }}
+  {% endif %}
+  
   {% include 'sidebar' %}
   <div class="catalog-content grid__item large--four-fifths">
     {% if template == 'list-collections' %}
@@ -11,21 +15,34 @@
         </div>
       {% endfor %}
     {% else %}
-      {% if collection.handle == 'all' %}
-        {% include 'collection' %}
-      {% else %}
+      <div class="collection-actionable">
+        <a href="/collections" class="btn back-button">Return</a>
+      </div>
+      {% if current_tags != blank %}
         <div class="collection-actionable">
-          <a href="/collections" class="btn back-button">Return</a>
+          {% if collection.handle == 'all' %}
+            <a href="/collections" class="btn">x Clear Filters</a>
+          {% else %}
+            <a href="/collections/{{ collection.handle }}" class="btn">x Clear Filters</a>
+          {% endif %}
         </div>
-        {% for type in collection.all_types %}
-          {% assign handle = type | handleize %}
-          {% assign collection = collections[handle] %}
-          {% include 'collection' %}
-        {% endfor %}
-        <div class="collection-footer">
-          <a href="/collections" class="btn back-button">Return</a>
-        </div>
+        <h4>
+          {% for tag in current_tags %}
+            {{ tag | capitalize }}
+            {% unless forloop.last %}|{% endunless %}
+          {% endfor %}
+        </h4>
       {% endif %}
+      {% for type in collection.all_types %}
+        {% assign handle = type | handleize %}
+        {% assign collection = collections[handle] %}
+        {% if collection.products.size > 1 %}
+          {% include 'collection' %}
+        {% endif %}
+      {% endfor %}
+      <div class="collection-footer">
+        <a href="/collections" class="btn back-button">Return</a>
+      </div>
     {% endif %}
   </div>
 </div>

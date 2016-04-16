@@ -38,7 +38,7 @@
       {% endif %}
 
       <!-- Lookbook Article List -->
-      <article class="grid" id="{{ article.id }}">
+      <article class="grid" id="{{ article.id }}" data-id="{{ article.id }}">
 
         <div class="grid__item large--three-fifths medium--two-thirds small--one-third">
           <h3 class="lookbook__microtrend--title">
@@ -76,18 +76,7 @@
                 </div>
               </div>
               <div class="grid__item">
-                <div data-relatable-kind="article" data-relatable-id="{{article.id}}" data-related-kind="product" class="grid">
-                  {% raw %}
-                    {{#.}}
-                      <a href="/products/{{handle}}" class="lookbook-product grid__item large--one-eighth medium--one-third small--one-quarter">
-                        <img src="{{#img_url.medium}}{{{image.src}}}{{/img_url.medium}}" alt="">
-                        <h4 class="lookbook-product__title">
-                          {{title}}
-                        </h4>
-                      </a>
-                    {{/.}}
-                  {% endraw %}
-                </div>
+                <div class="microtrends"></div>
               </div>
             </div>
           </div>
@@ -115,3 +104,85 @@
   <li>{{ article.title | link_to: article.url }}</li>
 {% endfor %}
 </div>
+<script type="template/mustache" id="microtrends">
+  {% raw %}
+    {{#articles}}
+      <div class="microtrend" data-id="{{id}}">
+        <h4>Microtrend: {{title}}</h4>
+        <img src="{{#img_url.large}}{{image.src}}{{/img_url.large}}" alt="">
+        <div class="materials"></div>
+      </div>
+    {{/articles}}
+  {% endraw %}
+</script>
+<script type="template/mustache" id="materials">
+  {% raw %}
+    {{#products}}
+      <div class="material">
+        <h4>Material: {{title}}</h4>
+        <a href="/products/{{handle}}">
+          <img src="{{#img_url.large}}{{image.src}}{{/img_url.large}}" alt="">
+        </a>
+      </div>
+    {{/products}}
+  {% endraw %}
+</script>
+<script type="text/javascript">
+  Relatable.ready(function() {
+    var $micro = $('#microtrends').html();
+    var $material = $('#materials').html();
+    
+    function getMaterials(articles) {
+      var ids = [];
+      
+      // Loop through articles and grab IDs
+      for (id in articles) {
+        if (articles.hasOwnProperty(id)) {
+          var subArticles = articles[id].articles;
+          
+          for (subArticle in subArticles) {
+            if (subArticles.hasOwnProperty(subArticle)) {
+              ids.push(subArticles[subArticle].id);
+            }
+          }
+        }
+      }
+      
+      Relatable.get({
+        query: "article.products",
+        id: ids.join(",")
+      }, function(articles) {
+        for (id in articles) {
+          if (articles.hasOwnProperty(id)) {
+            var output = Mustache.render($material, articles[id]);
+            var $html = $.parseHTML(output);
+            
+            $('[data-id="'+id+'"]').find('.materials').html($html);
+          }
+        }
+      });
+    }
+    
+    function getMicroTrends(ids) {
+      // Get all micro trends
+      Relatable.get({
+        query: "article.articles",
+        id: ids
+      }, function(articles) {
+        for (id in articles) {
+          if (articles.hasOwnProperty(id)) {
+            var output = Mustache.render($micro, articles[id]);
+            var $html = $.parseHTML(output);
+
+            $('[data-id="'+id+'"]').find('.microtrends').html($html);
+          }
+        }
+
+        // Get get materials
+        getMaterials(articles);
+      });
+    }
+    
+    getMicroTrends("{{ blog.articles | map: "id" | join: "," }}");
+  });
+</script>
