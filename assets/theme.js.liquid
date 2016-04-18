@@ -1157,14 +1157,14 @@ theme.checkoutIndicator = function () {
 
 theme.searchModal = function(event) {
   var $bar = $('.site-header .search-bar');
-  
+
   theme.cache.$toggleSearchModal.click(function(event) {
     event.preventDefault();
-    
+
     $bar.addClass('active');
     $bar.find('input[name="q"]').focus();
   });
-  
+
   $bar.find('.close-search').click(function() {
     $bar.removeClass('active');
   });

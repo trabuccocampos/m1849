@@ -5,15 +5,7 @@
 
   <!-- Fixed Sidebar -->
   <aside class="grid__item large--one-eighth lookbook__list">
-    <!-- <ul class="lookbook__list">
-      {% for article in blog.articles %}
-        <li class="lookbook__list-item">
-          <a href="#{{ article.id }}">{{ article.title }}</a>
-        </li>
-      {% endfor %}
-    </ul> -->
   </aside>
-  <div class="grid__item large--three-quarters lookbook__articles">
 
     <!-- <header class="section-header text-center">
       <h1>
@@ -31,57 +23,46 @@
       {% assign article.id = article.id %}
 
       {% if article.image %}
-        {% assign featured_image_src = article | img_url: '1024x1024' %}
+        {% assign featured_image_src = article | img_url: 'master' %}
       {% elsif article_content contains '<img' %}
         {% assign featured_image_src = article_content | split: 'src="' %}
         {% assign featured_image_src = featured_image_src[1] | split: '"' | first %}
       {% endif %}
 
-      <!-- Lookbook Article List -->
-      <article class="grid" id="{{ article.id }}" data-id="{{ article.id }}">
+      <div class="lookbook__macrotrend--image__wrapper">
+        <img src="{{ article.image | img_url: "master" }}" alt="" class="lookbook__macrotrend--image">
+      </div>
 
-        <div class="grid__item large--three-fifths medium--two-thirds small--one-third">
-          <h3 class="lookbook__microtrend--title">
+      <!-- Lookbook Article List -->
+      <div class="grid__item  push--large--one-eighth large--three-quarters lookbook__articles">
+
+      <article class="grid lookbook__macrotrend" id="{{ article.id }}" data-id="{{ article.id }}">
+
+        <div class="grid__item">
+          <h2 class="lookbook__microtrend--title">
             <!-- <a href="{{ article.url }}"></a> -->
             {{ article.title }}
-          </h3>
+          </h2>
 
-          <!-- TAGS -->
-          <!-- {% if article.tags.size > 0 %}
-            <ul class="tags tags--article inline-list">
-              {% include 'tags-article' %}
-            </ul>
-          {% endif %} -->
-        </div>
-        <div class="grid__item large--two-fifths medium--one-third small--two-thirds">
-          <div class="grid">
-              <div class="grid__item one-half">
-                {% if settings.social_sharing_products %}
-                  {% include 'social-sharing' %}
-                {% endif %}
-              </div>
-              <div class="grid__item one-half">
-                <button type="print" name="print" class="btn">Print</button>
-              </div>
-          </div>
         </div>
 
         {% unless featured_image_src == blank %}
           <div class="grid__item">
             <div class="grid">
-              <div class="grid__item">
-                <img src="{{ article.image | img_url: "1024x1024" }}" alt="">
+              <div class="grid__item push--large--one-eighth large--three-quarters lookbook__macrotrend--content">
                 <div class="rte rte--indented-images">
                   {{ article_content }}
                 </div>
               </div>
               <div class="grid__item">
-                <div class="microtrends"></div>
+                <div class="microtrends grid-uniform"></div>
               </div>
             </div>
           </div>
         {% endunless %}
       </article>
+
+      </div>
 
 
       {% unless forloop.last %}<hr class="hr--clear">{% endunless %}
@@ -94,7 +75,6 @@
       </div>
     {% endif %}
 
-  </div>
 </div>
 
 {% endpaginate %}
@@ -104,25 +84,36 @@
   <li>{{ article.title | link_to: article.url }}</li>
 {% endfor %}
 </div>
+
 <script type="template/mustache" id="microtrends">
   {% raw %}
     {{#articles}}
-      <div class="microtrend" data-id="{{id}}">
-        <h4>Microtrend: {{title}}</h4>
-        <img src="{{#img_url.large}}{{image.src}}{{/img_url.large}}" alt="">
-        <div class="materials"></div>
+      <div class="microtrend grid__item one-whole" data-id="{{id}}">
+        <div class="grid">
+          <div class="microtrend grid__item large--two-thirds medium--two-thirds small--one-half" data-id="{{id}}">
+            <h3 class="microtrend--title">{{title}}</h3>
+          </div>
+          <div class="grid__item large--one-third medium--one-third small--one-half lookbook__PDF">
+              <button type="print" name="print" class="btn">Download the PDF</button>
+          </div>
+          <div class="grid__item one-whole">
+            <img src="{{#img_url.large}}{{image.src}}{{/img_url.large}}" alt="" class="lookbook__microtrend__img">
+            <div class="materials"></div>
+          </div>
+        </div>
       </div>
+      <hr class="hr--clear">
     {{/articles}}
   {% endraw %}
 </script>
 <script type="template/mustache" id="materials">
   {% raw %}
     {{#products}}
-      <div class="material">
-        <h4>Material: {{title}}</h4>
+      <div class="grid__item large--one-sixth medium--one-third material">
         <a href="/products/{{handle}}">
           <img src="{{#img_url.large}}{{image.src}}{{/img_url.large}}" alt="">
         </a>
+        <h4 class="material--title">{{title}}</h4>
       </div>
     {{/products}}
   {% endraw %}
@@ -131,15 +122,15 @@
   Relatable.ready(function() {
     var $micro = $('#microtrends').html();
     var $material = $('#materials').html();
-    
+
     function getMaterials(articles) {
       var ids = [];
-      
+
       // Loop through articles and grab IDs
       for (id in articles) {
         if (articles.hasOwnProperty(id)) {
           var subArticles = articles[id].articles;
-          
+
           for (subArticle in subArticles) {
             if (subArticles.hasOwnProperty(subArticle)) {
               ids.push(subArticles[subArticle].id);
@@ -147,7 +138,7 @@
           }
         }
       }
-      
+
       Relatable.get({
         query: "article.products",
         id: ids.join(",")
@@ -156,13 +147,13 @@
           if (articles.hasOwnProperty(id)) {
             var output = Mustache.render($material, articles[id]);
             var $html = $.parseHTML(output);
-            
+
             $('[data-id="'+id+'"]').find('.materials').html($html);
           }
         }
       });
     }
-    
+
     function getMicroTrends(ids) {
       // Get all micro trends
       Relatable.get({
@@ -182,7 +173,7 @@
         getMaterials(articles);
       });
     }
-    
+
     getMicroTrends("{{ blog.articles | map: "id" | join: "," }}");
   });
 </script>

@@ -647,7 +647,7 @@
         },
         {
            "type":"header",
-           "content":"Box Five / Image (1:3)"
+           "content":"Box Five (2 col)"
         },
         {
            "type":"checkbox",
@@ -658,8 +658,8 @@
            "type":"image",
            "id":"box_5.jpg",
            "label":"Image 5",
-           "max-width":350,
-           "info":"Min 350px wide required"
+           "max-width":700,
+           "info":"Min 700px wide required"
         },
         {
            "type":"select",
@@ -749,7 +749,7 @@
         },
         {
            "type":"header",
-           "content":"Box Seven / Long / No Image (1:6)"
+           "content":"Box Seven (1:3)"
         },
         {
            "type":"checkbox",
@@ -846,6 +846,108 @@
         {
            "type":"text",
            "id":"box_8_link",
+           "label":"Link URL"
+        },
+        {
+           "type":"header",
+           "content":"Box Nine / Long / No Image (1:6)"
+        },
+        {
+           "type":"checkbox",
+           "id":"box_9_enable",
+           "label":"Enable"
+        },
+        {
+           "type":"image",
+           "id":"box_9.jpg",
+           "label":"Image 1",
+           "max-width":700,
+           "info":"Min 700px wide required"
+        },
+        {
+           "type":"select",
+           "id":"box_9_color",
+           "label":"Text color",
+           "options":[
+              {
+                 "value":"is-dark",
+                 "label":"Dark"
+              },
+              {
+                 "value":"is-light",
+                 "label":"Light"
+              }
+           ]
+        },
+        {
+           "type":"text",
+           "id":"box_9_subheading",
+           "label":"Subheading text"
+        },
+        {
+           "type":"text",
+           "id":"box_9_heading",
+           "label":"Heading text"
+        },
+        {
+           "type":"text",
+           "id":"box_9_cta",
+           "label":"Button text"
+        },
+        {
+           "type":"text",
+           "id":"box_9_link",
+           "label":"Link URL"
+        },
+        {
+           "type":"header",
+           "content":"Box Ten (2:3)"
+        },
+        {
+           "type":"checkbox",
+           "id":"box_10_enable",
+           "label":"Enable"
+        },
+        {
+           "type":"image",
+           "id":"box_10.jpg",
+           "label":"Image 1",
+           "max-width":700,
+           "info":"Min 700px wide required"
+        },
+        {
+           "type":"select",
+           "id":"box_10_color",
+           "label":"Text color",
+           "options":[
+              {
+                 "value":"is-dark",
+                 "label":"Dark"
+              },
+              {
+                 "value":"is-light",
+                 "label":"Light"
+              }
+           ]
+        },
+        {
+           "type":"text",
+           "id":"box_10_subheading",
+           "label":"Subheading text"
+        },
+        {
+           "type":"text",
+           "id":"box_10_heading",
+           "label":"Heading text"
+        },
+        {
+           "type":"text",
+           "id":"box_10_cta",
+           "label":"Button text"
+        },
+        {
+           "type":"text",
+           "id":"box_10_link",
            "label":"Link URL"
         }
       ]
@@ -1260,7 +1362,7 @@
          {
            "type":"header",
            "content":"Filter 1"
-         }, 
+         },
          {
            "type":"text",
            "id":"filter_1_name",
@@ -1319,7 +1421,7 @@
          {
            "type":"header",
            "content":"Filter 2"
-         }, 
+         },
          {
            "type":"text",
            "id":"filter_2_name",
@@ -1378,7 +1480,7 @@
          {
            "type":"header",
            "content":"Filter 3"
-         }, 
+         },
          {
            "type":"text",
            "id":"filter_3_name",
@@ -1437,7 +1539,7 @@
          {
            "type":"header",
            "content":"Filter 4"
-         }, 
+         },
          {
            "type":"text",
            "id":"filter_4_name",
@@ -1496,7 +1598,7 @@
          {
            "type":"header",
            "content":"Filter 4"
-         }, 
+         },
          {
            "type":"text",
            "id":"filter_5_name",
