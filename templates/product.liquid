@@ -83,11 +83,13 @@
     <h3>Featured In</h3>
     <div class="lookbooks-container" data-relatable="product.article" data-relatable-id="{{product.id}}">
       {% raw %}
-        <a href="/blogs/lookbook/{{article.id}}" class="product-lookbook">
-          <img src="{{article.image.src}}" alt="">
-          <h3>{{article.title}}</h3>
-          <p>{{{article.summary_html}}}</p>
-        </a>
+        {{#article}}
+          <a href="/blogs/lookbook/{{article.id}}" class="product-lookbook">
+            <img src="{{article.image.src}}" alt="">
+            <h3>{{article.title}}</h3>
+            <p>{{{article.summary_html}}}</p>
+          </a>
+        {{/article}}
       {% endraw %}
     </div>
   </div>
