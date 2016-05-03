@@ -3,7 +3,7 @@
   <div class="front-view-image" data-image-count="{{ image_count }}">
     <section class="front-view-container">
       <figure class="product-card">
-        <!-- {{ product.featured_image | img_url: "large" | img_tag }} -->
+        <span class="color-code">{{ product.title }}</span>
         <img src="{% if image_count > 0 %}{{ product.featured_image | img_url: "large" }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
       </figure>
     </section>

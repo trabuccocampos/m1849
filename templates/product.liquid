@@ -17,7 +17,7 @@
           <h2 class="product-single__vendor" itemprop="brand">{{ product.vendor }}</h2>
         {% endif %}
 
-        <h1 class="product-single__title" itemprop="name">{{ product.title }}</h1>
+        <h1 class="product-single__title color-code" itemprop="name">{{ product.title }}</h1>
         <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
           {% comment %}
             Optionally show the 'compare at' or original price of the product.
@@ -61,7 +61,7 @@
                         <tr>
                           {% assign key = field[0] | split: "_" %}
                           <td>{% for word in key %}{{word | capitalize}} {% endfor %}</td>
-                          <td>{{ field[1] }}</td>
+                          <td {% if field[0] == "color_code" %}data-color-code="{{ field[1] }}"{% endif %}>{{ field[1] }}</td>
                         </tr>
                       {% endfor %}
                     </tbody>
