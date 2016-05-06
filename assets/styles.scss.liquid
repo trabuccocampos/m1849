@@ -55,7 +55,7 @@ $red: #F5321E;
 
 /*------ Navbar -------*/
 .site-header {
-  margin-bottom: 3em;
+  margin-bottom: 2em;
 }
 .site-nav__link--icon.cart-link img {
     height: 22px;
@@ -126,17 +126,17 @@ $red: #F5321E;
     padding-right: 0;
   }
   .box-layout .grid__item {
-    margin-bottom: 4px;
-    padding-left: 4px !important;
+    margin-bottom: 8px;
+    padding-left: 8px !important;
 
     // margin-bottom: 0; //layout no spacing
     // padding-left: 0 !important; //layout no spacing
   }
 }
 @media screen and (min-width: 769px) {
-  .box-layout .grid__item:nth-of-type(3n+1) {
-    clear: left;
-  }
+  // .box-layout .grid__item:nth-of-type(3n+1) {
+  //   clear: left;
+  // }
 }
 .box-aspect-ratio,
 .box-aspect-ratio-long {
@@ -146,6 +146,10 @@ $red: #F5321E;
 @media screen and (min-width: 769px) {
   .box-aspect-ratio-long {
     @include aspect-ratio(4, 6);
+    overflow: hidden;
+  }
+  .box-aspect-ratio-wide {
+    @include aspect-ratio(8, 2.975);
     overflow: hidden;
   }
 }
@@ -463,15 +467,47 @@ $red: #F5321E;
 
 // Blog flow
 .lookbook__microtrend--title {
-  font-size: 2em;
+  font-size: 3em;
+  text-align: center;
 }
-.lookbook-product__title {
-
-}
-
 .lookbook__pin-button {
   display: inline-block;
 }
+
+.lookbook__microtrend__img {
+  min-width: 100%;
+}
+
+.lookbook__macrotrend--image__wrapper {
+  width: 100%;
+  padding-left: 30px;
+  z-index: 10000;
+}
+
+.lookbook__macrotrend--content {
+  margin-bottom: 4em;
+}
+
+.lookbook .hr--clear {
+  margin: 6em 0;
+}
+
+.lookbook__PDF {
+  text-align: right;
+}
+
+.microtrend--title {
+  font-weight: 900;
+
+  @media screen and (min-width: 769px) {
+    font-size: 1.6em;
+  }
+}
+
+.material {
+  text-align: center;
+}
+
 
 /*================ HERITAGE ================*/
 .heritage h2 {
@@ -583,7 +619,7 @@ $red: #F5321E;
 
 /*================ FOOTER ================*/
 body {
-  border-bottom: 20px solid $red;
+  border-bottom: 10px solid $red;
 }
 .site-footer {
   margin-top: 150px;

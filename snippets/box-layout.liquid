@@ -43,7 +43,7 @@
   {% endfor %}
 
 
-  {% for i in (2..6) %}
+  {% for i in (2..4) %}
     {% capture box %}box_{{ i }}_enable{% endcapture %}
     {% capture box_img %}box_{{ i }}.jpg{% endcapture %}
     {% capture box_text_color %}box_{{ i }}_color{% endcapture %}
@@ -86,7 +86,93 @@
     {% endif %}
   {% endfor %}
 
-  {% for i in (7..7) %}
+  {% for i in (5..5) %}
+    {% capture box %}box_{{ i }}_enable{% endcapture %}
+    {% capture box_img %}box_{{ i }}.jpg{% endcapture %}
+    {% capture box_text_color %}box_{{ i }}_color{% endcapture %}
+    {% capture box_heading %}box_{{ i }}_heading{% endcapture %}
+    {% capture box_subheading %}box_{{ i }}_subheading{% endcapture %}
+    {% capture box_cta %}box_{{ i }}_cta{% endcapture %}
+    {% capture box_link %}box_{{ i }}_link{% endcapture %}
+
+    {% if settings[box] %}
+        <div class="grid__item large--two-thirds medium--one-whole {{ settings[box_text_color] }}" data-color="{{ settings[box_text_color] }}">
+          <div class="box-aspect-ratio-wide">
+            <div class="box__content">
+              <a href="{{ settings[box_link] }}" class="box__img__link">
+                <div class="box__image" style="background-image: url('{{ box_img | asset_url }}');" data-image="{{ box_img | asset_url }}"></div>
+              </a>
+              <div class="box__text-wrap">
+                <div class="box__text-align">
+                  <div class="box__text-content">
+                    {% unless settings[box_subheading] == blank %}
+                      <p class="box__subtitle">
+                        {{ settings[box_subheading] }}
+                      </p>
+                    {% endunless %}
+                    {% unless settings[box_heading] == blank %}
+                      <h1 class="box__title">
+                        {{ settings[box_heading] }}
+                      </h1>
+                    {% endunless %}
+                    {% unless settings[box_cta] == blank %}
+                      <a href="{{ settings[box_link] }}" class="btn box__cta">
+                        {{ settings[box_cta] }} &rarr;
+                      </a>
+                    {% endunless %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    {% endif %}
+  {% endfor %}
+
+  {% for i in (6..8) %}
+    {% capture box %}box_{{ i }}_enable{% endcapture %}
+    {% capture box_img %}box_{{ i }}.jpg{% endcapture %}
+    {% capture box_text_color %}box_{{ i }}_color{% endcapture %}
+    {% capture box_heading %}box_{{ i }}_heading{% endcapture %}
+    {% capture box_subheading %}box_{{ i }}_subheading{% endcapture %}
+    {% capture box_cta %}box_{{ i }}_cta{% endcapture %}
+    {% capture box_link %}box_{{ i }}_link{% endcapture %}
+
+    {% if settings[box] %}
+        <div class="grid__item large--one-third medium--one-half {{ settings[box_text_color] }}" data-color="{{ settings[box_text_color] }}">
+          <div class="box-aspect-ratio">
+            <div class="box__content">
+              <a href="{{ settings[box_link] }}" class="box__img__link">
+                <div class="box__image" style="background-image: url('{{ box_img | asset_url }}');" data-image="{{ box_img | asset_url }}"></div>
+              </a>
+              <div class="box__text-wrap">
+                <div class="box__text-align">
+                  <div class="box__text-content">
+                    {% unless settings[box_subheading] == blank %}
+                      <p class="box__subtitle">
+                        {{ settings[box_subheading] }}
+                      </p>
+                    {% endunless %}
+                    {% unless settings[box_heading] == blank %}
+                      <h1 class="box__title">
+                        {{ settings[box_heading] }}
+                      </h1>
+                    {% endunless %}
+                    {% unless settings[box_cta] == blank %}
+                      <a href="{{ settings[box_link] }}" class="btn box__cta">
+                        {{ settings[box_cta] }} &rarr;
+                      </a>
+                    {% endunless %}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+    {% endif %}
+  {% endfor %}
+
+  {% for i in (9..9) %}
     {% capture box %}box_{{ i }}_enable{% endcapture %}
     {% capture box_img %}box_{{ i }}.jpg{% endcapture %}
     {% capture box_text_color %}box_{{ i }}_color{% endcapture %}
@@ -128,7 +214,8 @@
         </div>
     {% endif %}
   {% endfor %}
-  {% for i in (8..8) %}
+
+  {% for i in (10..10) %}
     {% capture box %}box_{{ i }}_enable{% endcapture %}
     {% capture box_img %}box_{{ i }}.jpg{% endcapture %}
     {% capture box_text_color %}box_{{ i }}_color{% endcapture %}
