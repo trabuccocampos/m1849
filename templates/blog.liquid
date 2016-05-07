@@ -94,10 +94,17 @@
             <h3 class="microtrend--title">{{title}}</h3>
           </div>
           <div class="grid__item large--one-third medium--one-third small--one-half lookbook__PDF">
-              <button type="print" name="print" class="btn">Download the PDF</button>
+              <a href="{{attachment}}" type="print" name="print" class="btn">Download the PDF</a>
           </div>
           <div class="grid__item one-whole">
-            <img src="{{#img_url.large}}{{image.src}}{{/img_url.large}}" alt="" class="lookbook__microtrend__img">
+            <div class="images">
+              <div>
+                <img src="{{#img_url.1024x1024}}{{image.src}}{{/img_url.1024x1024}}" alt="" class="lookbook__microtrend__img">
+              </div>
+              {{#images}}
+                <div><img src="{{.}}" alt=""></div>
+              {{/images}}
+            </div>
             <div class="materials"></div>
           </div>
         </div>
@@ -119,61 +126,6 @@
   {% endraw %}
 </script>
 <script type="text/javascript">
-  Relatable.ready(function() {
-    var $micro = $('#microtrends').html();
-    var $material = $('#materials').html();
-
-    function getMaterials(articles) {
-      var ids = [];
-
-      // Loop through articles and grab IDs
-      for (id in articles) {
-        if (articles.hasOwnProperty(id)) {
-          var subArticles = articles[id].articles;
-
-          for (subArticle in subArticles) {
-            if (subArticles.hasOwnProperty(subArticle)) {
-              ids.push(subArticles[subArticle].id);
-            }
-          }
-        }
-      }
-
-      Relatable.get({
-        query: "article.products",
-        id: ids.join(",")
-      }, function(articles) {
-        for (id in articles) {
-          if (articles.hasOwnProperty(id)) {
-            var output = Mustache.render($material, articles[id]);
-            var $html = $.parseHTML(output);
-
-            $('[data-id="'+id+'"]').find('.materials').html($html);
-          }
-        }
-      });
-    }
-
-    function getMicroTrends(ids) {
-      // Get all micro trends
-      Relatable.get({
-        query: "article.articles",
-        id: ids
-      }, function(articles) {
-        for (id in articles) {
-          if (articles.hasOwnProperty(id)) {
-            var output = Mustache.render($micro, articles[id]);
-            var $html = $.parseHTML(output);
-
-            $('[data-id="'+id+'"]').find('.microtrends').html($html);
-          }
-        }
-
-        // Get get materials
-        getMaterials(articles);
-      });
-    }
-
-    getMicroTrends("{{ blog.articles | map: "id" | join: "," }}");
-  });
+  Shopify.article_ids = "{{ blog.articles | map: "id" | join: "," }}";
 </script>
+{{ 'article.js' | asset_url | script_tag }}
