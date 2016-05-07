@@ -5,6 +5,7 @@
 
   <!-- Fixed Sidebar -->
   <aside class="grid__item large--one-quarter lookbook__list">
+    
   </aside>
 
     <!-- <header class="section-header text-center">
@@ -63,13 +64,15 @@
             </div>
           {% endunless %}
         </article>
-
         </div>
-
 
         {% unless forloop.last %}<hr class="hr--clear">{% endunless %}
 
       {% endfor %}
+      <div class="grid__item text-center push--large--one-eighth large--three-quarters lookbook__articles">
+        <h2 class="lookbook__microtrend--title">Archived</h2>
+        <a href="/blogs/archived" class="btn">View Archived</a>
+      </div>
     </div>
 
     {% if paginate.pages > 1 %}
