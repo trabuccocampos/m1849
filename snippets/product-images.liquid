@@ -51,7 +51,7 @@
     <div class="back-view-image" data-image-count="{{ image_count }}">
       <section class="back-view-container">
         <figure class="product-card">
-          {% assign back_index = product.images.size | minus: 2 %}
+          {% assign back_index = product.images.size | minus: 1 %}
           {{ product.images[back_index] | img_url: "large" | img_tag }}
         </figure>
       </section>
