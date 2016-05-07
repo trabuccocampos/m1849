@@ -638,8 +638,8 @@
   {% if template == "blog" %}
     {{ 'jquery.scrollNav.min.js' | asset_url | script_tag }}
     <script>
-      $('.lookbook__articles').scrollNav({
-          sections: 'h3',
+      $('.lookbook').scrollNav({
+          sections: '.lookbook__microtrend--title',
           // subSections: false,
           // sectionElem: 'section',
           className: 'scroll-nav',

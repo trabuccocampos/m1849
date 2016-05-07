@@ -1,0 +1,31 @@
+<!-- /templates/blog.liquid -->
+{% paginate blog.articles by 50 %}
+  <div class="grid">
+    <div class="grid__item large--one-quarter">
+      <h3>Filters</h3>
+      <ul>
+        <li><a href="/blogs/{{ blog.handle }}">All</a></li>
+        {% for tag in blog.all_tags %}
+          <li><a href="/blogs/{{ blog.handle }}/tagged/{{tag}}">{{ tag | capitalized }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="grid__item large--three-quarters">
+      <h1>Archived</h1>
+      <div class="grid">
+        {% for article in blog.articles %}
+          <div class="grid__item article large--one-third">
+            {{ article.image | img_url: "medium" | img_tag }}
+            <h3><a href="{{ article.url }}"><strong>{{ article.title }}</strong></a></h3>
+            <p>{{ article.excerpt | truncate: "100" }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% if paginate.pages > 1 %}
+      <div class="pagination">
+        {{ paginate | default_pagination | replace: '&laquo; Previous', '<span class="icon icon-arrow-left" aria-hidden="true"></span>' | replace: 'Next &raquo;', '<span class="icon icon-arrow-right" aria-hidden="true"></span>' }}
+      </div>
+    {% endif %}
+  </div>
+{% endpaginate %}

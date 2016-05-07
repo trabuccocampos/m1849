@@ -65,8 +65,6 @@
         }
       }
       
-      console.log(article);
-
       return article;
     }
 

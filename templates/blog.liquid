@@ -4,7 +4,7 @@
 <div class="grid lookbook">
 
   <!-- Fixed Sidebar -->
-  <aside class="grid__item large--one-eighth lookbook__list">
+  <aside class="grid__item large--one-quarter lookbook__list">
   </aside>
 
     <!-- <header class="section-header text-center">
@@ -16,58 +16,61 @@
         {% endif %}
       </h1>
     </header> -->
-    {% for article in blog.articles %}
+    
+    <div class="grid__item large--three-quarters">
+      {% for article in blog.articles %}
 
-      {% assign article_content = article.excerpt_or_content %}
-      {% assign featured_image_src = '' %}
-      {% assign article.id = article.id %}
+        {% assign article_content = article.excerpt_or_content %}
+        {% assign featured_image_src = '' %}
+        {% assign article.id = article.id %}
 
-      {% if article.image %}
-        {% assign featured_image_src = article | img_url: 'master' %}
-      {% elsif article_content contains '<img' %}
-        {% assign featured_image_src = article_content | split: 'src="' %}
-        {% assign featured_image_src = featured_image_src[1] | split: '"' | first %}
-      {% endif %}
+        {% if article.image %}
+          {% assign featured_image_src = article | img_url: 'master' %}
+        {% elsif article_content contains '<img' %}
+          {% assign featured_image_src = article_content | split: 'src="' %}
+          {% assign featured_image_src = featured_image_src[1] | split: '"' | first %}
+        {% endif %}
 
-      <div class="lookbook__macrotrend--image__wrapper">
-        <img src="{{ article.image | img_url: "master" }}" alt="" class="lookbook__macrotrend--image">
-      </div>
+        <div class="lookbook__macrotrend--image__wrapper">
+          <img src="{{ article.image | img_url: "master" }}" alt="" class="lookbook__macrotrend--image">
+        </div>
 
-      <!-- Lookbook Article List -->
-      <div class="grid__item  push--large--one-eighth large--three-quarters lookbook__articles">
+        <!-- Lookbook Article List -->
+        <div class="grid__item  push--large--one-eighth large--three-quarters lookbook__articles">
 
-      <article class="grid lookbook__macrotrend" id="{{ article.id }}" data-id="{{ article.id }}">
+        <article class="grid lookbook__macrotrend" id="{{ article.id }}" data-id="{{ article.id }}">
 
-        <div class="grid__item">
-          <h2 class="lookbook__microtrend--title">
-            <!-- <a href="{{ article.url }}"></a> -->
-            {{ article.title }}
-          </h2>
+          <div class="grid__item">
+            <h2 class="lookbook__microtrend--title">
+              <!-- <a href="{{ article.url }}"></a> -->
+              {{ article.title }}
+            </h2>
+
+          </div>
+
+          {% unless featured_image_src == blank %}
+            <div class="grid__item">
+              <div class="grid">
+                <div class="grid__item push--large--one-eighth large--three-quarters lookbook__macrotrend--content">
+                  <div class="rte rte--indented-images">
+                    {{ article_content }}
+                  </div>
+                </div>
+                <div class="grid__item">
+                  <div class="microtrends grid-uniform"></div>
+                </div>
+              </div>
+            </div>
+          {% endunless %}
+        </article>
 
         </div>
 
-        {% unless featured_image_src == blank %}
-          <div class="grid__item">
-            <div class="grid">
-              <div class="grid__item push--large--one-eighth large--three-quarters lookbook__macrotrend--content">
-                <div class="rte rte--indented-images">
-                  {{ article_content }}
-                </div>
-              </div>
-              <div class="grid__item">
-                <div class="microtrends grid-uniform"></div>
-              </div>
-            </div>
-          </div>
-        {% endunless %}
-      </article>
 
-      </div>
+        {% unless forloop.last %}<hr class="hr--clear">{% endunless %}
 
-
-      {% unless forloop.last %}<hr class="hr--clear">{% endunless %}
-
-    {% endfor %}
+      {% endfor %}
+    </div>
 
     {% if paginate.pages > 1 %}
       <div class="pagination">
