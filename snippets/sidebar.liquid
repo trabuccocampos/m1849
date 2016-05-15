@@ -1,4 +1,12 @@
 <aside class="grid__item large--one-fifth">
+  <form class="filters m49" action="/collections/{{collection_handle}}">
+    <div class="check-buttons">
+      <!-- <input type="checkbox" id="classical" name="classical">
+      <label for="classical">Classical</label> -->
+      <input type="checkbox" id="m49" name="m49">
+      <label class="btn__m49" for="m49">Be Green</label>
+    </div>
+  </form>
   <h2><a href="/collections">Categories</a></h2>
   <ul>
     {% for link in linklists.collections.links %}
@@ -12,13 +20,10 @@
   {% endif %}
   <form class="filters" action="/collections/{{collection_handle}}">
     <h2>Filters</h2>
-    <div class="check-buttons">
-      <input type="checkbox" id="classical" name="classical">
-      <label for="classical">Classical</label>
-      <input type="checkbox" id="m49" name="m49">
-      <label for="m49">M49</label>
-    </div>
     <ul>
+      <li>
+        <a class="filter" href="/collections/all/new">Latest Arrivals</a>
+      </li>
       {% for filter in (1..5) %}
         {% assign filter_name = "filter_" | append: filter | append: "_name" %}
         {% unless settings[filter_name] == blank %}
@@ -28,10 +33,13 @@
               {% for option in (1..10) %}
                 {% assign option_field = "filter_" | append: filter | append: "_option_" | append: option %}
                 {% unless settings[option_field] == blank %}
-                  <label>
-                    <input type="checkbox" name="{{ settings[option_field] }}">
-                    {{ settings[option_field] }}
-                  </label>
+                  <div class="btn__filter">
+                    <label>
+                      <input type="checkbox" name="{{ settings[option_field] }}">
+                      <span></span>
+                      {{ settings[option_field] }}
+                    </label>
+                  </div>
                 {% endunless %}
               {% endfor %}
             </section>
@@ -41,12 +49,22 @@
       <li class="filter-by-color">
         <span class="filter">Color</span>
         <section>
-          <input type="checkbox" name="red">
+          <input type="checkbox" name="black">
+          <input type="checkbox" name="white">
+          <input type="checkbox" name="brown">
           <input type="checkbox" name="blue">
+          <input type="checkbox" name="red">
+          <input type="checkbox" name="green">
+          <input type="checkbox" name="purple">
+          <input type="checkbox" name="yellow">
+          <input type="checkbox" name="pink">
+          <input type="checkbox" name="gold">
+          <input type="checkbox" name="silver">
+          <input type="checkbox" name="ivory">
+          <input type="checkbox" name="light-blue">
+          <input type="checkbox" name="orange">
+          <input type="checkbox" name="crystal">
         </section>
-      </li>
-      <li>
-        <a class="filter" href="/collections/all/new">Latest Arrivals</a>
       </li>
     </ul>
   </form>
