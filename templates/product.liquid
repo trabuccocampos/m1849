@@ -144,7 +144,12 @@
       {% for _product in product.collections.first.products %}
         <div class="related-product product-card">
           <a href="{{ _product.url }}">
-            <img src="{% if product.images.size > 0 %}{{ _product.featured_image | img_url: "compact" }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
+            {% if _product.featured_image %}
+              {% assign img_url = _product.featured_image | img_url: "compact" %}
+            {% else %}
+              {% assign img_url = 'no-image-compact.png' | asset_url %}
+            {% endif %}
+            <img src="{{ img_url }}" alt="{{ product.title | escape }}" />
           </a>
         </div>
       {% endfor %}
