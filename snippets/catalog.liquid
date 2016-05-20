@@ -1,5 +1,5 @@
 <div class="grid catalog">
-  {% if current_tags contains 'm49' %}
+  {% if current_tags contains 'M49' or current_tags contains 'm49' %}
     {{ 'collection_m49_banner.jpg' | asset_url | img_tag }}
   {% endif %}
 
