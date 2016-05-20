@@ -34,7 +34,6 @@ $dark-color: {{ settings.light_color_body_text }};
 
       label {
         display: block;
-        margin-left: 10px;
       }
 
       a {
@@ -151,7 +150,67 @@ $dark-color: {{ settings.light_color_body_text }};
   }
 }
 
-// Colors
+/*================ Checkbox style ================*/
+.btn__filter {
+  position: relative;
+}
+.btn__filter input {
+  // visibility: hidden;
+  display: none;
+}
+.btn__filter label {
+  margin-left: 30px;
+  font-style: normal;
+}
+.btn__filter label span {
+	cursor: pointer;
+	position: absolute;
+	width: 20px;
+	height: 20px;
+	top: 3px;
+  left: 2px;
+
+	background: transparent;
+  border: 1px solid #b3b3b3;
+  border-radius: 3px;
+}
+
+.btn__filter label span:after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
+	opacity: 0;
+	content: '';
+	position: absolute;
+	width: 10px;
+	height: 6px;
+	background: transparent;
+	top: 4px;
+	left: 4px;
+	border: 1px solid #000;
+	border-top: none;
+	border-right: none;
+
+	-webkit-transform: rotate(-45deg);
+	-moz-transform: rotate(-45deg);
+	-o-transform: rotate(-45deg);
+	-ms-transform: rotate(-45deg);
+	transform: rotate(-45deg);
+}
+
+.btn__filter label span:hover::after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+	filter: alpha(opacity=50);
+	opacity: 0.5;
+}
+
+.btn__filter input[type=checkbox]:checked + label span:after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+	filter: alpha(opacity=100);
+	opacity: 1;
+}
+
+
+/*================ COLORS ================*/
 .catalog aside .filter-by-color {
   section {
     font-size: 0;
@@ -167,23 +226,70 @@ $dark-color: {{ settings.light_color_body_text }};
   input[type="checkbox"] {
     display: none;
   }
-
+  .black {
+    background: black;
+  }
+  .white {
+    background: white;
+    border: 1px solid #ddd;
+  }
+  .brown {
+    background: #a17431;
+  }
   .blue {
     background: blue;
   }
-
   .red {
     background: red;
   }
+  .green {
+    background: green;
+  }
+  .purple {
+    background: purple;
+  }
+  .yellow {
+    background: yellow;
+  }
+  .pink {
+    background: fuchsia;
+  }
+  .grey {
+    background: #666;
+  }
+  .gold {
+    background: #FFD700;
+  }
+  .silver {
+    background: #c0c0c0;
+  }
+  .ivory {
+    background: #fffff0;
+    border: 1px solid #ddd;
+  }
+  .light-blue {
+    background: #add8e6;
+  }
+  .orange {
+    background: #ffa500;
+  }
+  .crystal {
+    background: #f5f5f5;
+  }
 }
 
+
+// Be Green / m49 btn
+.filters.m49 {
+  margin-top: 0;
+}
 .check-buttons {
   input[type="checkbox"] {
     display: none;
 
     &:checked {
       + label {
-        background: #333;
+        background: #84D270;
         color: white;
       }
     }
@@ -193,5 +299,30 @@ $dark-color: {{ settings.light_color_body_text }};
     background: #eee;
     padding: 10px;
     text-style: normal;
+  }
+
+  .btn__m49 {
+    border: 1px solid #84D270;
+    border-radius: 6px;
+    padding: 3px 30px;
+    text-align: center;
+    color: #84D270;
+    font-style: normal;
+    display: block;
+    margin-bottom: 20px;
+    background: transparent;
+    transition: all 0.4s ease-in-out;
+
+    &:hover,
+    &:focus {
+      background: #84D270;
+      color: white;
+    }
+  }
+}
+
+.btn__filters {
+  input[type="checkbox"] {
+    display: none;
   }
 }
