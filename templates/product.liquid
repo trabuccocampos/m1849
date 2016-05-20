@@ -37,7 +37,45 @@
         </div>
 
         <div class="product-single__description rte" itemprop="description">
-          <h2>{{ product.collections.first.title }}</h2>
+          {% comment%}
+          
+            -- Getting Collections --
+            In order to get the bottom level collection, we're finding the collection
+            that only has one product type and that product is exactly the product
+            type of our current product.
+            
+            The top level collection is found based on if every product from the bottom
+            level collection is found within the top level. This ensures that other
+            collections such as 'all' or 'newest' won't corrupt the fetching of these collections.
+          
+          {% endcomment%}
+          {% for collection in product.collections %}
+            {% if collection.all_types.size == 1 && collection.all_types contains product.type %}
+              {% assign bottom_level_collection = collection %}
+            {% endif %}
+          {% endfor %}
+          
+          {% for collection in product.collections %}
+            {% unless collection.id == bottom_level_collection.id %}
+              {% assign match = true %}
+              {% for _product in bottom_level_collection.products %}
+                {% assign collection_ids = _product.collections | map: "id" %}
+                {% unless collection_ids contains collection.id %}
+                  {% assign match = false %}
+                {% endunless %}
+              {% endfor %}
+            
+              {% if match %}
+                {% assign top_level_collection = collection%}
+              {% endif %}
+            {% endunless %}
+          {% endfor %}
+          
+          <div class="collections">
+            <h3><a href="{{ top_level_collection.url }}">{{ top_level_collection.title }}</a></h3>
+            <h4><a href="{{ bottom_level_collection.url }}">{{ bottom_level_collection.title }}</a></h4>
+          </div>
+
           {{ product.description }}
         </div>
         <div class="specs tabular">

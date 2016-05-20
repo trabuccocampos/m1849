@@ -36,7 +36,7 @@
       {% for type in collection.all_types %}
         {% assign handle = type | handleize %}
         {% assign collection = collections[handle] %}
-        {% if collection.products.size > 1 %}
+        {% if collection.products.size > 0 %}
           {% include 'collection' %}
         {% endif %}
       {% endfor %}
