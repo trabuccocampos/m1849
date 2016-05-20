@@ -13,9 +13,11 @@
     </div>
   </form>
   <h2><a href="/collections/{{ current_tags | join: "+"}}">Categories</a></h2>
-  <ul>
+  <ul class="sidemenu-list">
     {% for link in linklists.collections.links %}
-      <li><a href="{{ link.url }}/{{ current_tags | join: "+"}}">{{ link.title }}</a></li>
+      <li>
+        <a href="{{ link.url }}/{{ current_tags | join: "+"}}" class="{% if link.active %}active{% endif %}">{{ link.title }}</a>
+      </li>
     {% endfor %}
   </ul>
   <form class="filters" action="/collections/{{collection_handle}}">
