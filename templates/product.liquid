@@ -81,18 +81,21 @@
         <div class="specs tabular">
           {% assign made_in_places = "italy,asia" | split: "," %}
           <div class="tabs">
+            {% assign first_tab = true %}
             {% for place in made_in_places %}
               {% assign place_fields = product.metafields[place] | size %}
               {% if place_fields > 0 %}
-                <a href="#{{place}}" class="{% if forloop.first %}active{% endif %}" data-tab="{{ place }}">{{ place | capitalize }}</a>
+                <a href="#{{place}}" class="{% if first_tab %}active{% endif %}" data-tab="{{ place }}">{{ place | capitalize }}</a>
+                {% assign first_tab = false %}
               {% endif %}
             {% endfor %}
           </div>
           <div class="tab-content">
+            {% assign first_tab = true %}
             {% for place in made_in_places %}
               {% assign place_fields = product.metafields[place] | size %}
               {% if place_fields > 0 %}
-                <div class="tab {% if forloop.first %}active{% endif %}" data-tab="{{ place }}">
+                <div class="tab {% if first_tab %}active{% endif %}" data-tab="{{ place }}">
                   <table>
                     <tbody>
                       {% for field in product.metafields[place] %}
@@ -105,6 +108,7 @@
                     </tbody>
                   </table>
                 </div>
+                {% assign first_tab = false %}
               {% endif %}
             {% endfor %}
           </div>

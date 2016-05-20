@@ -1,0 +1,7 @@
+{% layout none %}
+{% paginate blog.articles by 6 %}
+  {
+    "title": "{{ blog.title }}",
+    "articles": {{ blog.articles | json }}
+  }
+{% endpaginate %}
