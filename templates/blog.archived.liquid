@@ -19,21 +19,17 @@
       {% endfor %}
     </div>
   {% else %}
-    {% paginate blog.articles by 50 %}
+    {% paginate blog.articles by 48 %}
       <div class="grid__item large--three-quarters">
         <h1>{{ current_tags | join: "," }}</h1>
         <div class="grid">
           {% for article in blog.articles %}
-            <div class="grid__item article large--one-third">
-              {{ article.image | img_url: "medium" | img_tag }}
-              <h3><a href="{{ article.url }}"><strong>{{ article.title }}</strong></a></h3>
-              <p>{{ article.excerpt | strip_html | truncate: "100" }}</p>
-            </div>
+            {% include 'article-item' %}
           {% endfor %}
         </div>
       </div>
       {% if paginate.pages > 1 %}
-        <div class="pagination">
+        <div class="pagination grid__item text-center">
           {{ paginate | default_pagination | replace: '&laquo; Previous', '<span class="icon icon-arrow-left" aria-hidden="true"></span>' | replace: 'Next &raquo;', '<span class="icon icon-arrow-right" aria-hidden="true"></span>' }}
         </div>
       {% endif %}
