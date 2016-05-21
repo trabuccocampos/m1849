@@ -47,7 +47,7 @@ $stack_offset: 80;
       font-size: 0.9em;
     }
   }
-  
+    
   .specs {
     margin-bottom: 20px;
 
@@ -266,9 +266,25 @@ $stack_offset: 80;
   border-top: 1px solid #eee;
   padding: 20px 0;
   margin: 20px 0;
+  
+  &:after {
+    content: '';
+    clear: both;
+    display: block;
+  }
 
   h3 {
     color: {{ settings.light_color_body_text }};
+  }
+  
+  .attachments {
+    width: 200px;
+    float: right;
+    
+    .btn {
+      width: 100%;
+      margin: 5px 0;
+    }
   }
 }
 

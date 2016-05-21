@@ -131,6 +131,14 @@
     </div>
   </div>
   <div class="product-extras related-lookbooks">
+    <div class="attachments">
+      <a href="http://google.com/print" class="btn">Print</a>
+      {% for attachment in product.metafields.attachments %}
+        {% unless attachment == blank %}
+          <a href="{{ attachment[1] }}" class="btn">{{ attachment[0] | capitalize }}</a>
+        {% endunless %}
+      {% endfor %}
+    </div>
     <h3>Featured In</h3>
     <div class="lookbooks-container" data-relatable="product.article" data-relatable-id="{{product.id}}">
       {% raw %}
