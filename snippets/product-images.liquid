@@ -29,24 +29,26 @@
       <span class="image-view-title">Frontal layer view</span>
     </footer>
   </div>
-  <div class="side-view-images" data-image-count="{{ image_count }}">
-    <section class="side-view-container">
-      {% for image in product.images %}
-        {% if forloop.index != 1 and forloop.index != product.images.size %}
-          <figure>
-            <!-- <img src="{{ image.src | img_url: 'large' }}"> -->
-            <img src="{% if image_count > 0 %}{{ image.src | img_url: 'large' }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
-          </figure>
-        {% endif %}
-      {% endfor %}
-    </section>
-    {% if image_count > 1 %}
-      <footer>
-        <span class="image-view-title">Side view <br>
-        {{ 'icon_side.png' | asset_url | img_tag }}</span>
-      </footer>
-    {% endif %}
-  </div>
+  {% if image_count > 2 %}
+    <div class="side-view-images" data-image-count="{{ image_count }}">
+      <section class="side-view-container">
+        {% for image in product.images %}
+          {% if forloop.index != 1 and forloop.index != product.images.size %}
+            <figure>
+              <!-- <img src="{{ image.src | img_url: 'large' }}"> -->
+              <img src="{% if image_count > 0 %}{{ image.src | img_url: 'large' }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
+            </figure>
+          {% endif %}
+        {% endfor %}
+      </section>
+      {% if image_count > 1 %}
+        <footer>
+          <span class="image-view-title">Side view <br>
+          {{ 'icon_side.png' | asset_url | img_tag }}</span>
+        </footer>
+      {% endif %}
+    </div>
+  {% endif %}
   {% if image_count > 1 %}
     <div class="back-view-image" data-image-count="{{ image_count }}">
       <section class="back-view-container">
