@@ -152,26 +152,30 @@
       {% endraw %}
     </div>
   </div>
-  <div class="product-extras related-products">
-    <h3>
-      Products in Category
-      <a href="{{ product.collections.first.url }}" class="more-styles">{{ product.collections.first.products.size }} more styles</a>
-    </h3>
-    <div class="slick-items">
-      {% for _product in product.collections.first.products %}
-        <div class="related-product product-card">
-          <a href="{{ _product.url }}">
-            {% if _product.featured_image %}
-              {% assign img_url = _product.featured_image | img_url: "compact" %}
-            {% else %}
-              {% assign img_url = 'no-image-compact.png' | asset_url %}
-            {% endif %}
-            <img src="{{ img_url }}" alt="{{ product.title | escape }}" />
-          </a>
-        </div>
-      {% endfor %}
+  {% if bottom_level_collection %}
+    <div class="product-extras related-products">
+      <h3>
+        Products in Category
+        <a href="{{ product.collections.first.url }}" class="more-styles">{{ bottom_level_collection.products.size }} more styles</a>
+      </h3>
+      <div class="slick-items">
+        {% for _product in bottom_level_collection.products %}
+          {% unless _product.id == product.id %}
+            <div class="related-product product-card">
+              <a href="{{ _product.url }}">
+                {% if _product.featured_image %}
+                  {% assign img_url = _product.featured_image | img_url: "compact" %}
+                {% else %}
+                  {% assign img_url = 'no-image-compact.png' | asset_url %}
+                {% endif %}
+                <img src="{{ img_url }}" alt="{{ product.title | escape }}" />
+              </a>
+            </div>
+          {% endunless %}
+        {% endfor %}
+      </div>
     </div>
-  </div>
+  {% endif %}
   {% if collection %}
     <hr class="hr--clear">
     <div class="text-center">
