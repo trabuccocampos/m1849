@@ -47,3 +47,24 @@
     border-top: 1px solid #eee;
   }
 }
+
+.lookbook__list {
+  li {
+    list-style-type: none;
+    cursor: pointer;
+    color: gray;
+    transition: color 0.1s ease;
+    
+    &.chapter-header {
+      font-weight: bold;
+    }
+    
+    &.chapter-sub-header {
+      padding-left: 15px;
+    }
+    
+    &.active {
+      color: black;
+    }
+  }
+}

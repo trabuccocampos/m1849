@@ -51,6 +51,10 @@
   {% if template contains 'customers' %}
     {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
   {% endif %}
+  
+  {% if template == "blog" %}
+    {{ 'chapters.jquery.js' | asset_url | script_tag }}
+  {% endif %}
 
   <!-- Begin Relatable -->
   <style>*[data-relatable]{visibility:hidden;}*[data-relatable].rendered{visibility:visible;}</style>
@@ -634,34 +638,6 @@
   {{ 'slick.js' | asset_url | script_tag }}
   {{ 'theme.js' | asset_url | script_tag }}
   {{ 'shop.js' | asset_url | script_tag }}
-
-  {% if template == "blog" %}
-    {{ 'jquery.scrollNav.min.js' | asset_url | script_tag }}
-    <script>
-      $('.lookbook').scrollNav({
-          sections: '.lookbook__microtrend--title',
-          // subSections: false,
-          // sectionElem: 'section',
-          className: 'scroll-nav',
-          showHeadline: false,
-          // headlineText: 'Sections',
-          showTopLink: false,
-          // topLinkText: 'Top',
-          // fixedMargin: 40,
-          // scrollOffset: -400,
-          // animated: true,
-          speed: 500,
-          insertTarget: '.lookbook__list',
-          insertLocation: 'appendTo',
-          // activeClass: 'active',
-          arrowKeys: true
-          // scrollToHash: true,
-          // onInit: null,
-          // onRender: null,
-          // onDestroy: null
-      });
-    </script>
-  {% endif %}
 
   {% comment %}
     Template-specific js

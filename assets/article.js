@@ -1,7 +1,24 @@
 (function($) {
+  // Sets height of aside nav to match
+  function setListHeight() {
+    $('.lookbook__list').height($('.lookbook').height());
+    
+    $(document.body).trigger("sticky_kit:recalc");
+  }
+  
   function init() {
     var $micro = $('#microtrends').html();
     var $material = $('#materials').html();
+        
+    function scrollNav() {
+      setListHeight();
+      
+      $('.lookbook').chapters({
+        nav: '.lookbook__list',
+        header: '.lookbook__microtrend--title',
+        subHeader: 'h3'
+      });
+    }
 
     function makeSlick($images) {
       $images.slick({
@@ -79,15 +96,21 @@
             var output = Mustache.render($micro, articleImages(articles[id]));
             var $html = $.parseHTML(output);
 
-            var $elem = $('[data-id="'+id+'"]').find('.microtrends');
-            $elem.html($html);
+            var $macrotrend = $('.lookbook__macrotrend[data-id="'+id+'"]');
+            var $header = $macrotrend.find('.macrotrend-header');
+            var $microtrends = $macrotrend.find('.microtrends');
+            
+            $microtrends.html($html);
 
-            makeSlick($elem.find('.images'));
+            makeSlick($microtrends.find('.images'));
           }
         }
 
         // Get get materials
         getMaterials(articles);
+        
+        // scroll nav
+        scrollNav();
       });
     }
 
@@ -99,4 +122,7 @@
       init();
     })
   });
+  
+  $(window).load(setListHeight);
+  $(window).resize(setListHeight);
 })(jQuery);

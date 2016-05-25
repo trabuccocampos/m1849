@@ -41,13 +41,10 @@
 
         <article class="grid lookbook__macrotrend" id="{{ article.id }}" data-id="{{ article.id }}">
 
-          <div class="grid__item">
-            <h2 class="lookbook__microtrend--title">
-              <!-- <a href="{{ article.url }}"></a> -->
-              {{ article.title }}
-            </h2>
-
-          </div>
+          <h2 class="lookbook__microtrend--title">
+            <!-- <a href="{{ article.url }}"></a> -->
+            {{ article.title }}
+          </h2>
 
           {% unless featured_image_src == blank %}
             <div class="grid__item">
@@ -70,8 +67,8 @@
 
       {% endfor %}
       <div class="grid__item text-center push--large--one-eighth large--three-quarters lookbook__articles">
-        <h2 class="lookbook__microtrend--title">Archived</h2>
-        <a href="/blogs/archived" class="btn">View Archived</a>
+        <h2 class="lookbook__microtrend--title">Archive</h2>
+        <a href="/blogs/archived" class="btn">View Archive</a>
       </div>
     </div>
 
