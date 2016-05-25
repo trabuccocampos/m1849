@@ -1,28 +1,42 @@
 <!-- /templates/blog.liquid -->
 <div class="grid archives">
-  <div class="grid__item large--one-quarter">
-    <h3>Filters</h3>
-    <ul>
+  {% assign tags = "" %}
+  {% for i in (1..30) %}
+    {% assign setting_id = "filter_3_option_" | append: i %}
+    {% assign tag = settings[setting_id] %}
+    
+    {% unless tag == blank %}
+      {% unless tags == blank %}
+        {% assign tags = tags | append: "," %}
+      {% endunless %}
+      {% assign tags = tags | append: tag %}
+    {% endunless %}
+  {% endfor %}
+  
+  {% assign tags = tags | split: "," %}
+  <aside class="grid__item large--one-quarter filters">
+    <h2>Filters</h2>
+    <ul class="sidemenu-list">
       <li><a href="/blogs/{{ blog.handle }}">All</a></li>
-      {% for tag in blog.all_tags %}
-        <li><a href="/blogs/{{ blog.handle }}/tagged/{{tag}}">{{ tag | capitalized }}</a></li>
+      {% for tag in tags %}
+        <li><a href="/blogs/{{ blog.handle }}/tagged/{{ tag | replace: " ", "" | handleize }}">{{ tag | capitalized }}</a></li>
       {% endfor %}
     </ul>
-  </div>
+  </aside>
   {% if current_tags == blank %}
     <div class="grid__item large--three-quarters archive-tags">
-      {% for tag in blog.all_tags %}
+      {% for tag in tags %}
         <div class="category">
-          <h1>{{ tag }}</h1>
-          <div class="grid" data-category-tag="{{ tag }}"></div>
+          <h1><a href="/blogs/{{ blog.handle }}/tagged/{{tag}}">{{ tag }}</a></h1>
+          <div class="grid grid-uniform" data-category-tag="{{ tag }}"></div>
         </div>
       {% endfor %}
     </div>
   {% else %}
     {% paginate blog.articles by 48 %}
       <div class="grid__item large--three-quarters">
-        <h1>{{ current_tags | join: "," }}</h1>
-        <div class="grid">
+        <h1>{{ current_tags | join: "," | capitalize }}</h1>
+        <div class="grid grid-uniform">
           {% for article in blog.articles %}
             {% include 'article-item' %}
           {% endfor %}
