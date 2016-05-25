@@ -105,7 +105,7 @@
                           {% assign key = field[0] | split: "_" %}
                           <td>{% for word in key %}{{word | capitalize}} {% endfor %}</td>
                           <td {% if field[0] == "color_code" %}data-color-code="{{ field[1] }}"{% endif %}>
-                            {% assign link_keys = "temple,side" | split: ","  %}
+                            {% assign link_keys = "temple" | split: ","  %}
                             {% if link_keys contains field[0] %}
                               <a href="/products/{{ field[1] }}">{{ field[1] }}</a>
                             {% else %}

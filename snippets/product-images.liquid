@@ -49,22 +49,20 @@
       {% endif %}
     </div>
   {% endif %}
-  {% if image_count > 1 %}
-    <div class="back-view-image" data-image-count="{{ image_count }}">
-      <section class="back-view-container">
-        <figure class="product-card">
-          {{ product.images.last | img_url: "large" | img_tag }}
-        </figure>
-      </section>
-      <footer>
-        <span class="image-view-title">Back view</span>
-      </footer>
-    </div>
-    <div class="toggle-views">
-      <span class="image-view-title switch-image-view active" data-direction="back">See back</span>
-      <span class="image-view-title switch-image-view" data-direction="front">See front</span>
-    </div>
-  {% endif %}
+  <div class="back-view-image" data-image-count="{{ image_count }}">
+    <section class="back-view-container">
+      <figure class="product-card">
+        {{ product.images.last | img_url: "large" | img_tag }}
+      </figure>
+    </section>
+    <footer>
+      <span class="image-view-title">Back view</span>
+    </footer>
+  </div>
+  <div class="toggle-views">
+    <span class="image-view-title switch-image-view active" data-direction="back">See back</span>
+    <span class="image-view-title switch-image-view" data-direction="front">See front</span>
+  </div>
 </div>
 {% if image_count > 1 %}
   <script type="text/javascript">
@@ -108,16 +106,18 @@
       // On window resize, set stack height again
       $(window).resize(set_stack_height);
 
-      // Toggle front and back switches
-      var $product_images = $('.product-images');
-
-      $('.switch-image-view').click(function() {
-        var direction = $(this).attr('data-direction');
-
-        $product_images.attr('data-direction', direction);
-        $('.switch-image-view').addClass('active');
-        $(this).removeClass('active');
-      });
     })();
   </script>
 {% endif %}
+<script type="text/javascript">
+  // Toggle front and back switches
+  var $product_images = $('.product-images');
+  
+  $('.switch-image-view').click(function() {
+    var direction = $(this).attr('data-direction');
+
+    $product_images.attr('data-direction', direction);
+    $('.switch-image-view').addClass('active');
+    $(this).removeClass('active');
+  });
+</script>
