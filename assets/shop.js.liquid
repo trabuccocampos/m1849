@@ -167,11 +167,24 @@ var AssetImage = function(url, is_original) {
     $fields.val(Localize.getLanguage());
   }
   
+  function toggle_color_codes() {
+    $('.specs .tabs a').click(function() {
+      var $code = $(this).closest('.tabular').find('.tab.active').find('[data-color-code]');
+      
+      var new_code = $code.text();
+      var prev_code = $('.color-code').first().text();
+      
+      $('.color-code').text(new_code);
+      $('title').text($('title').text().replace(prev_code, new_code));
+    });
+  }
+  
   // On DOM load
   $(function() {
     catalog_filters();
     tabs();
     slick();
     languages_select();
+    toggle_color_codes();
   });
 })(jQuery);

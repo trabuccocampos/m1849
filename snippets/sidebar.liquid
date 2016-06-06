@@ -1,3 +1,8 @@
+{% if collection %}
+  {% assign collection_handle = collection.handle %}
+{% else %}
+  {% assign collection_handle = "all" %}
+{% endif %}
 <aside class="grid__item large--one-fifth">
   <form class="filters m49" action="/collections/{{collection_handle}}">
     <div class="check-buttons">
@@ -10,14 +15,9 @@
   <h2><a href="/collections">Categories</a></h2>
   <ul>
     {% for link in linklists.collections.links %}
-      <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+      <li><a href="{{ link.url }}/{{ current_tags | join: "+"}}">{{ link.title }}</a></li>
     {% endfor %}
   </ul>
-  {% if collection %}
-    {% assign collection_handle = collection.handle %}
-  {% else %}
-    {% assign collection_handle = "all" %}
-  {% endif %}
   <form class="filters" action="/collections/{{collection_handle}}">
     <h2>Filters</h2>
     <ul>

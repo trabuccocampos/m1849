@@ -11,12 +11,12 @@
         {% assign limit = 20 %}
         {% include 'collection' with collection: collection %}
         <div class="collection-footer">
-          <a href="{{ collection.url }}" class="btn">See more +</a>
+          <a href="{{ collection.url }}/" class="btn">See more +</a>
         </div>
       {% endfor %}
     {% else %}
       <div class="collection-actionable">
-        <a href="/collections" class="btn back-button">Return</a>
+        <a href="/collections/all/{{ current_tags | join: "+"}}" class="btn back-button">Return</a>
       </div>
       {% if current_tags != blank %}
         <div class="collection-actionable">
@@ -36,7 +36,7 @@
       {% for type in collection.all_types %}
         {% assign handle = type | handleize %}
         {% assign collection = collections[handle] %}
-        {% if collection.products.size > 1 %}
+        {% if collection.products.size > 0 %}
           {% include 'collection' %}
         {% endif %}
       {% endfor %}

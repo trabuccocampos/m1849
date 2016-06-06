@@ -16,7 +16,7 @@
 
   <!-- Title and description ================================================== -->
   <title>
-  {{ page_title }}{% if current_tags %}{% assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags }}{% endif %}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
+  {{ page_title }}{% if current_page != 1 %} &ndash; {{ 'general.meta.page' | t: page: current_page }}{% endif %}{% unless page_title contains shop.name %} &ndash; {{ shop.name }}{% endunless %}
   </title>
 
   {% if page_description %}
@@ -31,6 +31,7 @@
 
   <!-- CSS ================================================== -->
   {{ 'timber.scss.css' | asset_url | stylesheet_tag }}
+  {{ 'article.scss.css' | asset_url | stylesheet_tag }}
   {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
   {{ 'catalog.scss.css' | asset_url | stylesheet_tag }}
   {{ 'product.scss.css' | asset_url | stylesheet_tag }}
@@ -637,8 +638,8 @@
   {% if template == "blog" %}
     {{ 'jquery.scrollNav.min.js' | asset_url | script_tag }}
     <script>
-      $('.lookbook__articles').scrollNav({
-          sections: 'h3',
+      $('.lookbook').scrollNav({
+          sections: '.lookbook__microtrend--title',
           // subSections: false,
           // sectionElem: 'section',
           className: 'scroll-nav',
