@@ -38,23 +38,23 @@
 
         <div class="product-single__description rte" itemprop="description">
           {% comment%}
-          
+
             -- Getting Collections --
             In order to get the bottom level collection, we're finding the collection
             that only has one product type and that product is exactly the product
             type of our current product.
-            
+
             The top level collection is found based on if every product from the bottom
             level collection is found within the top level. This ensures that other
             collections such as 'all' or 'newest' won't corrupt the fetching of these collections.
-          
+
           {% endcomment%}
           {% for collection in product.collections %}
             {% if collection.all_types.size == 1 && collection.all_types contains product.type %}
               {% assign bottom_level_collection = collection %}
             {% endif %}
           {% endfor %}
-          
+
           {% for collection in product.collections %}
             {% unless collection.id == bottom_level_collection.id %}
               {% assign match = true %}
@@ -64,47 +64,60 @@
                   {% assign match = false %}
                 {% endunless %}
               {% endfor %}
-            
+
               {% if match %}
                 {% assign top_level_collection = collection%}
               {% endif %}
             {% endunless %}
           {% endfor %}
-          
-          <div class="collections">
-            <h3><a href="{{ top_level_collection.url }}">{{ top_level_collection.title }}</a></h3>
-            <h4><a href="{{ bottom_level_collection.url }}">{{ bottom_level_collection.title }}</a></h4>
-          </div>
 
+          <div class="collections">
+            <h3><a href="{{ bottom_level_collection.url }}">{{ bottom_level_collection.title }}</a></h3>
+            <h4><a href="{{ top_level_collection.url }}">{{ top_level_collection.title }}</a></h4>
+          </div>
+          {% if product.tags contains 'M49' or product.tags contains 'm49' %}
+            <a href="/collections/all/M49" class="btn">M49</a>
+          {% endif %}
           {{ product.description }}
         </div>
         <div class="specs tabular">
           {% assign made_in_places = "italy,asia" | split: "," %}
           <div class="tabs">
+            {% assign first_tab = true %}
             {% for place in made_in_places %}
               {% assign place_fields = product.metafields[place] | size %}
               {% if place_fields > 0 %}
-                <a href="#{{place}}" class="{% if forloop.first %}active{% endif %}" data-tab="{{ place }}">{{ place | capitalize }}</a>
+                <a href="#{{place}}" class="{% if first_tab %}active{% endif %}" data-tab="{{ place }}">{{ place | capitalize }}</a>
+                {% assign first_tab = false %}
               {% endif %}
             {% endfor %}
           </div>
           <div class="tab-content">
+            {% assign first_tab = true %}
             {% for place in made_in_places %}
               {% assign place_fields = product.metafields[place] | size %}
               {% if place_fields > 0 %}
-                <div class="tab {% if forloop.first %}active{% endif %}" data-tab="{{ place }}">
+                <div class="tab {% if first_tab %}active{% endif %}" data-tab="{{ place }}">
                   <table>
                     <tbody>
                       {% for field in product.metafields[place] %}
                         <tr>
                           {% assign key = field[0] | split: "_" %}
                           <td>{% for word in key %}{{word | capitalize}} {% endfor %}</td>
-                          <td {% if field[0] == "color_code" %}data-color-code="{{ field[1] }}"{% endif %}>{{ field[1] }}</td>
+                          <td {% if field[0] == "color_code" %}data-color-code="{{ field[1] }}"{% endif %}>
+                            {% assign link_keys = "temple" | split: ","  %}
+                            {% if link_keys contains field[0] %}
+                              <a href="/products/{{ field[1] }}">{{ field[1] }}</a>
+                            {% else %}
+                              {{ field[1] }}
+                            {% endif %}
+                          </td>
                         </tr>
                       {% endfor %}
                     </tbody>
                   </table>
                 </div>
+                {% assign first_tab = false %}
               {% endif %}
             {% endfor %}
           </div>
@@ -118,6 +131,14 @@
     </div>
   </div>
   <div class="product-extras related-lookbooks">
+    <div class="attachments">
+      <a href="{{ settings.global_spec_url }}" class="btn">Specifications</a>
+      {% for attachment in product.metafields.attachments %}
+        {% unless attachment == blank %}
+          <a href="{{ attachment[1] }}" class="btn">{{ attachment[0] | capitalize }}</a>
+        {% endunless %}
+      {% endfor %}
+    </div>
     <h3>Featured In</h3>
     <div class="lookbooks-container" data-relatable="product.article" data-relatable-id="{{product.id}}">
       {% raw %}
@@ -131,21 +152,30 @@
       {% endraw %}
     </div>
   </div>
-  <div class="product-extras related-products">
-    <h3>
-      Products in Category
-      <a href="{{ product.collections.first.url }}" class="more-styles">{{ product.collections.first.products.size }} more styles</a>
-    </h3>
-    <div class="slick-items">
-      {% for _product in product.collections.first.products %}
-        <div class="related-product product-card">
-          <a href="{{ _product.url }}">
-            <img src="{% if product.images.size > 0 %}{{ _product.featured_image | img_url: "compact" }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
-          </a>
-        </div>
-      {% endfor %}
+  {% if bottom_level_collection %}
+    <div class="product-extras related-products">
+      <h3>
+        Products in Collection
+        <a href="{{ product.collections.first.url }}" class="more-styles">{{ bottom_level_collection.products.size }} more styles</a>
+      </h3>
+      <div class="slick-items">
+        {% for _product in bottom_level_collection.products %}
+          {% unless _product.id == product.id %}
+            <div class="related-product product-card">
+              <a href="{{ _product.url }}">
+                {% if _product.featured_image %}
+                  {% assign img_url = _product.featured_image | img_url: "compact" %}
+                {% else %}
+                  {% assign img_url = 'no-image-compact.png' | asset_url %}
+                {% endif %}
+                <img src="{{ img_url }}" alt="{{ product.title | escape }}" />
+              </a>
+            </div>
+          {% endunless %}
+        {% endfor %}
+      </div>
     </div>
-  </div>
+  {% endif %}
   {% if collection %}
     <hr class="hr--clear">
     <div class="text-center">

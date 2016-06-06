@@ -11,13 +11,15 @@ $stack_offset: 80;
   margin: 0;
   font-size: 0;
   position: relative;
-  
+
   .color-code {
     position: absolute;
     top: 10px;
     right: 15px;
     color: white;
     font-size: 1.8rem;
+
+    display: none;
   }
 
   img {
@@ -86,6 +88,10 @@ $stack_offset: 80;
 
     h3 {
       font-weight: bold;
+    }
+
+    &.rte .text-link {
+      border-bottom: none;
     }
   }
 
@@ -231,7 +237,7 @@ $stack_offset: 80;
         height: 100%;
         max-width: none;
         position: relative;
-        left: -50%;
+        left: -70%;
       }
     }
   }
@@ -278,6 +284,7 @@ $stack_offset: 80;
     h3 {
       margin: 0;
       font-size: 1em;
+      clear: left;
     }
 
     p {
