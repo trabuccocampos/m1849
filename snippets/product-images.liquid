@@ -1,4 +1,4 @@
-{% assign image_count = product.images.size | divided_by: 2 %}
+{% assign image_count = product.images.size %}
 <div class="product-images">
   <div class="front-view-image" data-image-count="{{ image_count }}">
     <section class="front-view-container">
@@ -17,8 +17,7 @@
   <div class="stacked-images">
     <section class="stacked-container">
       {% for image in product.images reversed %}
-        {% assign index = forloop.index | modulo: 2 %}
-        {% if index == 0 %}
+        {% if forloop.index != 1 and forloop.index != product.images.size %}
           <figure class="product-card" data-image-count="{{ image_count }}">
             <!-- <img  src="{{ image.src | img_url: 'large' }}" alt="{{ image.alt | escape }}" data-image-id="{{ image.id }}"> -->
             <img src="{% if image_count > 0 %}{{ image.src | img_url: 'large' }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
@@ -30,40 +29,40 @@
       <span class="image-view-title">Frontal layer view</span>
     </footer>
   </div>
-  <div class="side-view-images" data-image-count="{{ image_count }}">
-    <section class="side-view-container">
-      {% for image in product.images %}
-        {% assign index = forloop.index | modulo: 2 %}
-        {% if index == 0 %}
-          <figure>
-            <!-- <img src="{{ image.src | img_url: 'large' }}"> -->
-            <img src="{% if image_count > 0 %}{{ image.src | img_url: 'large' }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
-          </figure>
-        {% endif %}
-      {% endfor %}
-    </section>
-    <footer>
-      <span class="image-view-title">Side view <br>
-      {{ 'icon_side.png' | asset_url | img_tag }}</span>
-    </footer>
-  </div>
-  {% if image_count > 1 %}
-    <div class="back-view-image" data-image-count="{{ image_count }}">
-      <section class="back-view-container">
-        <figure class="product-card">
-          {% assign back_index = product.images.size | minus: 1 %}
-          {{ product.images[back_index] | img_url: "large" | img_tag }}
-        </figure>
+  {% if image_count > 2 %}
+    <div class="side-view-images" data-image-count="{{ image_count }}">
+      <section class="side-view-container">
+        {% for image in product.images %}
+          {% if forloop.index != 1 and forloop.index != product.images.size %}
+            <figure>
+              <!-- <img src="{{ image.src | img_url: 'large' }}"> -->
+              <img src="{% if image_count > 0 %}{{ image.src | img_url: 'large' }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
+            </figure>
+          {% endif %}
+        {% endfor %}
       </section>
-      <footer>
-        <span class="image-view-title">Back view</span>
-      </footer>
-    </div>
-    <div class="toggle-views">
-      <span class="image-view-title switch-image-view active" data-direction="back">See back</span>
-      <span class="image-view-title switch-image-view" data-direction="front">See front</span>
+      {% if image_count > 1 %}
+        <footer>
+          <span class="image-view-title">Side view <br>
+          {{ 'icon_side.png' | asset_url | img_tag }}</span>
+        </footer>
+      {% endif %}
     </div>
   {% endif %}
+  <div class="back-view-image" data-image-count="{{ image_count }}">
+    <section class="back-view-container">
+      <figure class="product-card">
+        {{ product.images.last | img_url: "large" | img_tag }}
+      </figure>
+    </section>
+    <footer>
+      <span class="image-view-title">Back view</span>
+    </footer>
+  </div>
+  <div class="toggle-views">
+    <span class="image-view-title switch-image-view active" data-direction="back">See back</span>
+    <span class="image-view-title switch-image-view" data-direction="front">See front</span>
+  </div>
 </div>
 {% if image_count > 1 %}
   <script type="text/javascript">
@@ -107,16 +106,18 @@
       // On window resize, set stack height again
       $(window).resize(set_stack_height);
 
-      // Toggle front and back switches
-      var $product_images = $('.product-images');
-
-      $('.switch-image-view').click(function() {
-        var direction = $(this).attr('data-direction');
-
-        $product_images.attr('data-direction', direction);
-        $('.switch-image-view').addClass('active');
-        $(this).removeClass('active');
-      });
     })();
   </script>
 {% endif %}
+<script type="text/javascript">
+  // Toggle front and back switches
+  var $product_images = $('.product-images');
+  
+  $('.switch-image-view').click(function() {
+    var direction = $(this).attr('data-direction');
+
+    $product_images.attr('data-direction', direction);
+    $('.switch-image-view').addClass('active');
+    $(this).removeClass('active');
+  });
+</script>

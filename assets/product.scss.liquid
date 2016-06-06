@@ -18,8 +18,8 @@ $stack_offset: 80;
     right: 15px;
     color: white;
     font-size: 1.8rem;
-
     display: none;
+    z-index: 1;
   }
 
   img {
@@ -28,7 +28,6 @@ $stack_offset: 80;
     border-radius: 10px;
     // box-shadow: 0 5px 8px rgba(0,0,0,0.3);
     -webkit-filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.5));
-    transition: all 1s ease;
   }
 
   &.related-product img {
@@ -40,6 +39,21 @@ $stack_offset: 80;
   text-align: left;
   color: #a3a5a9;
   margin-bottom: 100px;
+
+  .collections {
+    a, a:hover {
+      border: none;
+    }
+
+    h3 {
+      font-size: 1.3em;
+      font-weight: normal !important;
+    }
+
+    h4 {
+      font-size: 0.9em;
+    }
+  }
 
   .specs {
     margin-bottom: 20px;
@@ -151,7 +165,7 @@ $stack_offset: 80;
     width: 70%;
     transition: opacity 0.3s ease;
 
-    &:not([data-image-count="1"]):hover {
+    &:not([data-image-count="1"]):not([data-image-count="2"]):hover {
       opacity: 0;
 
       & ~ .stacked-images {
@@ -232,6 +246,7 @@ $stack_offset: 80;
       width: 20px;
       margin: 0;
       padding: 0;
+      position: relative;
 
       img {
         height: 100%;
@@ -255,6 +270,18 @@ $stack_offset: 80;
 
     .back-view-container {
       height: 100%;
+
+      .product-card {
+        &:before {
+          content: '';
+          position: absolute;
+          top: 0;
+          right: 0;
+          bottom: 0;
+          left: 0;
+          z-index: 1;
+        }
+      }
     }
   }
 }
@@ -263,8 +290,24 @@ $stack_offset: 80;
   padding: 20px 0;
   margin: 20px 0;
 
+  &:after {
+    content: '';
+    clear: both;
+    display: block;
+  }
+
   h3 {
     color: {{ settings.light_color_body_text }};
+  }
+
+  .attachments {
+    width: 200px;
+    float: right;
+
+    .btn {
+      width: 100%;
+      margin: 5px 0;
+    }
   }
 }
 

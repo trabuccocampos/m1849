@@ -12,10 +12,12 @@
       <label class="btn__m49" for="m49">Be Green</label>
     </div>
   </form>
-  <h2><a href="/collections">Categories</a></h2>
-  <ul>
+  <h2><a href="/collections/all/{{ current_tags | join: "+"}}">Categories</a></h2>
+  <ul class="sidemenu-list">
     {% for link in linklists.collections.links %}
-      <li><a href="{{ link.url }}/{{ current_tags | join: "+"}}">{{ link.title }}</a></li>
+      <li>
+        <a href="{{ link.url }}/{{ current_tags | join: "+"}}" class="{% if link.active %}active{% endif %}">{{ link.title }}</a>
+      </li>
     {% endfor %}
   </ul>
   <form class="filters" action="/collections/{{collection_handle}}">

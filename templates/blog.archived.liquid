@@ -1,31 +1,104 @@
 <!-- /templates/blog.liquid -->
-{% paginate blog.articles by 50 %}
-  <div class="grid">
-    <div class="grid__item large--one-quarter">
-      <h3>Filters</h3>
-      <ul>
-        <li><a href="/blogs/{{ blog.handle }}">All</a></li>
-        {% for tag in blog.all_tags %}
-          <li><a href="/blogs/{{ blog.handle }}/tagged/{{tag}}">{{ tag | capitalized }}</a></li>
-        {% endfor %}
-      </ul>
+<div class="grid archives">
+  {% assign tags = "" %}
+  {% for i in (1..30) %}
+    {% assign setting_id = "filter_3_option_" | append: i %}
+    {% assign tag = settings[setting_id] %}
+    
+    {% unless tag == blank %}
+      {% unless tags == blank %}
+        {% assign tags = tags | append: "," %}
+      {% endunless %}
+      {% assign tags = tags | append: tag %}
+    {% endunless %}
+  {% endfor %}
+  
+  {% assign tags = tags | split: "," %}
+  <aside class="grid__item large--one-quarter filters">
+    <h2>Filters</h2>
+    <ul class="sidemenu-list">
+      <li><a href="/blogs/{{ blog.handle }}">All</a></li>
+      {% for tag in tags %}
+        <li><a href="/blogs/{{ blog.handle }}/tagged/{{ tag | replace: " ", "" | handleize }}">{{ tag | capitalized }}</a></li>
+      {% endfor %}
+    </ul>
+  </aside>
+  {% if current_tags == blank %}
+    <div class="grid__item large--three-quarters archive-tags">
+      {% for tag in tags %}
+        <div class="category">
+          <h1><a href="/blogs/{{ blog.handle }}/tagged/{{tag}}">{{ tag }}</a></h1>
+          <div class="grid grid-uniform" data-category-tag="{{ tag }}"></div>
+        </div>
+      {% endfor %}
     </div>
-    <div class="grid__item large--three-quarters">
-      <h1>Archived</h1>
-      <div class="grid">
-        {% for article in blog.articles %}
-          <div class="grid__item article large--one-third">
-            {{ article.image | img_url: "medium" | img_tag }}
-            <h3><a href="{{ article.url }}"><strong>{{ article.title }}</strong></a></h3>
-            <p>{{ article.excerpt | truncate: "100" }}</p>
-          </div>
-        {% endfor %}
+  {% else %}
+    {% paginate blog.articles by 48 %}
+      <div class="grid__item large--three-quarters">
+        <h1>{{ current_tags | join: "," | capitalize }}</h1>
+        <div class="grid grid-uniform">
+          {% for article in blog.articles %}
+            {% include 'article-item' %}
+          {% endfor %}
+        </div>
       </div>
-    </div>
-    {% if paginate.pages > 1 %}
-      <div class="pagination">
-        {{ paginate | default_pagination | replace: '&laquo; Previous', '<span class="icon icon-arrow-left" aria-hidden="true"></span>' | replace: 'Next &raquo;', '<span class="icon icon-arrow-right" aria-hidden="true"></span>' }}
+      {% if paginate.pages > 1 %}
+        <div class="pagination grid__item text-center">
+          {{ paginate | default_pagination | replace: '&laquo; Previous', '<span class="icon icon-arrow-left" aria-hidden="true"></span>' | replace: 'Next &raquo;', '<span class="icon icon-arrow-right" aria-hidden="true"></span>' }}
+        </div>
+      {% endif %}
+    {% endpaginate %}
+  
+  {% endif %}
+
+</div>
+
+<script id="article-grid" type="template/mustache">
+  {% raw %}
+    {{#articles}}
+      <div class="grid__item article large--one-third">
+        <img src="{{thumb}}" alt="{{title}}">
+        <h3><a href="/blogs/archived/{{id}}"><strong>{{ title }}</strong></a></h3>
+        <p>{{summary}}</p>
       </div>
-    {% endif %}
-  </div>
-{% endpaginate %}
+    {{/articles}}
+    <footer class="grid__item text-center">
+      <a href="/blogs/archived/tagged/{{tag}}" class="btn">See More +</a>
+    </footer>
+  {% endraw %}
+</script>
+{% if current_tags == blank %}
+  <script type="text/javascript">
+    // Just so we know we have mustache
+    Relatable.ready(function() {
+      var template = $('#article-grid').html();
+      
+      $('[data-category-tag]').each(function() {
+        var self = $(this),
+            tag = $(this).data('category-tag'),
+            path = '/blogs/archived/tagged/' + tag + '?view=json';
+        
+        $.getJSON(path, function(blog) {
+          for (var i=0; i < blog.articles.length; i++) {
+            // Set thumb image
+            if (blog.articles[i].image) {
+              var image = new Relatable.image(blog.articles[i].image.src, true);
+              blog.articles[i].thumb = image.resized("medium");
+            }
+            
+            // Strip summary
+            var summary = $.parseHTML(blog.articles[i].summary_html);
+            blog.articles[i].summary = $(summary).text().slice(0, 100);
+          };
+          
+          // Set tag
+          blog.tag = tag;
+          
+          var output = Mustache.render(template, blog);
+          
+          self.html($.parseHTML(output));
+        })
+      });
+    });
+  </script>
+{% endif %}

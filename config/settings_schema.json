@@ -1323,6 +1323,11 @@
             "type":"checkbox",
             "id":"product_zoom_enable",
             "label":"Enable image zoom"
+         },
+         {
+           "type":"text",
+           "id":"global_spec_url",
+           "label":"Specification URL"
          }
       ]
    },
