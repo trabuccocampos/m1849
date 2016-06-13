@@ -59,10 +59,12 @@
       <span class="image-view-title">Back view</span>
     </footer>
   </div>
-  <div class="toggle-views">
-    <span class="image-view-title switch-image-view active" data-direction="back">See back</span>
-    <span class="image-view-title switch-image-view" data-direction="front">See front</span>
-  </div>
+  {% if image_count > 1 %}
+    <div class="toggle-views">
+      <span class="image-view-title switch-image-view active" data-direction="back">See back</span>
+      <span class="image-view-title switch-image-view" data-direction="front">See front</span>
+    </div>
+  {% endif %}
 </div>
 {% if image_count > 1 %}
   <script type="text/javascript">
