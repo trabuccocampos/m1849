@@ -51,7 +51,7 @@
   {% if template contains 'customers' %}
     {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
   {% endif %}
-  
+
   {% if template == "blog" %}
     {{ 'chapters.jquery.js' | asset_url | script_tag }}
   {% endif %}
@@ -433,6 +433,9 @@
              {% else %}
                </div>
              {% endif %}
+             <p>
+               © 2016 Mazzucchelli 1849 S.p.A.
+             </p>
            </div>
 
            <div class="grid__item large--one-quarter medium--one-half">
