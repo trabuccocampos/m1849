@@ -137,7 +137,11 @@
   </div>
   <div class="product-extras related-lookbooks">
     <div class="attachments">
-      <a href="{{ settings.global_spec_url }}" class="btn">Specifications</a>
+      {% if product.tags contains 'M49' %}
+        <a href="{{ settings.global_m49_spec_url }}" class="btn">Specifications</a>
+      {% else %}
+        <a href="{{ settings.global_spec_url }}" class="btn">Specifications</a>
+      {% endif %}
       {% for attachment in product.metafields.attachments %}
         {% unless attachment == blank %}
           <a href="{{ attachment[1] }}" class="btn">{{ attachment[0] | capitalize }}</a>

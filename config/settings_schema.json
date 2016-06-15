@@ -1328,6 +1328,11 @@
            "type":"text",
            "id":"global_spec_url",
            "label":"Specification URL"
+         },
+         {
+           "type":"text",
+           "id":"global_m49_spec_url",
+           "label":"M49 Specification URL"
          }
       ]
    },

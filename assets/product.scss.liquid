@@ -158,6 +158,7 @@ $stack_offset: 80;
   }
 
   .front-view-image {
+//    display: none;
     z-index: 2;
     position: absolute;
     left: 0;
@@ -172,7 +173,7 @@ $stack_offset: 80;
         opacity: 1;
 
         .product-card:not(:first-child) {
-          margin-left: -80px;
+          margin-left: -50%;
         }
       }
     }
@@ -193,7 +194,8 @@ $stack_offset: 80;
       display: inline-block;
       position: relative;
       vertical-align: top;
-      margin-right: -#{$stack_offset*2}px;
+      margin-left: -#{$stack_offset*2}px;
+      margin-left: -40%;
       transition: margin-left 0.3s ease;
       border-radius: 13px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.4);
@@ -214,11 +216,17 @@ $stack_offset: 80;
         $inset: (($i - 1) * $stack_offset) / $i;
         $width: percentage(1/$i);
         width: calc(#{$width} + #{$inset - 4}px);
-      }
-
-      .product-card:nth-child(#{$i}) {
-        $stack_offset-y: ($i - 1)*$stack_offset;
-        margin-top: #{$stack_offset-y}px;
+        
+        $offset_per_stack: 200 / ($i - 1);
+        
+        @for $j from 1 through 10 {
+          &:nth-child(#{$j}) {
+            $stack_offset_y: $offset_per_stack*($j - 1);
+            margin-top: #{$stack_offset_y}px;
+          }
+        }
+        
+        
       }
     }
   }
@@ -229,6 +237,16 @@ $stack_offset: 80;
     height: 100%;
     font-size: 0;
     width: 30%;
+    
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1;
+    }
 
     .side-view-container {
       display: inline-block;
