@@ -37,7 +37,7 @@
                 {% unless settings[option_field] == blank %}
                   <div class="btn__filter">
                     <label>
-                      <input type="checkbox" name="{{ settings[option_field] }}">
+                      <input type="checkbox" name="{{ settings[option_field] | handleize }}">
                       <span></span>
                       {{ settings[option_field] }}
                     </label>
@@ -72,5 +72,5 @@
   </form>
 </aside>
 <script type="text/javascript">
-  Shopify.current_tags = {{ current_tags | json }};
+  Shopify.current_tags = {{ current_tags | json | downcase }};
 </script>

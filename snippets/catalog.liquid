@@ -1,6 +1,10 @@
 <div class="grid catalog">
   {% if current_tags contains 'M49' or current_tags contains 'm49' %}
-    {{ 'collection_m49_banner.jpg' | asset_url | img_tag }}
+    <h2>M49</h2>
+    {% comment %}
+      # Leaving this here in case this changes back
+      {{ 'collection_m49_banner.jpg' | asset_url | img_tag }}
+    {% endcomment %}
   {% endif %}
 
   {% include 'sidebar' %}
