@@ -148,16 +148,20 @@
         {% endunless %}
       {% endfor %}
     </div>
-    <div class="lookbooks-container" data-relatable="product.article" data-relatable-id="{{product.id}}">
+    <div data-relatable="product.article" data-relatable-id="{{product.id}}">
       {% raw %}
-        <h3>Featured In</h3>
         {{#article}}
-          <a href="/blogs/lookbook/{{article.id}}" class="product-lookbook">
-            <img src="{{article.image.src}}" alt="">
-            <h3>{{article.title}}</h3>
-            <p>{{{article.summary_html}}}</p>
-          </a>
+          <h3>Featured In</h3>
         {{/article}}
+        <div class="lookbooks-container">
+          {{#article}}
+            <a href="/blogs/lookbook/{{article.id}}" class="product-lookbook">
+              <img src="{{article.image.src}}" alt="">
+              <h3>{{article.title}}</h3>
+              <p>{{{article.summary_html}}}</p>
+            </a>
+          {{/article}}
+        </div>
       {% endraw %}
     </div>
   </div>
