@@ -3,7 +3,12 @@ $soft-grey: #E6E7E8;
 $dark-color: #333;
 // $red: #D23719;
 $red: #F5321E;
-$green: #84D270;
+$green: #85d271;
+
+// Breakpoints
+$small: 590px;
+$medium: 768px;
+$large: 769px;
 
 /*------- Mixins --------*/
 @mixin aspect-ratio($width, $height) {
@@ -63,11 +68,12 @@ $green: #84D270;
     padding-bottom: 0;
 }
 .cart-link__bubble--visible {
-    top: 40px;
-    right: 10px;
-    background-color: #D23719;
+  top: 100%;
+  right: 20%;
+  background-color: #D23719;
+  background-color: $red;
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: $medium) {
     .site-nav--mobile {
       opacity: 1 !important;
     }
@@ -75,7 +81,7 @@ $green: #84D270;
       margin-bottom: 2em;
     }
 }
-@media screen and (max-width: 590px) {
+@media screen and (max-width: $small) {
   .site-header {
     margin-bottom: 1em;
   }
@@ -134,7 +140,7 @@ $green: #84D270;
     // padding-left: 0 !important; //layout no spacing
   }
 }
-@media screen and (min-width: 769px) {
+@media screen and (min-width: $large) {
   // .box-layout .grid__item:nth-of-type(3n+1) {
   //   clear: left;
   // }
@@ -144,7 +150,7 @@ $green: #84D270;
   @include aspect-ratio(4, 3);
   overflow: hidden;
 }
-@media screen and (min-width: 769px) {
+@media screen and (min-width: $large) {
   .box-aspect-ratio-long {
     @include aspect-ratio(4, 6);
     overflow: hidden;
@@ -371,7 +377,7 @@ html[lang=it] {
     a {
       font-size: 0.8;
     }
-    @media (max-width: 768px) {
+    @media (max-width: $medium) {
       display: none;
     }
   }
@@ -416,7 +422,10 @@ html[lang=it] {
 
 /*================ CATALOG ================*/
 .product-single .product-images {
-  //max-height: 496px !important;
+  height: 430px !important;
+    @media screen and (max-width: $small) {
+      height: 350px !important;
+    }
 }
 
 .catalog aside h2 a {
@@ -447,7 +456,7 @@ html[lang=it] {
 .btn--secondary.back-button:before {
   display: none;
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: $medium) {
   .grid.catalog aside {
     display: none;
   }
@@ -472,7 +481,7 @@ html[lang=it] {
 .tabular .tabs a {
   display: inline-block;
   width: 50%;
-  text-align: left;
+  text-align: center;
   padding-left: 0;
 }
 .product-single__add-to-cart .btn {
@@ -484,7 +493,7 @@ html[lang=it] {
     color: white;
   }
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: $medium) {
   .product-single .product-images footer {
     // width: 100px;
     text-align: left;
@@ -547,7 +556,7 @@ html[lang=it] {
 // Sidebar
 .lookbook__list {
 }
-@media screen and (max-width: 768px) {
+@media screen and (max-width: $medium) {
   .lookbook__list {
     display: none;
   }
@@ -646,7 +655,7 @@ html[lang=it] {
 .microtrend--title {
   font-weight: 900;
 
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: $large) {
     font-size: 1.6em;
   }
 }

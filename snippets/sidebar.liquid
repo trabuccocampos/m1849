@@ -31,7 +31,7 @@
           <li>
             <span class="filter">{{ settings[filter_name] }}</span>
             <section>
-              {% for option in (1..10) %}
+              {% for option in (1..20) %}
                 {% assign option_field = "filter_" | append: filter | append: "_option_" | append: option %}
                 {% unless settings[option_field] == blank %}
                   <div class="btn__filter">

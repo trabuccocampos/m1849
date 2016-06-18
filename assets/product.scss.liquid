@@ -40,7 +40,7 @@ $stack_offset: 80;
     max-width: none;
     border-radius: 10px;
     position: relative;
-   
+
     // box-shadow: 0 5px 8px rgba(0,0,0,0.3);
     // -webkit-filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.5));
 
@@ -209,7 +209,7 @@ $stack_offset: 80;
       display: inline-block;
       position: relative;
       vertical-align: top;
-      margin-left: -#{$stack_offset*2}px;
+      // margin-left: -#{$stack_offset*2}px;
       margin-left: -40%;
       transition: margin-left 0.3s ease;
       border-radius: 13px;
@@ -231,17 +231,17 @@ $stack_offset: 80;
         $inset: (($i - 1) * $stack_offset) / $i;
         $width: percentage(1/$i);
         width: calc(#{$width} + #{$inset - 4}px);
-        
+
         $offset_per_stack: 200 / ($i - 1);
-        
+
         @for $j from 1 through 10 {
           &:nth-child(#{$j}) {
             $stack_offset_y: $offset_per_stack*($j - 1);
             margin-top: #{$stack_offset_y}px;
           }
         }
-        
-        
+
+
       }
     }
   }
@@ -252,7 +252,7 @@ $stack_offset: 80;
     height: 100%;
     font-size: 0;
     width: 30%;
-    
+
     &:before {
       content: '';
       position: absolute;
@@ -285,7 +285,7 @@ $stack_offset: 80;
         height: 100%;
         max-width: none;
         position: relative;
-        left: -70%;
+        left: -65%;
       }
     }
   }

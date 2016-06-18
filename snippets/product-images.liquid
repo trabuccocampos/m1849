@@ -4,7 +4,7 @@
     <section class="front-view-container">
       <figure class="product-card">
         <span class="color-code">{{ product.title }}</span>
-        <img src="{% if image_count > 0 %}{{ product.featured_image | img_url: "large" }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
+        <img src="{% if image_count > 0 %}{{ product.featured_image | img_url: "grande" }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
       </figure>
     </section>
     <footer>
@@ -29,7 +29,38 @@
       <span class="image-view-title">Frontal layer view</span>
     </footer>
   </div>
-  {% if image_count > 2 %}
+  <!-- SINGLE IMAGE CASES -->
+  {% if image_count == 1 %}
+    <div class="side-view-images">
+      <section class="side-view-container">
+        <figure>
+          <!-- <img src="{{ image.src | img_url: 'large' }}"> -->
+          <img src="{% if image_count > 0 %}{{ product.featured_image | img_url: "grande" }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
+        </figure>
+      </section>
+      <footer>
+        <span class="image-view-title">Side view <br>
+        {{ 'icon_side.png' | asset_url | img_tag }}</span>
+      </footer>
+    </div>
+  {% endif %}
+  <!-- TWO IMAGE CASES -->
+  {% if image_count == 2 %}
+    <div class="side-view-images" data-image-count="{{ image_count }}">
+      <section class="side-view-container">
+        <figure>
+          <!-- <img src="{{ image.src | img_url: 'large' }}"> -->
+          {{ product.images.last | img_url: "grande" | img_tag }}
+        </figure>
+      </section>
+      <footer>
+        <span class="image-view-title">Side view <br>
+        {{ 'icon_side.png' | asset_url | img_tag }}</span>
+      </footer>
+    </div>
+  {% endif %}
+  <!-- THREE OR MORE IMAGE CASES -->
+  {% if image_count > 3 %}
     <div class="side-view-images" data-image-count="{{ image_count }}">
       <section class="side-view-container">
         {% for image in product.images %}
@@ -41,32 +72,32 @@
           {% endif %}
         {% endfor %}
       </section>
-      {% if image_count > 1 %}
-        <footer>
-          <span class="image-view-title">Side view <br>
-          {{ 'icon_side.png' | asset_url | img_tag }}</span>
-        </footer>
-      {% endif %}
+      <footer>
+        <span class="image-view-title">Side view <br>
+        {{ 'icon_side.png' | asset_url | img_tag }}</span>
+      </footer>
     </div>
   {% endif %}
   <div class="back-view-image" data-image-count="{{ image_count }}">
     <section class="back-view-container">
       <figure class="product-card">
-        {{ product.images.last | img_url: "large" | img_tag }}
+        {{ product.images.last | img_url: "grande" | img_tag }}
       </figure>
     </section>
     <footer>
       <span class="image-view-title">Back view</span>
     </footer>
   </div>
-  {% if image_count > 1 %}
+  {% if image_count > 2 %}
     <div class="toggle-views">
-      <span class="image-view-title switch-image-view active" data-direction="back">See back</span>
-      <span class="image-view-title switch-image-view" data-direction="front">See front</span>
+      <span class="image-view-title switch-image-view active" data-direction="back">See back<br>
+      {{ 'icon_back.png' | asset_url | img_tag }}</span>
+      <span class="image-view-title switch-image-view" data-direction="front">See front<br>
+      {{ 'icon_front.png' | asset_url | img_tag }}</span>
     </div>
   {% endif %}
 </div>
-{% if image_count > 1 %}
+{% if image_count > 2 %}
   <script type="text/javascript">
     (function stack_images() {
       var zoomed = false;
@@ -114,7 +145,7 @@
 <script type="text/javascript">
   // Toggle front and back switches
   var $product_images = $('.product-images');
-  
+
   $('.switch-image-view').click(function() {
     var direction = $(this).attr('data-direction');
 
