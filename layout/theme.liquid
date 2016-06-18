@@ -32,7 +32,6 @@
   <!-- CSS ================================================== -->
   {{ 'timber.scss.css' | asset_url | stylesheet_tag }}
   {{ 'article.scss.css' | asset_url | stylesheet_tag }}
-  {{ 'theme.scss.css' | asset_url | stylesheet_tag }}
   {{ 'catalog.scss.css' | asset_url | stylesheet_tag }}
   {{ 'product.scss.css' | asset_url | stylesheet_tag }}
   {{ 'slick.css' | asset_url | stylesheet_tag }}
@@ -197,7 +196,6 @@
     <div class="header-wrapper{% unless hero_full_height %} header-wrapper--over-hero{% endunless %}">
       <header class="site-header" role="banner">
         {% include 'search-bar' %}
-        {% include 'language-select' %}
         <div class="wrapper">
           <div class="grid--full grid--table">
             <div class="grid__item large--hide one-quarter">
@@ -327,7 +325,13 @@
                     </span>
                   </a>
                 </li>
-
+                <li class="site-nav__item">
+                  <!-- {% include 'language-select' %} -->
+                  <div class="language-select">
+                    <a href='javascript:Localize.setLanguage("en")' class="language-select__en">EN</a> / 
+                    <a href='javascript:Localize.setLanguage("it")' class="language-select__it">IT</a>
+                  </div>
+                </li>
               </ul>
               <!-- //site-nav -->
             </div>
