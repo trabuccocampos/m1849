@@ -19,13 +19,18 @@
     <input type="number" hidden="hidden" id="Quantity" name="quantity" value="1" min="1" class="js-quantity-selector">
   </div>
   {% endcomment %}
-
-  <div class="product-single__add-to-cart">
-    <button type="submit" name="add" id="AddToCart" class="btn">
-      <span id="AddToCartText">{{ 'products.product.add_to_cart' | t }}</span>
-    </button>
+  <div class="grid">
+    <div class="grid__item medium--one-whole">
+      <div class="product-single__add-to-cart">
+        <button type="submit" name="add" id="AddToCart" class="btn">
+          <span id="AddToCartText">{{ 'products.product.add_to_cart' | t }}</span>
+        </button>
+      </div>
+     </div>
+   <div class="grid__item medium--one-whole">
+     {% if settings.social_sharing_products %}
+       {% include 'social-sharing' %}
+     {% endif %}
+    </div>
   </div>
-  {% if settings.social_sharing_products %}
-    {% include 'social-sharing' %}
-  {% endif %}
 </form>
