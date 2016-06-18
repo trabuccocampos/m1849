@@ -127,9 +127,6 @@
         </div>
 
         {% include 'product-form' %}
-        {% if settings.social_sharing_products %}
-          {% include 'social-sharing' %}
-        {% endif %}
       </div>
     </div>
   </div>
@@ -166,8 +163,8 @@
   {% if bottom_level_collection %}
     <div class="product-extras related-products">
       <h3>
-        Products in Category
-        <a href="{{ product.collections.first.url }}" class="more-styles">{{ bottom_level_collection.products.size }} more styles</a>
+        Products in Collection
+        <a href="{{ product.collections.first.url }}" class="more-styles">{{ bottom_level_collection.products.size }} colors in Collection</a>
       </h3>
       <div class="slick-items">
         {% for _product in bottom_level_collection.products %}
@@ -197,7 +194,6 @@
 </div>
 
 <div class="grid">
-  <hr class="hr--clear">
   <div class="grid__item large--two-thirds push--large--one-sixth disclaimer">
     <p>
       We strive to make our colors as accurate as possible, but screen images are intended as a guide only and should not be regarded as absolutely correct. Some of the pictures drawn out of the main images, as well as animations, included in the catalogue may not reflect the final product. It is therefore recommended to request a sample before proceeding with the order.

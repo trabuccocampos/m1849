@@ -25,4 +25,7 @@
       <span id="AddToCartText">{{ 'products.product.add_to_cart' | t }}</span>
     </button>
   </div>
+  {% if settings.social_sharing_products %}
+    {% include 'social-sharing' %}
+  {% endif %}
 </form>
