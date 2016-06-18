@@ -41,6 +41,13 @@ $large: 769px;
 }
 
 /*================ SITE WIDE STYLES ================*/
+/*---- Do Not Print ------*/
+@media print {
+  .noprint {
+    display:none;
+  }
+}
+
 /*------ Typography -------*/
 .section-header h1 {
   font-size: 3em;
@@ -80,10 +87,15 @@ $large: 769px;
     padding-bottom: 0;
 }
 .cart-link__bubble--visible {
-  top: 100%;
-  right: 20%;
-  background-color: #D23719;
-  background-color: $red;
+  top: 90%;
+  right: -20%;
+  background-color: #fff;
+  font-size: 12px;
+  text-align: center;
+  height: 20px;
+  width: 20px;
+  border: 1px $red solid;
+  color: $red;
 }
 @media screen and (max-width: $medium) {
     .site-nav--mobile {
@@ -106,8 +118,7 @@ $large: 769px;
       padding-bottom: 0;
   }
   .cart-link__bubble--visible {
-      top: 1px;
-      right: 22px;
+    right: 7%;
   }
 }
 .site-nav__link {

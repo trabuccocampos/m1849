@@ -80,7 +80,7 @@
 {% endcomment %}
 <body id="{{ page_title | handle }}" class="{% if customer %}customer-logged-in {% endif %}template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}">
 
-  <div id="NavDrawer" class="drawer drawer--left">
+  <div id="NavDrawer" class="drawer drawer--left noprint">
     <div class="drawer__fixed-header">
       <div class="drawer__header">
         <div class="drawer__close drawer__close--left">
@@ -174,7 +174,7 @@
       <!-- //mobile-nav -->
     </div>
   </div>
-  <div id="CartDrawer" class="drawer drawer--right drawer--has-fixed-footer">
+  <div id="CartDrawer" class="drawer drawer--right drawer--has-fixed-footer noprint">
     <div class="drawer__fixed-header">
       <div class="drawer__header">
         <div class="drawer__title">{{ 'cart.general.title' | t }}</div>
@@ -198,7 +198,7 @@
         {% include 'search-bar' %}
         <div class="wrapper">
           <div class="grid--full grid--table">
-            <div class="grid__item large--hide one-quarter">
+            <div class="grid__item large--hide one-quarter noprint">
               <div class="site-nav--mobile">
                 <button type="button" class="icon-fallback-text site-nav__link js-drawer-open-left" aria-controls="NavDrawer">
                   <span class="icon icon-hamburger" aria-hidden="true"></span>
@@ -238,7 +238,7 @@
                 </div>
               {% endif %}
             </div>
-            <div class="grid__item large--two-thirds large--text-right medium-down--hide">
+            <div class="grid__item large--two-thirds large--text-right medium-down--hide noprint">
               {% comment %}
                 List out your main-menu linklist (default)
 
@@ -246,7 +246,7 @@
                   - http://docs.shopify.com/themes/liquid-variables/linklists
               {% endcomment %}
               <!-- begin site-nav -->
-              <ul class="site-nav" id="AccessibleNav">
+              <ul class="site-nav noprint" id="AccessibleNav">
                 <li class="site-nav__item site-nav--compress__menu">
                   <button type="button" class="icon-fallback-text site-nav__link site-nav__link--icon js-drawer-open-left" aria-controls="NavDrawer">
                     <span class="icon icon-hamburger" aria-hidden="true"></span>
@@ -321,31 +321,43 @@
                     <span class="icon-fallback-text">
                       <span class="fallback-text">{{ 'layout.cart.title' | t }}</span>
                     {{ 'wishlist_icon.png' | asset_url | img_tag }}
-                    <span class="cart-link__bubble{% if cart.item_count > 0 %} cart-link__bubble--visible{% endif %}"></span>
+                      <span class="cart-link__bubble{% if cart.item_count > 0 %} cart-link__bubble--visible{% endif %}" id="cartCount">
+                        {{ cart.item_count }}
+                      </span>
                     </span>
                   </a>
                 </li>
                 <li class="site-nav__item">
                   <!-- {% include 'language-select' %} -->
                   <div class="language-select">
-                    <a href='javascript:Localize.setLanguage("en")' class="language-select__en">EN</a> / 
+                    <a href='javascript:Localize.setLanguage("en")' class="language-select__en">EN</a> /
                     <a href='javascript:Localize.setLanguage("it")' class="language-select__it">IT</a>
                   </div>
                 </li>
               </ul>
               <!-- //site-nav -->
             </div>
-            <div class="grid__item large--hide one-quarter">
+            <div class="grid__item large--hide one-quarter noprint">
               <div class="site-nav--mobile text-right">
                 <a href="/cart" class="site-nav__link cart-link js-drawer-open-right" aria-controls="CartDrawer">
                   <span class="icon-fallback-text">
                     <span class="fallback-text">{{ 'layout.cart.title' | t }}</span>
                   {{ 'wishlist_icon.png' | asset_url | img_tag }}
-                  <span class="cart-link__bubble{% if cart.item_count > 0 %} cart-link__bubble--visible{% endif %}"></span>
+                  <span class="cart-link__bubble{% if cart.item_count > 0 %} cart-link__bubble--visible{% endif %}" id="cartCount">
+                    {{ cart.item_count }}
+                  </span>
                 </a>
               </div>
             </div>
           </div>
+
+          <script type="text/javascript">
+            Shopify.onItemAdded = function(cart) {
+              jQuery.getJSON('/cart.js', function(cart) {
+                  $('#cartCount').html(cart.item_count);
+              });
+            };
+          </script>
 
           {% comment %}
             Remove comment tags below to add a search box to your header.
@@ -362,13 +374,13 @@
     </div>
 
     <main class="main-content" role="main">
-      <div class="wrapper">
+      <div class="wrapper clearfix">
         {{ content_for_layout }}
       </div>
     </main>
 
     {% if settings.footer_newsletter_enable %}
-      <div class="newsletter">
+      <div class="newsletter noprint">
         <div class="wrapper">
           {% comment %}
 

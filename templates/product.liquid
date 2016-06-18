@@ -130,36 +130,99 @@
       </div>
     </div>
   </div>
-  <div class="product-extras related-lookbooks">
-    <div class="attachments">
-      {% if product.tags contains 'M49' %}
-        <a href="{{ settings.global_m49_spec_url }}" class="btn">Specifications</a>
-      {% else %}
-        <a href="{{ settings.global_spec_url }}" class="btn">Specifications</a>
-      {% endif %}
-      {% for attachment in product.metafields.attachments %}
-        {% unless attachment == blank %}
-          <a href="{{ attachment[1] }}" class="btn">{{ attachment[0] | capitalize }}</a>
-        {% endunless %}
-      {% endfor %}
-    </div>
-    <div data-relatable="product.article" data-relatable-id="{{product.id}}">
-      {% raw %}
-        {{#article}}
-          <h3>Featured In</h3>
-        {{/article}}
-        <div class="lookbooks-container">
+
+</div>
+<!-- Product Div closed above -->
+</div>
+<!-- Wrapper div closed above -->
+
+<!-- whole width panel -->
+<div class="related-products__wrapper noprint">
+    <div class="wrapper">
+      <div class="product-extras related-lookbooks grid">
+      <div class="grid__item large--one-third small--one-whole" data-relatable="product.article" data-relatable-id="{{product.id}}">
+        {% raw %}
           {{#article}}
-            <a href="/blogs/lookbook/{{article.id}}" class="product-lookbook">
-              <img src="{{article.image.src}}" alt="">
-              <h3>{{article.title}}</h3>
-              <p>{{{article.summary_html}}}</p>
-            </a>
+            <h3>Featured In</h3>
           {{/article}}
+          <div class="lookbooks-container">
+            {{#article}}
+              <a href="/blogs/lookbook/{{article.id}}" class="product-lookbook">
+                <img src="{{article.image.src}}" alt="">
+                <h3>{{article.title}}</h3>
+                <p>{{{article.summary_html}}}</p>
+              </a>
+            {{/article}}
+          </div>
+        {% endraw %}
+      </div>
+      <div class="grid__item large--one-third medium--one-third small--one-whole">
+        <a class="print-item" href="javascript:window.print()">
+          <svg width="74px" height="53px" viewBox="723 788 74 53" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="icon-print">
+              <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+              <desc>Material card icon</desc>
+              <defs></defs>
+              <polygon id="Rectangle-28" fill="none" transform="translate(759.992959, 814.211268) rotate(-90.000000) translate(-759.992959, -814.211268) " points="735.345072 779.359154 784.640846 779.359154 784.640846 839.874309 775.57352 849.063381 735.345072 849.063381"></polygon>
+              <polyline id="Path-277" fill="none" transform="translate(789.577174, 794.205689) rotate(-90.000000) translate(-789.577174, -794.205689) " points="784.880565 798.782863 784.880565 789.628515 794.273782 789.628515"></polyline>
+              <rect id="Rectangle-30" fill-rule="evenodd" x="731" y="796" width="39" height="36"></rect>
+              <path d="M776.352113,816.056338 L787.5,816.056338" id="Line" stroke-linecap="square" fill="none"></path>
+              <path d="M776.352113,823.056338 L787.5,823.056338" id="Line" stroke-linecap="square" fill="none"></path>
+              <path d="M776.352113,830.056338 L787.5,830.056338" id="Line" stroke-linecap="square" fill="none"></path>
+          </svg>
+          <h3>Print Materials Card</h3>
+        </a>
+      </div>
+      <div class="grid__item large--one-third small--one-whole">
+        <div class="attachments">
+          {% if product.tags contains 'M49' %}
+            <a href="{{ settings.global_m49_spec_url }}">
+              <svg width="53px" height="74px" viewBox="976 777 53 74" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="icon-specifications">
+                  <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+                  <desc>Specifications Icon</desc>
+                  <defs></defs>
+                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(978.000000, 779.000000)">
+                      <polygon id="Rectangle-28" points="0 0 49.2957746 0 49.2957746 60.5151557 40.2284486 69.7042277 0 69.7042277"></polygon>
+                      <polyline id="Path-277" points="39.9568572 69.0135025 39.9568572 59.8591549 49.3500743 59.8591549"></polyline>
+                      <path d="M7.3943662,8.09859155 L41.5511118,8.09859155" id="Line" stroke-linecap="square"></path>
+                      <path d="M7.3943662,22.1830986 L41.5511118,22.1830986" id="Line" stroke-linecap="square"></path>
+                      <path d="M7.3943662,15.1408451 L41.5511118,15.1408451" id="Line" stroke-linecap="square"></path>
+                      <path d="M7.3943662,29.2253521 L41.5511118,29.2253521" id="Line" stroke-linecap="square"></path>
+                      <path d="M7.3943662,36.2676056 L41.5511118,36.2676056" id="Line" stroke-linecap="square"></path>
+                  </g>
+              </svg>
+              <h3>Specifications</h3>
+            </a>
+          {% else %}
+            <a href="{{ settings.global_spec_url }}">
+              <svg width="53px" height="74px" viewBox="976 777 53 74" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="icon-specifications">
+                  <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
+                  <desc>Specifications Icon</desc>
+                  <defs></defs>
+                  <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" transform="translate(978.000000, 779.000000)">
+                      <polygon id="Rectangle-28" points="0 0 49.2957746 0 49.2957746 60.5151557 40.2284486 69.7042277 0 69.7042277"></polygon>
+                      <polyline id="Path-277" points="39.9568572 69.0135025 39.9568572 59.8591549 49.3500743 59.8591549"></polyline>
+                      <path d="M7.3943662,8.09859155 L41.5511118,8.09859155" id="Line" stroke-linecap="square"></path>
+                      <path d="M7.3943662,22.1830986 L41.5511118,22.1830986" id="Line" stroke-linecap="square"></path>
+                      <path d="M7.3943662,15.1408451 L41.5511118,15.1408451" id="Line" stroke-linecap="square"></path>
+                      <path d="M7.3943662,29.2253521 L41.5511118,29.2253521" id="Line" stroke-linecap="square"></path>
+                      <path d="M7.3943662,36.2676056 L41.5511118,36.2676056" id="Line" stroke-linecap="square"></path>
+                  </g>
+              </svg>
+              <h3>Specifications</h3>
+            </a>
+          {% endif %}
+          {% for attachment in product.metafields.attachments %}
+            {% unless attachment == blank %}
+              <a href="{{ attachment[1] }}" class="btn">{{ attachment[0] | capitalize }}</a>
+            {% endunless %}
+          {% endfor %}
         </div>
-      {% endraw %}
+      </div>
     </div>
   </div>
+</div>
+
+<div class="wrapper">
   {% if bottom_level_collection %}
     <div class="product-extras related-products">
       <h3>

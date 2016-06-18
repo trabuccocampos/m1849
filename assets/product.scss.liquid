@@ -5,6 +5,15 @@ $medium: 768px;
 $large: 769px;
 $stack_offset: 80;
 
+
+$light-color: #fff;
+$soft-grey: #E6E7E8;
+$mid-grey: #aeb1b5;
+$dark-grey: #333;
+$dark-color: $dark-grey;
+// $red: #D23719;
+$red: #F5321E;
+
 .product-card {
   height: 100%;
   display: inline-block;
@@ -319,9 +328,9 @@ $stack_offset: 80;
   }
 }
 .product-extras {
-  border-top: 1px solid #eee;
+  // border-top: 1px solid #eee;
   padding: 20px 0;
-  margin: 20px 0;
+  margin: 0 0 20px;
 
   &:after {
     content: '';
@@ -343,15 +352,25 @@ $stack_offset: 80;
     }
   }
 }
-
+.related-products__wrapper {
+  clear: both;
+  background: #f5f5f5;
+  margin-top: 2em;
+  padding: 1em 0 0;
+}
 .related-lookbooks {
+  &.grid {
+    .grid__item:first-child {
+      padding-left: 0;
+    }
+  }
   .lookbooks-container {
     font-size: 0;
   }
 
   .product-lookbook {
     display: inline-block;
-    width: 33.33%;
+    // width: 33.33%;
     font-size: 1rem;
     vertical-align: top;
     padding-right: 10px;
@@ -368,9 +387,42 @@ $stack_offset: 80;
     }
 
     img {
-      width: 50%;
+      width: 70%;
       float: left;
       margin: 0 10px 10px 0;
+    }
+  }
+}
+.related-lookbooks a {
+  transition: color 0.3s ease;
+
+  svg#icon-specifications polygon,
+  svg#icon-specifications polyline,
+  svg#icon-specifications path,
+  svg#icon-print polygon,
+  svg#icon-print polyline,
+  svg#icon-print path {
+    stroke: $mid-grey;
+    stroke-width: 2px;
+    fill: none;
+    transition: stroke 0.4s ease;
+
+  }
+  svg#icon-print rect {
+    fill: $mid-grey;
+    transition: fill 0.4s ease;
+  }
+
+  &:hover {
+    svg#icon-specifications path,
+    svg#icon-print path {
+      stroke: $red;
+    }
+    svg#icon-print rect {
+      fill: $red;
+    }
+    h3 {
+      color: $red;
     }
   }
 }
