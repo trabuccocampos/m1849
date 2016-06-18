@@ -5,7 +5,7 @@
       "settings":[
          {
             "type":"header",
-            "content":"m1849 by A.A. Trabucco-Campos"
+            "content":"m1849 by A.A. Trabucco-Campos & Helium Dev"
          },
          {
             "type":"paragraph",
@@ -1544,6 +1544,56 @@
          {
            "type":"text",
            "id":"filter_3_option_10",
+           "label":"Option"
+         },
+         {
+           "type":"text",
+           "id":"filter_3_option_11",
+           "label":"Option"
+         },
+         {
+           "type":"text",
+           "id":"filter_3_option_12",
+           "label":"Option"
+         },
+         {
+           "type":"text",
+           "id":"filter_3_option_13",
+           "label":"Option"
+         },
+         {
+           "type":"text",
+           "id":"filter_3_option_14",
+           "label":"Option"
+         },
+         {
+           "type":"text",
+           "id":"filter_3_option_15",
+           "label":"Option"
+         },
+         {
+           "type":"text",
+           "id":"filter_3_option_16",
+           "label":"Option"
+         },
+         {
+           "type":"text",
+           "id":"filter_3_option_17",
+           "label":"Option"
+         },
+         {
+           "type":"text",
+           "id":"filter_3_option_18",
+           "label":"Option"
+         },
+         {
+           "type":"text",
+           "id":"filter_3_option_19",
+           "label":"Option"
+         },
+         {
+           "type":"text",
+           "id":"filter_3_option_20",
            "label":"Option"
          },
          {

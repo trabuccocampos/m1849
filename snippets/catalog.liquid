@@ -20,14 +20,14 @@
       {% endfor %}
     {% else %}
       <div class="collection-actionable">
-        <a href="/collections/all/{{ current_tags | join: "+"}}" class="btn back-button">Return</a>
+        <a href="/collections/all/{{ current_tags | join: "+"}}" class="btn back-button">&#8592; Back to Catalog</a>
       </div>
       {% if current_tags != blank %}
         <div class="collection-actionable">
           {% if collection.handle == 'all' %}
-            <a href="/collections" class="btn">x Clear Filters</a>
+            <a href="/collections" class="btn">&times;&ensp;Clear Filters</a>
           {% else %}
-            <a href="/collections/{{ collection.handle }}" class="btn">x Clear Filters</a>
+            <a href="/collections/{{ collection.handle }}" class="btn">&times;&ensp;Clear Filters</a>
           {% endif %}
         </div>
         <h4>
@@ -45,7 +45,7 @@
         {% endif %}
       {% endfor %}
       <div class="collection-footer">
-        <a href="/collections" class="btn back-button">Return</a>
+        <a href="/collections/all/{{ current_tags | join: "+"}}" class="btn back-button">&#8592; Back to Catalog</a>
       </div>
     {% endif %}
   </div>
