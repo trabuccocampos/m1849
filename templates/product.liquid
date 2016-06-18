@@ -1,7 +1,5 @@
 <!-- /templates/product.liquid -->
-
 <div itemscope itemtype="http://schema.org/Product">
-
   <meta itemprop="url" content="{{ shop.url }}{{ product.url }}">
   <meta itemprop="image" content="{{ product.featured_image.src | img_url: 'grande' }}">
 
@@ -94,25 +92,30 @@
           </div>
           <div class="tab-content">
             {% assign first_tab = true %}
+
+            {% assign fields = "color_code,thickness,size,front,temple,notes" | split: "," %}
             {% for place in made_in_places %}
               {% assign place_fields = product.metafields[place] | size %}
               {% if place_fields > 0 %}
                 <div class="tab {% if first_tab %}active{% endif %}" data-tab="{{ place }}">
                   <table>
                     <tbody>
-                      {% for field in product.metafields[place] %}
-                        <tr>
-                          {% assign key = field[0] | split: "_" %}
-                          <td>{% for word in key %}{{word | capitalize}} {% endfor %}</td>
-                          <td {% if field[0] == "color_code" %}data-color-code="{{ field[1] }}"{% endif %}>
-                            {% assign link_keys = "temple" | split: ","  %}
-                            {% if link_keys contains field[0] %}
-                              <a href="/products/{{ field[1] }}">{{ field[1] }}</a>
-                            {% else %}
-                              {{ field[1] }}
-                            {% endif %}
-                          </td>
-                        </tr>
+                      {% for key in fields %}
+                        {% assign field = product.metafields[place][key] %}
+                        {% if field %}
+                          <tr>
+                            {% assign humanized_key = key | split: "_" %}
+                            <td>{% for word in humanized_key %}{{word | capitalize}} {% endfor %}</td>
+                            <td {% if field == "color_code" %}data-color-code="{{ field }}"{% endif %}>
+                              {% assign link_keys = "temple,front" | split: ","  %}
+                              {% if link_keys contains key %}
+                                <a href="/products/{{ field }}">{{ field }}</a>
+                              {% else %}
+                                {{ field }}
+                              {% endif %}
+                            </td>
+                          </tr>
+                        {% endif %}
                       {% endfor %}
                     </tbody>
                   </table>
@@ -132,23 +135,31 @@
   </div>
   <div class="product-extras related-lookbooks">
     <div class="attachments">
-      <a href="{{ settings.global_spec_url }}" class="btn">Specifications</a>
+      {% if product.tags contains 'M49' %}
+        <a href="{{ settings.global_m49_spec_url }}" class="btn">Specifications</a>
+      {% else %}
+        <a href="{{ settings.global_spec_url }}" class="btn">Specifications</a>
+      {% endif %}
       {% for attachment in product.metafields.attachments %}
         {% unless attachment == blank %}
           <a href="{{ attachment[1] }}" class="btn">{{ attachment[0] | capitalize }}</a>
         {% endunless %}
       {% endfor %}
     </div>
-    <h3>Featured In</h3>
-    <div class="lookbooks-container" data-relatable="product.article" data-relatable-id="{{product.id}}">
+    <div data-relatable="product.article" data-relatable-id="{{product.id}}">
       {% raw %}
         {{#article}}
-          <a href="/blogs/lookbook/{{article.id}}" class="product-lookbook">
-            <img src="{{article.image.src}}" alt="">
-            <h3>{{article.title}}</h3>
-            <p>{{{article.summary_html}}}</p>
-          </a>
+          <h3>Featured In</h3>
         {{/article}}
+        <div class="lookbooks-container">
+          {{#article}}
+            <a href="/blogs/lookbook/{{article.id}}" class="product-lookbook">
+              <img src="{{article.image.src}}" alt="">
+              <h3>{{article.title}}</h3>
+              <p>{{{article.summary_html}}}</p>
+            </a>
+          {{/article}}
+        </div>
       {% endraw %}
     </div>
   </div>

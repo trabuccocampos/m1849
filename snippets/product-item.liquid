@@ -1,4 +1,4 @@
-<a href="{{ product.url }}">
+<a href="{{ product.url }}" class="product-card">
   <!-- <img src="{{ product.featured_image | img_url: "small" }}" alt=""> -->
-  <img src="{% if product.images.size > 0 %}{{ product.featured_image | img_url: "small" }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
+  <img src="{% if product.images.size > 0 %}{{ product.featured_image | img_url: "compact" }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
 </a>

@@ -12,6 +12,19 @@ $stack_offset: 80;
   font-size: 0;
   position: relative;
 
+  &:before {
+    content: '';
+    position: absolute;
+    top: -12.5%;
+    right: -12.5%;
+    bottom: -12.5%;
+    left: -12.5%;
+    background-image: url('{{ "product-card-shadow.png" | asset_url }}');
+    background-repeat: no-repeat;
+    background-position: top center;
+    background-size: 100% 100%;
+  }
+
   .color-code {
     position: absolute;
     top: 10px;
@@ -26,13 +39,16 @@ $stack_offset: 80;
     height: 100%;
     max-width: none;
     border-radius: 10px;
+    position: relative;
+   
     // box-shadow: 0 5px 8px rgba(0,0,0,0.3);
-    -webkit-filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.5));
+    // -webkit-filter: drop-shadow(4px 4px 8px rgba(0, 0, 0, 0.5));
+
   }
 
-  &.related-product img {
-    -webkit-filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.3));
-  }
+//  &.related-product img {
+//    -webkit-filter: drop-shadow(2px 2px 5px rgba(0, 0, 0, 0.3));
+//  }
 
 }
 .product-single {
@@ -172,7 +188,7 @@ $stack_offset: 80;
         opacity: 1;
 
         .product-card:not(:first-child) {
-          margin-left: -80px;
+          margin-left: -50%;
         }
       }
     }
@@ -193,7 +209,8 @@ $stack_offset: 80;
       display: inline-block;
       position: relative;
       vertical-align: top;
-      margin-right: -#{$stack_offset*2}px;
+      margin-left: -#{$stack_offset*2}px;
+      margin-left: -40%;
       transition: margin-left 0.3s ease;
       border-radius: 13px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.4);
@@ -214,11 +231,17 @@ $stack_offset: 80;
         $inset: (($i - 1) * $stack_offset) / $i;
         $width: percentage(1/$i);
         width: calc(#{$width} + #{$inset - 4}px);
-      }
-
-      .product-card:nth-child(#{$i}) {
-        $stack_offset-y: ($i - 1)*$stack_offset;
-        margin-top: #{$stack_offset-y}px;
+        
+        $offset_per_stack: 200 / ($i - 1);
+        
+        @for $j from 1 through 10 {
+          &:nth-child(#{$j}) {
+            $stack_offset_y: $offset_per_stack*($j - 1);
+            margin-top: #{$stack_offset_y}px;
+          }
+        }
+        
+        
       }
     }
   }
@@ -229,6 +252,16 @@ $stack_offset: 80;
     height: 100%;
     font-size: 0;
     width: 30%;
+    
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 1;
+    }
 
     .side-view-container {
       display: inline-block;
@@ -272,7 +305,7 @@ $stack_offset: 80;
       height: 100%;
 
       .product-card {
-        &:before {
+        &:after {
           content: '';
           position: absolute;
           top: 0;

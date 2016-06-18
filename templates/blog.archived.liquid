@@ -27,8 +27,8 @@
     <div class="grid__item large--three-quarters archive-tags">
       {% for tag in tags %}
         <div class="category">
-          <h1><a href="/blogs/{{ blog.handle }}/tagged/{{tag}}">{{ tag }}</a></h1>
-          <div class="grid grid-uniform" data-category-tag="{{ tag }}"></div>
+          <h1><a href="/blogs/{{ blog.handle }}/tagged/{{tag | handleize}}">{{ tag }}</a></h1>
+          <div class="grid grid-uniform" data-category-tag="{{ tag | handleize }}"></div>
         </div>
       {% endfor %}
     </div>
@@ -69,7 +69,7 @@
 </script>
 {% if current_tags == blank %}
   <script type="text/javascript">
-    // Just so we know we have mustache
+    // Just so we know we have MustacheJS
     Relatable.ready(function() {
       var template = $('#article-grid').html();
       
