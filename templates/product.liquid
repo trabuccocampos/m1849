@@ -106,7 +106,7 @@
                           <tr>
                             {% assign humanized_key = key | split: "_" %}
                             <td>{% for word in humanized_key %}{{word | capitalize}} {% endfor %}</td>
-                            <td {% if field == "color_code" %}data-color-code="{{ field }}"{% endif %}>
+                            <td {% if key == "color_code" %}data-color-code="{{ field }}"{% endif %}>
                               {% assign link_keys = "temple,front" | split: ","  %}
                               {% if link_keys contains key %}
                                 <a href="/products/{{ field }}">{{ field }}</a>
