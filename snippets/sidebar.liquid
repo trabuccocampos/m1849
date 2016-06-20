@@ -71,5 +71,10 @@
   </form>
 </aside>
 <script type="text/javascript">
-  Shopify.current_tags = {{ current_tags | json | downcase }};
+  Shopify.current_tags = [
+    {% for tag in current_tags %}
+      {% unless forloop.first %},{% endunless %}
+      "{{ tag | handleize }}"
+    {% endfor %}
+  ];
 </script>
