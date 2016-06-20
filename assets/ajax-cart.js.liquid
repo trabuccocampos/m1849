@@ -111,6 +111,12 @@ ShopifyAPI.addItemFromForm = function(form, callback, errorCallback) {
       else {
         ShopifyAPI.onItemAdded(line_item, form);
       }
+
+      // Update cart qty number
+      ShopifyAPI.getCart(function(cart) {
+        console.log(cart);
+        $('#cartCount').text(cart.item_count);
+      });
     },
     error: function(XMLHttpRequest, textStatus) {
       if ((typeof errorCallback) === 'function') {
