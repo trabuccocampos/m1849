@@ -5,7 +5,7 @@
 
   <!-- Fixed Sidebar -->
   <aside class="grid__item large--one-quarter lookbook__list">
-    
+
   </aside>
 
     <!-- <header class="section-header text-center">
@@ -17,7 +17,7 @@
         {% endif %}
       </h1>
     </header> -->
-    
+
     <div class="grid__item large--three-quarters">
       {% for article in blog.articles %}
 
@@ -121,7 +121,12 @@
     {{#products}}
       <div class="grid__item large--one-sixth medium--one-third material">
         <a href="/products/{{handle}}">
-          <img src="{{#img_url.large}}{{image.src}}{{/img_url.large}}" alt="">
+          {{#image}}
+            <img src="{{#img_url.large}}{{image.src}}{{/img_url.large}}" alt="">
+          {{/image}}
+          {{^image}}
+            {% endraw %}{{ "no-image-compact.png" | asset_url | img_tag }}{% raw %}
+          {{/image}}
         </a>
         <h4 class="material--title"><a href="/products/{{handle}}">{{title}}</a></h4>
       </div>

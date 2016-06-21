@@ -5,7 +5,7 @@
         button:before {
           background: #ccc;
         }
-        
+
         &.slick-active {
           button:before {
             border-color: black;
@@ -22,20 +22,20 @@
     padding: 0;
     margin-top: 0;
   }
-  
+
   .category {
     padding: 30px 0;
     border-bottom: 1px solid #eee;
-    
+
     h1 {
       margin: 0 0 15px 0;
     }
-    
+
     footer {
       padding-top: 35px;
     }
   }
-  
+
   .pagination {
     margin-top: 20px;
     padding-top: 20px;
@@ -45,7 +45,7 @@
 
 .journal-items {
   margin-top: 30px;
-  
+
   .pagination {
     margin-top: 20px;
     padding-top: 20px;
@@ -59,17 +59,25 @@
     cursor: pointer;
     color: gray;
     transition: color 0.1s ease;
-    
+
     &.chapter-header {
       font-weight: bold;
+
+      ul {
+        font-weight: normal;
+        display: none;
+      }
+
+      &.active {
+        ul {
+          display: block;
+        }
+      }
     }
-    
-    &.chapter-sub-header {
-      padding-left: 15px;
-    }
-    
+
     &.active {
       color: black;
+      font-weight: bold;
     }
   }
 }

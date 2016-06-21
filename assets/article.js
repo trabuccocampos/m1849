@@ -2,17 +2,17 @@
   // Sets height of aside nav to match
   function setListHeight() {
     $('.lookbook__list').height($('.lookbook').height());
-    
+
     $(document.body).trigger("sticky_kit:recalc");
   }
-  
+
   function init() {
     var $micro = $('#microtrends').html();
     var $material = $('#materials').html();
-        
+
     function scrollNav() {
       setListHeight();
-      
+
       $('.lookbook').chapters({
         nav: '.lookbook__list',
         header: '.lookbook__microtrend--title',
@@ -81,7 +81,7 @@
           }
         }
       }
-      
+
       return article;
     }
 
@@ -99,7 +99,7 @@
             var $macrotrend = $('.lookbook__macrotrend[data-id="'+id+'"]');
             var $header = $macrotrend.find('.macrotrend-header');
             var $microtrends = $macrotrend.find('.microtrends');
-            
+
             $microtrends.html($html);
 
             makeSlick($microtrends.find('.images'));
@@ -108,7 +108,7 @@
 
         // Get get materials
         getMaterials(articles);
-        
+
         // scroll nav
         scrollNav();
       });
@@ -116,13 +116,23 @@
 
     getMicroTrends(Shopify.article_ids);
   }
-  
+
   Relatable.ready(function() {
     $(function() {
       init();
     })
   });
-  
+
   $(window).load(setListHeight);
   $(window).resize(setListHeight);
+
+  var throttleScroll;
+
+  $(window).scroll(function() {
+    clearTimeout(throttleScroll);
+
+    throttleScroll = setTimeout(function() {
+      setListHeight();
+    }, 20);
+  });
 })(jQuery);

@@ -3,7 +3,8 @@ loadStickyKit();
 
 $.fn.chapters = function(options) {
   var self = this;
-  
+  var scrubbing = false;
+
   var options = $.extend({
     header: 'h1',
     subHeader: 'h2',
@@ -11,69 +12,94 @@ $.fn.chapters = function(options) {
     easing: 'linear',
     speed: 200
   }, options);
-  
+
   var $nav = this.find(options.nav),
       $headings = this.find([options.header, options.subHeader].join(','));
-  
+
   function buildNav() {
     var $ul = $('<ul/>');
-    
+
     self.find($headings).each(function() {
       var $heading = $(this);
       var $li = $('<li/>').text($heading.text());
-      
+
       if ($(this).is(options.header)) {
         $li.addClass('chapter-header');
+
+        $sub = $('<ul/>').appendTo($li);
+        $ul.append($li);
       } else if ($(this).is(options.subHeader)) {
         $li.addClass('chapter-sub-header');
+
+        if (!window.$sub) {
+          throw("A sub-header cannot come before a header!");
+        } else {
+          $sub.append($li);
+        }
       }
-      
-      $li.click(function() {
+
+      $li.click(function(event) {
+        event.stopPropagation();
+
+        scrubbing = true;
         $('html,body').animate({
           scrollTop: $heading.offset().top + "px"
-        }, options.speed, options.easing);
+        }, options.speed, options.easing, function() {
+          scrubbing = false;
+        });
       });
-      
-      $ul.append($li);
     });
-    
+
     $nav.append($ul);
-    
+
     $ul.stick_in_parent({
       offset_top: options.offset
     });
   }
-  
+
   // Find the closest heading and set active
   function setActiveHeading() {
     var distances = $headings.map(function(index, heading) {
+      var offset = Math.abs($(this).offset().top - window.scrollY)
       return {
         index: index,
-        distance: Math.abs($(this).offset().top - window.scrollY)
+        distance: Math.round(offset)
       };
     });
-    
+
+    // Sort headings by distance and get the closest one
     var active = distances.sort(function(a,b) {
-      return a.distance > b.distance;
+      if (a.distance > b.distance) {
+        return 1;
+      } else if (a.distance < b.distance) {
+        return -1;
+      } else {
+        return 0;
+      }
     })[0];
-    
+
     $nav.find('ul li.active').removeClass('active');
-    
-    $nav.find('ul li').eq(active.index).addClass('active');
+    var $header = $nav.find('ul li').eq(active.index).addClass('active');
+
+    if ($header.hasClass('chapter-sub-header')) {
+      $header.parent('ul').parent('li').addClass('active');
+    }
   }
-  
+
   var throttleScroll;
-  
+
   $(window).scroll(function() {
     clearTimeout(throttleScroll);
-    
+
     throttleScroll = setTimeout(function() {
-      setActiveHeading();
-    }, 20);
+      if (!scrubbing) {
+        setActiveHeading();
+      }
+    }, 10);
   });
 
   buildNav();
-  
+
   return this;
 }
 

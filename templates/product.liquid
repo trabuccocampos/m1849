@@ -147,7 +147,7 @@
           {{/article}}
           <div class="lookbooks-container">
             {{#article}}
-              <a href="/blogs/lookbook/{{article.id}}" class="product-lookbook">
+              <a href="/blogs/{{article.blog.handle}}/{{article.handle}}" class="product-lookbook">
                 <img src="{{article.image.src}}" alt="">
                 <h3>{{article.title}}</h3>
                 <p>{{{article.summary_html}}}</p>
