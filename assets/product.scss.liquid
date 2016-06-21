@@ -138,6 +138,10 @@ $red: #F5321E;
     height: 430px;
     position: relative;
 
+    @media (max-width: $small) {
+      height: 380px;
+    }
+
     .toggle-views {
       position: absolute;
       bottom: -65px;
@@ -183,6 +187,7 @@ $red: #F5321E;
   }
 
   .front-view-image {
+    // display: none;
     z-index: 2;
     position: absolute;
     left: 0;
@@ -196,8 +201,25 @@ $red: #F5321E;
       & ~ .stacked-images {
         opacity: 1;
 
-        .product-card:not(:first-child) {
-          margin-left: -50%;
+        .product-card {
+
+          $base-left: 70;
+          $per-factor: 3.7;
+
+          @for $i from 1 through 10 {
+            &[data-image-count="#{$i}"] {
+              $factor: $i*$per-factor;
+              margin-left: -#{$base-left - $factor}#{"%"};
+
+              @media (max-width: $small) {
+                margin-left: -#{($base-left - $factor) * 1.218}#{"%"};
+              }
+            }
+          }
+
+          &:first-child {
+            margin-left: 0;
+          }
         }
       }
     }
@@ -218,12 +240,24 @@ $red: #F5321E;
       display: inline-block;
       position: relative;
       vertical-align: top;
-      // margin-left: -#{$stack_offset*2}px;
-      margin-left: -40%;
       transition: margin-left 0.3s ease;
       border-radius: 13px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.4);
       height: auto;
+
+      $base-left: 43;
+      $per-factor: 2;
+
+      @for $i from 1 through 10 {
+        &[data-image-count="#{$i}"] {
+          $factor: $i*$per-factor;
+          margin-left: -#{$base-left - $factor}#{"%"};
+
+          @media (max-width: $small) {
+            margin-left: -#{($base-left - $factor) * 1.45}#{"%"};
+          }
+        }
+      }
 
       img {
         height: auto;
@@ -241,7 +275,7 @@ $red: #F5321E;
         $width: percentage(1/$i);
         width: calc(#{$width} + #{$inset - 4}px);
 
-        $offset_per_stack: 200 / ($i - 1);
+        $offset_per_stack: 345 / ($i - 1);
 
         @for $j from 1 through 10 {
           &:nth-child(#{$j}) {
