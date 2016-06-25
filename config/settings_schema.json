@@ -450,7 +450,7 @@
       "settings":[
         {
            "type":"header",
-           "content":"Box One (2:3)"
+           "content":"Box One (Large 2:3)"
         },
         {
            "type":"checkbox",
@@ -501,7 +501,7 @@
         },
         {
            "type":"header",
-           "content":"Box Two / No Image (1:3)"
+           "content":"Box Two / No Image (Small 1:3)"
         },
         {
            "type":"checkbox",
@@ -596,7 +596,7 @@
         },
         {
            "type":"header",
-           "content":"Box Four (1:3)"
+           "content":"Box Four (Small 1:3)"
         },
         {
            "type":"checkbox",
@@ -647,7 +647,7 @@
         },
         {
            "type":"header",
-           "content":"Box Five (2 col)"
+           "content":"Box Five (Medium 2 col)"
         },
         {
            "type":"checkbox",

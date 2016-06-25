@@ -182,7 +182,7 @@
     {% capture box_link %}box_{{ i }}_link{% endcapture %}
 
     {% if settings[box] %}
-        <div class="grid__item large--one-third medium--one-half {{ settings[box_text_color] }}" data-color="{{ settings[box_text_color] }}" style="background-color: {{ settings[box_background_color] }} !important;">
+        <div class="grid__item large--one-third medium--one-half box-layout-long {{ settings[box_text_color] }}" data-color="{{ settings[box_text_color] }}" style="background-color: {{ settings[box_background_color] }} !important;">
           <div class="box-aspect-ratio-long">
             <div class="box__content" style="background-color: {{ settings[box_background_color] }} !important;">
               <a href="{{ settings[box_link] }}" class="box__img__link">
