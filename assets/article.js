@@ -1,9 +1,20 @@
 (function($) {
-  // Sets height of aside nav to match
-  function setListHeight() {
-    $('.lookbook__list').height($('.lookbook').height());
+  var $lookbook = $('.lookbook');
 
-    $(document.body).trigger("sticky_kit:recalc");
+  // Sets height of aside nav to match
+  var prevLookbookHeight = $lookbook.height();
+
+  function setListHeight() {
+    var newHeight = $lookbook.height();
+
+    if (prevLookbookHeight != newHeight) {
+      $('.lookbook__list').height($lookbook.height());
+
+      console.log("recalc!")
+      $(document.body).trigger("sticky_kit:recalc");
+
+      prevLookbookHeight = $lookbook.height();
+    }
   }
 
   function init() {
@@ -13,7 +24,7 @@
     function scrollNav() {
       setListHeight();
 
-      $('.lookbook').chapters({
+      $lookbook.chapters({
         nav: '.lookbook__list',
         header: '.lookbook__microtrend--title',
         subHeader: 'h3'
@@ -123,16 +134,15 @@
     })
   });
 
-  $(window).load(setListHeight);
   $(window).resize(setListHeight);
 
   var throttleScroll;
 
   $(window).scroll(function() {
-    clearTimeout(throttleScroll);
+  clearTimeout(throttleScroll);
 
-    throttleScroll = setTimeout(function() {
-      setListHeight();
-    }, 20);
-  });
+  throttleScroll = setTimeout(function() {
+    setListHeight();
+  }, 200);
+});
 })(jQuery);
