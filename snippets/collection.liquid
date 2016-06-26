@@ -6,8 +6,8 @@
       {% else %}
         {% capture related_tags %}
           {% for tag in current_tags %}
-            {% assign _tags = product.tags | join: "," | downcase %}
-            {% assign _tag = tag | downcase %}
+            {% assign _tags = product.tags | join: "||" | prepend: "||" | downcase | append: "||"  %}
+            {% assign _tag = tag | downcase | prepend: "||" | append: "||" %}
             {% unless _tags contains _tag %}0{% endunless %}
           {% endfor %}
         {% endcapture %}
