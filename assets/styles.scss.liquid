@@ -137,7 +137,7 @@ $large: 769px;
 .cart-link__bubble--visible {
   top: 90%;
   right: -20%;
-  background-color: #fff;
+  background-color: transparent;
   font-size: 12px;
   text-align: center;
   height: 20px;
@@ -578,9 +578,6 @@ html[lang=it] {
 .product-single {
   margin-bottom: 140px;
 }
-.product-single .product-images .toggle-views {
-  bottom: -112px;
-}
 .tabular .tabs a {
   display: inline-block;
   width: 50%;
@@ -705,6 +702,7 @@ html[lang=it] {
 
   li {
     @include transition(all 0.3s ease-in-out);
+    font-size: .9em;
   }
 
   // & > ul:first-child,
@@ -853,6 +851,10 @@ html[lang=it] {
   }
 }
 /*================ JOURNAL ================*/
+.section-header {
+  margin-bottom: 0;
+}
+
 .journal__sections {
   margin-top: 5em;
 }
@@ -883,6 +885,11 @@ html[lang=it] {
   .social-sharing.clean,
   .tags--article.inline-list {
     text-align: center;
+  }
+}
+.journal-items {
+  .grid__item.article.large--one-third:first-child {
+    display: none;
   }
 }
 
@@ -992,6 +999,6 @@ body {
   }
 
   .copyright {
-
+    clear: left;
   }
 }
