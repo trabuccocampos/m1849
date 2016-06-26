@@ -20,14 +20,14 @@
   </div>
   {% endcomment %}
   <div class="grid noprint">
-    <div class="grid__item medium--one-whole">
+    <div class="grid__item large--two-thirds medium--one-whole">
       <div class="product-single__add-to-cart">
         <button type="submit" name="add" id="AddToCart" class="btn">
           <span id="AddToCartText">{{ 'products.product.add_to_cart' | t }}</span>
         </button>
       </div>
      </div>
-   <div class="grid__item medium--one-whole">
+   <div class="grid__item large--one-third medium--one-whole">
      {% if settings.social_sharing_products %}
        {% include 'social-sharing' %}
      {% endif %}

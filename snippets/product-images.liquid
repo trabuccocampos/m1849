@@ -9,8 +9,8 @@
     </section>
     <footer>
       <span class="image-view-title">Frontal view
-      <br>
-        {{ 'icon_front.png' | asset_url | img_tag }}
+      <!-- <br>
+        {{ 'icon_front.png' | asset_url | img_tag }} -->
       </span>
     </footer>
   </div>
@@ -26,7 +26,7 @@
       {% endfor %}
     </section>
     <footer>
-      <span class="image-view-title">Frontal layer view</span>
+      <span class="image-view-title">Split layer view</span>
     </footer>
   </div>
   <!-- SINGLE IMAGE CASES -->
@@ -39,8 +39,9 @@
         </figure>
       </section>
       <footer>
-        <span class="image-view-title">Side view <br>
-        {{ 'icon_side.png' | asset_url | img_tag }}</span>
+        <span class="image-view-title">Side view
+          <!-- <br>
+        {{ 'icon_side.png' | asset_url | img_tag }}</span> -->
       </footer>
     </div>
   {% endif %}
