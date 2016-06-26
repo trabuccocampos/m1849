@@ -36,7 +36,13 @@
                 {% unless settings[option_field] == blank %}
                   <div class="btn__filter">
                     <label>
-                      <input type="checkbox" name="{{ settings[option_field] | handleize }}">
+                      {% assign field = settings[option_field] %}
+
+                      {% if field == "Italy & Asia" %}
+                        <input type="checkbox" name="italy+asia">
+                      {% else %}
+                        <input type="checkbox" name="{{ field | handleize }}">
+                      {% endif %}
                       <span></span>
                       {{ settings[option_field] }}
                     </label>
