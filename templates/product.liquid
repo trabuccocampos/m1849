@@ -156,8 +156,9 @@
           </div>
         {% endraw %}
       </div>
-      <div class="grid__item large--one-third medium--one-third small--one-whole medium-down--hide">
+      <div class="grid__item large--one-third medium--one-third small--one-whole medium-down--hide vertically--center">
         <a class="print-item" href="javascript:window.print()">
+          <h3>Print Materials Card</h3>
           <svg width="74px" height="53px" viewBox="723 788 74 53" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="icon-print">
               <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
               <desc>Material card icon</desc>
@@ -169,13 +170,13 @@
               <path d="M776.352113,823.056338 L787.5,823.056338" id="Line" stroke-linecap="square" fill="none"></path>
               <path d="M776.352113,830.056338 L787.5,830.056338" id="Line" stroke-linecap="square" fill="none"></path>
           </svg>
-          <h3>Print Materials Card</h3>
         </a>
       </div>
-      <div class="grid__item large--one-third small--one-whole">
+      <div class="grid__item large--one-third small--one-whole vertically--center">
         <div class="attachments">
           {% if product.tags contains 'M49' %}
             <a href="{{ settings.global_m49_spec_url }}">
+              <h3>Specifications</h3>
               <svg width="53px" height="74px" viewBox="976 777 53 74" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="icon-specifications">
                   <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
                   <desc>Specifications Icon</desc>
@@ -190,10 +191,10 @@
                       <path d="M7.3943662,36.2676056 L41.5511118,36.2676056" id="Line" stroke-linecap="square"></path>
                   </g>
               </svg>
-              <h3>Specifications</h3>
             </a>
           {% else %}
             <a href="{{ settings.global_spec_url }}">
+              <h3>Specifications</h3>
               <svg width="53px" height="74px" viewBox="976 777 53 74" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="icon-specifications">
                   <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
                   <desc>Specifications Icon</desc>
@@ -208,7 +209,6 @@
                       <path d="M7.3943662,36.2676056 L41.5511118,36.2676056" id="Line" stroke-linecap="square"></path>
                   </g>
               </svg>
-              <h3>Specifications</h3>
             </a>
           {% endif %}
           {% for attachment in product.metafields.attachments %}

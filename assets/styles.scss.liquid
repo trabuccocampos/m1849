@@ -64,6 +64,9 @@ $large: 769px;
 .header-wrapper {
   z-index: 100;
 }
+.template-index .site-header {
+  padding-top: 0;
+}
 .site-header {
   position: fixed;
   width: 100%;
@@ -400,7 +403,7 @@ $large: 769px;
     text-align: center;
     color: $dark-color;
     z-index: -1;
-    @include transition(all 0.4s ease-in-out);
+    @include transition(all 0.6s ease-in-out);
 
     &.active {
       // display: block;
@@ -774,7 +777,6 @@ html[lang=it] {
 
 
 // Microtrend
-
 .microtrend.grid__item.one-whole {
     margin-top: 4em;
     padding-top: 1em;
@@ -800,18 +802,14 @@ html[lang=it] {
   }
 }
 .lookbook__macrotrend--content {
-  margin-bottom: 4em;
+  margin-bottom: 0;
   @media screen and (max-width: $medium) {
     margin-bottom: -1em;
   }
 }
 .lookbook__PDF {
   text-align: right;
-  padding-top: 10px;
-
-  @media screen and (max-width: $medium) {
-    padding-top: 0;
-  }
+  padding-top: 0;
 }
 
 // Macrotrend Image
@@ -842,14 +840,13 @@ html[lang=it] {
     height: auto;
   }
 }
-
 .microtrend--title {
   font-weight: 400;
   font-size: 1.6em;
   line-height: 1.2em;
 
   @media screen and (min-width: $large) {
-    font-size: 2.2em;
+    font-size: 1.8em;
   }
 }
 .lookbook__microtrend__img {
@@ -897,6 +894,40 @@ html[lang=it] {
   }
   footer {
     padding-top: 15px;
+  }
+}
+
+// Microtrend Article Page
+.lookbook__body__content {
+  text-align: center;
+}
+.lookbook__microtrend__main__img {
+  margin-bottom: 1em;
+}
+.lookbook__microtrend__materials .product-card {
+  height: 90px;
+  margin-right: 6px;
+}
+.lookbook__microtrend__footer {
+  margin-top: 3em;
+
+  .tags {
+    width: 79%;
+    display: inline-block;
+  }
+  .social-sharing {
+    display: inline-block;
+    text-align: right;
+    width: 20%;
+  }
+
+  @media screen and (max-width: $small) {
+    .tags,
+    .social-sharing {
+      width: 100%;
+      display: block;
+      text-align: center;
+    }
   }
 }
 
