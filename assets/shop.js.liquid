@@ -1,12 +1,12 @@
 // Used for resizing images based on the Shopify CDN
 var AssetImage = function(url, is_original) {
   var self = this;
-  
+
   this.url = url;
   this.is_original = is_original;
-  
-  var image_sizes =  "pico icon thumb small compact medium large grande 1024x1024 2048x2048 master original".split(" "); 
-  
+
+  var image_sizes =  "pico icon thumb small compact medium large grande 1024x1024 2048x2048 master original".split(" ");
+
   function resize(size) {
     // Don't resize images that aren't from Shopify, duh!
     if (!self.url.indexOf("cdn.shopify.com") < 0) {
@@ -19,17 +19,17 @@ var AssetImage = function(url, is_original) {
     // Pick apart the url and rebuild it
     var sizes = "_" + image_sizes.join("|_");
     var filetype = "(\\.(jpg|jpeg|png|gif)+\\??.*)";
-    
+
     if (self.is_original) {
       var format = new RegExp(filetype, "i");
-      
+
       return {
         original: self.url,
         resized: url.replace(format, "_"+size+"$1")
       }
     } else {
       var format = new RegExp("("+sizes+")" + filetype, "i");
-       
+
       return {
         original: self.url.replace(format, "$2"),
         resized: self.url.replace(format, "_" + size + "$2")
@@ -67,7 +67,7 @@ var AssetImage = function(url, is_original) {
 
       $filters.find('input[type="checkbox"]:checked').each(function() {
         var name = $(this).attr('name');
-        
+
         if (fields.indexOf(name) < 0) {
           fields.push($(this).attr('name'));
         }
@@ -76,7 +76,7 @@ var AssetImage = function(url, is_original) {
       var url = $filters.attr('action') + "/" + fields.join("+");
       window.location = url;
     });
-    
+
     // Create labels for colors
     $('.filter-by-color input[type="checkbox"]').each(function() {
       var color = $(this).attr('name');
@@ -91,37 +91,37 @@ var AssetImage = function(url, is_original) {
       event.preventDefault();
     });
   };
-  
+
   function tabs() {
     var hash = window.location.hash;
-    
+
     function activate_tab(tab) {
       var selector = '*[data-tab="'+tab+'"]';
       var $tab = $(selector);
-      
+
       if ($tab.length < 1) {
         return;
       }
-      
+
       var $tabular = $tab.first().closest('.tabular');
 
       // Assign classes
       $tabular.find('.active').removeClass('active').end()
               .find(selector).addClass('active');
-              
+
       window.location.hash = tab;
     }
-    
+
     if (hash) {
       activate_tab(hash.replace("#",''));
     }
-    
+
     $('.tabular .tabs a').click(function(event) {
       event.preventDefault();
       activate_tab($(this).attr('data-tab'));
     });
   }
-  
+
   function slick() {
     $('.slick-items').slick({
       infinite: true,
@@ -156,33 +156,33 @@ var AssetImage = function(url, is_original) {
       ]
     });
   }
-  
+
   function languages_select() {
     var $fields = $('.language-select');
-    
+
     $fields.change(function() {
       // Set all other fields the same
       $fields.val($(this).val());
-      
+
       Localize.setLanguage($(this).val());
     });
-    
+
     // Set selects
     $fields.val(Localize.getLanguage());
   }
-  
+
   function toggle_color_codes() {
     $('.specs .tabs a').click(function() {
       var $code = $(this).closest('.tabular').find('.tab.active').find('[data-color-code]');
-      
+
       var new_code = $code.text();
       var prev_code = $('.color-code').first().text();
-      
+
       $('.color-code').text(new_code);
       $('title').text($('title').text().replace(prev_code, new_code));
     });
   }
-  
+
   // On DOM load
   $(function() {
     catalog_filters();
@@ -192,3 +192,19 @@ var AssetImage = function(url, is_original) {
     toggle_color_codes();
   });
 })(jQuery);
+
+
+
+// Scroll Navbar Shrink
+$(document).on("scroll", function(){
+	if
+    ($(document).scrollTop() > 50){
+	  $("header").addClass("shrink");
+		// updateSliderMargin();
+	}
+	else
+	{
+		$("header").removeClass("shrink");
+		// updateSliderMargin();
+	}
+});
