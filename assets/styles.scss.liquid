@@ -40,6 +40,27 @@ $large: 769px;
 @mixin transition($transition: 0.1s all) {
   @include prefix('transition', #{$transition});
 }
+@mixin keyframes($name) {
+  @-webkit-keyframes #{$name} {
+    @content;
+  }
+  @-moz-keyframes #{$name} {
+    @content;
+  }
+  @-ms-keyframes #{$name} {
+    @content;
+  }
+  @keyframes #{$name} {
+    @content;
+  }
+}
+@mixin animation($animation) {
+  -webkit-animation: $animation;
+  -moz-animation:    $animation;
+  -o-animation:      $animation;
+  animation:         $animation;
+}
+
 
 /*================ SITE WIDE STYLES ================*/
 
@@ -896,6 +917,20 @@ html[lang=it] {
     padding-top: 15px;
   }
 }
+.archives {
+  h1 {
+    font-size: 2em;
+    font-weight: 400;
+  }
+  .article {
+    margin-bottom: 15px;
+  }
+  h3 {
+    strong {
+      font-weight: 400;
+    }
+  }
+}
 
 // Microtrend Article Page
 .lookbook__body__content {
@@ -1088,6 +1123,10 @@ html[lang=it] {
 
 body {
   border-bottom: 10px solid $red;
+  @include animation(fadeIn 1s cubic-bezier(0.44, 0.13, 0.48, 0.87));
+}
+.form-vertical input {
+  font-style: normal;
 }
 .site-footer {
   margin-top: 100px;
