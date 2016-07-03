@@ -19,7 +19,6 @@
       {% for image in product.images reversed %}
         {% if forloop.index != 1 and forloop.index != product.images.size %}
           <figure class="product-card" data-image-count="{{ image_count }}">
-            <!-- <img  src="{{ image.src | img_url: 'large' }}" alt="{{ image.alt | escape }}" data-image-id="{{ image.id }}"> -->
             <img src="{% if image_count > 0 %}{{ image.src | img_url: 'large' }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
           </figure>
         {% endif %}
@@ -34,7 +33,6 @@
     <div class="side-view-images">
       <section class="side-view-container">
         <figure>
-          <!-- <img src="{{ image.src | img_url: 'large' }}"> -->
           <img src="{% if image_count > 0 %}{{ product.featured_image | img_url: "grande" }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
         </figure>
       </section>
@@ -51,7 +49,6 @@
     <div class="side-view-images" data-image-count="{{ image_count }}">
       <section class="side-view-container">
         <figure>
-          <!-- <img src="{{ image.src | img_url: 'large' }}"> -->
           {{ product.images.last | img_url: "grande" | img_tag }}
         </figure>
       </section>
@@ -70,7 +67,6 @@
         {% for image in product.images %}
           {% if forloop.index != 1 and forloop.index != product.images.size %}
             <figure>
-              <!-- <img src="{{ image.src | img_url: 'large' }}"> -->
               <img src="{% if image_count > 0 %}{{ image.src | img_url: 'large' }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
             </figure>
           {% endif %}

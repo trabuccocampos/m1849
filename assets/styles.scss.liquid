@@ -94,6 +94,14 @@ $large: 769px;
       margin-bottom: 0px;
       margin-top: 5px;
     }
+
+    .site-nav__link.cart-link {
+      margin-right: 35px;
+    }
+    .cart-link__bubble--visible {
+      top: 10%;
+      right: -180%;
+    }
   }
 }
 .site-header__logo img {
@@ -101,6 +109,9 @@ $large: 769px;
 }
 .site-nav {
   font-weight: 400;
+}
+.site-nav__link.cart-link {
+  @include transition(all 0.3s ease-in-out);
 }
 .site-nav__link--icon.cart-link img {
     height: 22px;
@@ -116,6 +127,7 @@ $large: 769px;
   width: 20px;
   border: 1px $red solid;
   color: $red;
+  @include transition(all 0.3s ease-in-out);
 }
 @media screen and (max-width: $medium) {
   .grid--table {
@@ -133,7 +145,7 @@ $large: 769px;
       height: 30px;
     }
     .cart-link__bubble--visible {
-      right: 120%;
+      right: -120%;
       top: 15%;
     }
   }
@@ -148,7 +160,6 @@ $large: 769px;
   }
   .cart-link__bubble--visible {
     right: 7%;
-    @include transition(all 0.4s ease-in-out);
   }
 }
 @media screen and (max-width: $small) {
@@ -699,17 +710,29 @@ html[lang=it] {
   float: left;
   position: absolute;
   margin-left: 10px;
+  opacity: .2;
+  @include transition(opacity 0.6s ease-in-out);
+
+  &:hover {
+    opacity: 1;
+  }
   // -webkit-transform: translate3d(0,0,0);
 
   li {
     @include transition(all 0.3s ease-in-out);
     font-size: .9em;
+    line-height: 1.2em;
+
+    &.chapter-header {
+      margin-bottom: 1em;
+    }
   }
 
   // & > ul:first-child,
   .is_stuck {
-    top: 18px !important;
-    width: 160px !important;
+    top: 48px !important;
+    // width: 160px !important;
+    width: 10% !important;
   }
 
   & > ul+div {
@@ -726,8 +749,8 @@ html[lang=it] {
   content: '';
    display: inline-block;
    position: absolute;
-   left: -2px;
-   margin-top: 4px;
+   left: 0;
+   margin-top: 2px;
    width: 12px;
    height: 12px;
    -moz-border-radius: 12px;
@@ -742,7 +765,20 @@ html[lang=it] {
 }
 
 
-// Blog flow
+// Microtrend
+
+.microtrend.grid__item.one-whole {
+    margin-top: 4em;
+    padding-top: 1em;
+    border-top: 1px solid gray;
+    padding-left: 0;
+    margin-left: 30px;
+
+    @media screen and (max-width: $medium) {
+      margin-left: 0;
+    }
+}
+
 .lookbook__microtrend--title {
   font-size: 3em;
   text-align: center;
@@ -755,6 +791,7 @@ html[lang=it] {
 }
 .lookbook__PDF {
   text-align: right;
+  padding-top: 10px;
 }
 
 // Macrotrend Image
