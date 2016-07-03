@@ -60,10 +60,12 @@ $large: 769px;
 }
 
 /*------ Navbar -------*/
+.header-wrapper {
+  z-index: 100;
+}
 .site-header {
   position: fixed;
   width: 100%;
-  z-index: 10;
 
   border: none;
   margin-bottom: 1.5em;
@@ -79,6 +81,10 @@ $large: 769px;
     padding-top: 0;
     background-color: #ffffff;
     background-color: rgba(#ffffff, 0.84);
+
+    h1 {
+      font-size: 1em;
+    }
 
     .site-header__logo img {
       max-width: 160px !important;
@@ -112,18 +118,38 @@ $large: 769px;
   color: $red;
 }
 @media screen and (max-width: $medium) {
-    .site-nav--mobile {
-      opacity: 1 !important;
+  .grid--table {
+    @include transition(all 0.4s ease-in-out);
+  }
+  .site-header.shrink {
+    .grid--table {
+      height: 50px;
+    }
+    .site-header__logo img {
+      max-width: 180px;
+      margin-top: 10px;
     }
     .site-nav__link.cart-link img {
-      height: 35px;
-    }
-    .site-header {
-      margin-bottom: 2em;
+      height: 30px;
     }
     .cart-link__bubble--visible {
-      right: 8%;
+      right: 120%;
+      top: 15%;
     }
+  }
+  .site-nav--mobile {
+    opacity: 1 !important;
+  }
+  .site-nav__link.cart-link img {
+    height: 35px;
+  }
+  .site-header {
+    margin-bottom: 2em;
+  }
+  .cart-link__bubble--visible {
+    right: 7%;
+    @include transition(all 0.4s ease-in-out);
+  }
 }
 @media screen and (max-width: $small) {
   .site-header {
@@ -512,10 +538,6 @@ html[lang=it] {
   display: none;
 }
 
-.back-button__product {
-
-}
-
 @media screen and (max-width: $medium) {
   .grid.catalog aside {
     display: none;
@@ -542,7 +564,6 @@ html[lang=it] {
   }
 }
 .collections {
-
   @media screen and (max-width: $medium) {
     h3, h4 {
       text-align: center !important;
@@ -572,12 +593,18 @@ html[lang=it] {
   }
 }
 @media screen and (max-width: $medium) {
+  .catalog-content {
+    padding-left: 0;
+  }
   .product-single .product-images footer {
     // width: 100px;
     text-align: left;
   }
   .side-view-container+footer {
     left: -110px;
+  }
+  .related-products__wrapper {
+    margin-top: 0;
   }
   .related-lookbooks .product-lookbook {
     display: block;
