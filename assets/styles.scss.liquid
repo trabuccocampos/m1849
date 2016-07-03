@@ -3,6 +3,7 @@ $soft-grey: #E6E7E8;
 $mid-grey: #aeb1b5;
 $dark-grey: #333;
 $dark-color: $dark-grey;
+$drawerBgColor: #dfdedd;
 // $red: #D23719;
 $red: #F5321E;
 $green: #85d271;
@@ -388,19 +389,23 @@ $large: 769px;
 
 .site-header {
   .search-bar {
-    display: none;
+    // display: none;
+    opacity: 0;
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     height: 80px;
-    background: black;
+    background: $soft-grey;
     text-align: center;
-    color: white;
-    z-index: 1;
+    color: $dark-color;
+    z-index: -1;
+    @include transition(all 0.4s ease-in-out);
 
     &.active {
-      display: block;
+      // display: block;
+      opacity: 1;
+      z-index: 1;
     }
 
     &:before {
@@ -411,28 +416,31 @@ $large: 769px;
     }
 
     input[type="search"] {
+      font-style: normal;
+      padding-left: 0;
       background: none;
-      border: 2px solid #ccc;
+      border-bottom: 2px solid $dark-color;
       width: 100%;
       max-width: 300px;
-      color: white;
+      color: $dark-color;
       outline: none;
 
       &:focus {
-        border-color: white;
+        // border-color: white;
+        // font-weight: 600;
       }
 
       &::-webkit-input-placeholder { /* Chrome/Opera/Safari */
-        color: white;
+        color: $dark-color;
       }
       &::-moz-placeholder { /* Firefox 19+ */
-        color: white;
+        color: $dark-color;
       }
       &:-ms-input-placeholder { /* IE 10+ */
-        color: white;
+        color: $dark-color;
       }
       &:-moz-placeholder { /* Firefox 18- */
-        color: white;
+        color: $dark-color;
       }
     }
 
@@ -778,20 +786,32 @@ html[lang=it] {
       margin-left: 0;
     }
 }
-
+.lookbook__macrotrend {
+  .hr-clear {
+    margin-bottom: 4em;
+  }
+}
 .lookbook__microtrend--title {
   font-size: 3em;
+  line-height: 1.1;
   text-align: center;
+  @media screen and (max-width: $medium) {
+    font-size: 2em;
+  }
 }
 .lookbook__macrotrend--content {
   margin-bottom: 4em;
-}
-.lookbook .hr--clear {
-  margin: 6em 0;
+  @media screen and (max-width: $medium) {
+    margin-bottom: -1em;
+  }
 }
 .lookbook__PDF {
   text-align: right;
   padding-top: 10px;
+
+  @media screen and (max-width: $medium) {
+    padding-top: 0;
+  }
 }
 
 // Macrotrend Image
@@ -801,6 +821,12 @@ html[lang=it] {
   overflow: hidden;
   margin-bottom: 1em;
   position: relative;
+
+  @media screen and (max-width: $small) {
+    width: 108%;
+    padding-left: 0;
+    margin-left: -15px;
+  }
 }
 .lookbook__macrotrend--image__wrapper--crop-bottom {
   margin: 0 auto;
@@ -819,6 +845,8 @@ html[lang=it] {
 
 .microtrend--title {
   font-weight: 400;
+  font-size: 1.6em;
+  line-height: 1.2em;
 
   @media screen and (min-width: $large) {
     font-size: 2.2em;
@@ -828,23 +856,28 @@ html[lang=it] {
   min-width: 100%;
 }
 
-
-.materials > .grid__item {
-  margin-bottom: 20px;
-}
-
-.material {
-  text-align: center;
-
-  .product-card,
-  img {
-    max-width: 100%;
-    height: auto;
+.materials {
+  // text-align: center;
+  .grid__item {
+    margin-bottom: 20px;
+  }
+  .product-card img {
+    border-radius: 3px;
+  }
+  .product-card {
+    height: 70px;
+    margin-right: 3px;
   }
 }
 
 // Archives
+.lookbook__archive__link {
+  margin-top: 4em;
 
+  @media screen and (max-width: $medium) {
+    margin-bottom: 3em;
+  }
+}
 .archive-tags .category {
   &:first-child {
     padding-top: 0;
@@ -852,7 +885,7 @@ html[lang=it] {
 
   h1 {
     font-size: 2em;
-    font-weight: 600;
+    font-weight: 400;
   }
 
   div.grid__item {
@@ -932,8 +965,6 @@ html[lang=it] {
 }
 
 /*================ WISHLIST DRAWER ================*/
-$drawerBgColor: #dfdedd;
-
 .drawer.drawer--right {
   background-color: $drawerBgColor;
   color: $dark-color;

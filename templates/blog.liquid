@@ -6,7 +6,6 @@
   <!-- Fixed Sidebar -->
   <aside class="lookbook__list__wrapper">
     <div class="lookbook__list">
-
     </div>
   </aside>
 
@@ -66,7 +65,7 @@
         {% unless forloop.last %}<hr class="hr--clear">{% endunless %}
 
       {% endfor %}
-      <div class="grid__item text-center push--large--one-eighth large--three-quarters lookbook__articles">
+      <div class="grid__item text-center push--large--one-eighth large--three-quarters lookbook__articles lookbook__archive__link">
         <h2 class="lookbook__microtrend--title">Archive</h2>
         <a href="/blogs/archived" class="btn">View Archive</a>
       </div>
@@ -108,17 +107,18 @@
                 <div><img src="{{.}}" alt=""></div>
               {{/images}}
             </div>
-            <div class="materials"></div>
+            <div class="materials lookbook__microtrend__materials"></div>
           </div>
         </div>
       </div>
     {{/articles}}
   {% endraw %}
 </script>
+
+
 <script type="template/mustache" id="materials">
   {% raw %}
     {{#products}}
-      <div class="grid__item large--one-sixth medium--one-fourth small--one-third material">
         <a href="/products/{{handle}}">
         <figure class="product-card">
           {{#image}}
@@ -129,7 +129,6 @@
           {{/image}}
         </figure>
         </a>
-      </div>
     {{/products}}
   {% endraw %}
 </script>
