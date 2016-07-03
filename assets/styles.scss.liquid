@@ -104,8 +104,8 @@ $large: 769px;
     margin-bottom: 1em;
   }
   .site-header__logo img {
-    max-width: 185px;
-    margin-top: 0;
+    max-width: 210px !important;
+    margin-top: 20px;
   }
   .site-nav__link.cart-link img {
       height: 35px;
@@ -522,7 +522,7 @@ html[lang=it] {
   }
 }
 .product-single {
-  margin-bottom: 140px;
+  margin-bottom: 4em;
 }
 .tabular .tabs a {
   display: inline-block;
@@ -726,10 +726,10 @@ html[lang=it] {
 }
 
 .microtrend--title {
-  font-weight: 900;
+  font-weight: 400;
 
   @media screen and (min-width: $large) {
-    font-size: 2.6em;
+    font-size: 2.2em;
   }
 }
 .lookbook__microtrend__img {
@@ -947,6 +947,10 @@ body {
   .copyright {
     clear: left;
   }
+
+  @media (max-width: $small) {
+    margin-top: 1em;
+  }
 }
 
 
@@ -1030,6 +1034,7 @@ body {
   }
   .slick-prev,
   .slick-next,
+  #admin_bar_iframe,
   .toggle-views {
     display: none !important;
   }
