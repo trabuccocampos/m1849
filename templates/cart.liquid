@@ -24,17 +24,15 @@
         </div>
         {% for item in cart.items %}
           <input type="hidden" name="contact[product_{{item.id}}]" value="{{item.title}}">
-          <div class="grid__item large--one-third">
-            <div class="grid">
-              <div class="grid__item one-half">
+          <div class="grid__item large--one-quarter text-center">
                 <a href="{{ item.url | within: collections.all }}" class="cart__image">
                   <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
+
+                  <!-- <h3>{{ item.product.title }}</h3> -->
+
                 </a>
-              </div>
-              <div class="grid__item one-half">
-                <a href="{{ item.url }}" class="h4 cart__product-name">
-                  {{ item.product.title }}
-                </a>
+                <!-- <a href="{{ item.url }}" class="h4 cart__product-name">
+                </a> -->
                 {% unless item.variant.title contains 'Default' %}
                   <p class="cart__product-meta">
                     {{ item.variant.title }}
@@ -58,14 +56,13 @@
                     {% endunless %}
                   {% endfor %}
                 {% endif %}
+                <br>
 
-                <p class="cart__product-meta">
+                <p class="btn cart__product-meta">
                   <a class="remove-from-cart" href="/cart/change?line={{ forloop.index }}&amp;quantity=0">
                     {{ 'cart.general.remove' | t }}
                   </a>
                 </p>
-              </div>
-            </div>
           </div>
         {% endfor %}
         <div class="grid__item">
