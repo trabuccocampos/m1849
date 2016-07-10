@@ -409,7 +409,7 @@ $large: 769px;
 //  transform: translateY(-5px);
 // }
 
-/*================ NAVIGATION: LANGUAGE ================*/
+/*================ SEARCH ================*/
 
 .site-header {
   .search-bar {
@@ -448,9 +448,10 @@ $large: 769px;
       max-width: 300px;
       color: $dark-color;
       outline: none;
+      @include transition(border 0.4s ease-in-out);
 
       &:focus {
-        // border-color: white;
+        // border-bottom-color: $red;
         // font-weight: 600;
       }
 
@@ -477,6 +478,49 @@ $large: 769px;
     }
   }
 }
+
+// Searchinize Widget
+li.snize-ac-odd.snize-product {
+    width: 33% !important;
+    display: inline-block !important;
+}
+div.snize-ac-results span.snize-thumbnail img {
+    display: inline-block !important;
+    max-height: 140px !important;
+    max-width: 200px !important;
+}
+li.snize-ac-odd.snize-product+.snize-separator {
+    display: none !important;
+}
+div.snize-ac-results span.snize-overhidden {
+    display: inline-block !important;
+    text-align: center !important;
+    width: 100% !important;
+}
+div.snize-ac-results span.snize-title {
+  font-weight: 400 !important;
+}
+
+// Searchinize Results
+#snize-search-results-grid-mode span.snize-overhidden {
+  display: none !important;
+}
+#snize-search-results-grid-mode li.snize-product {
+  border-color: transparent !important;
+  @include transition(border 0.4s ease-in-out);
+
+  &:hover {
+    border-color: $mid-grey !important;
+  }
+}
+
+#snize-search-results-grid-mode span.snize-thumbnail {
+  border: none !important;
+  padding-bottom: 1em;
+}
+
+
+/*================ NAVIGATION: LANGUAGE ================*/
 
 html[lang=en] {
   // CSS rules for English
@@ -856,7 +900,7 @@ html[lang=it] {
 
   img {
     display: block;
-    margin: 0 auto -1.9%;
+    margin: 0 auto -2.3%;
     width: 100%;
     height: auto;
   }
@@ -870,9 +914,13 @@ html[lang=it] {
     font-size: 1.8em;
   }
 }
+.microtrend .slick-initialized .slick-slide {
+  margin-bottom: -0.7%;
+}
 .lookbook__microtrend__img {
   min-width: 100%;
 }
+
 
 .materials {
   // text-align: center;
@@ -1095,6 +1143,14 @@ html[lang=it] {
   &:hover {
     background-color: $light-color;
     color: $dark-color;
+  }
+}
+
+.template-cart .remove-from-cart {
+  color: $dark-color;
+
+  &:hover {
+    color: white;
   }
 }
 

@@ -35,7 +35,7 @@
 
         <div class="lookbook__macrotrend--image__wrapper">
           <div class="lookbook__macrotrend--image__wrapper--crop-bottom">
-            <img src="{{ article.image | img_url: "1024x1024" }}" alt="" class="lookbook__macrotrend--image">
+            <img src="{{ article.image | img_url: "2048x2048" }}" alt="" class="lookbook__macrotrend--image">
           </div>
         </div>
 
@@ -137,3 +137,10 @@
   Shopify.article_ids = "{{ blog.articles | map: "id" | join: "," }}";
 </script>
 {{ 'article.js' | asset_url | script_tag }}
+<!-- {{ 'jquery.unveil.js' | asset_url | script_tag }}
+
+<script type="text/javascript">
+  $(document).ready(function() {
+    $("img").unveil(100);
+  });
+</script> -->

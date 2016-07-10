@@ -36,7 +36,7 @@
         infinite: true,
         dots: true,
         easing: 'easeOutQuint',
-        speed: 500,
+        speed: 600,
         autoplay: true
       })
     }
