@@ -1317,7 +1317,7 @@
       ]
    },
    {
-      "name":"Product page",
+      "name":"Material page - Specifications",
       "settings":[
          {
             "type":"checkbox",
@@ -1340,21 +1340,6 @@
       "name":"Collection page",
       "settings":[
          {
-            "type":"select",
-            "id":"collection_products_grid",
-            "label":"Grid style",
-            "options":[
-               {
-                  "value":"collage",
-                  "label":"Collage"
-               },
-               {
-                  "value":"grid",
-                  "label":"Grid"
-               }
-            ]
-         },
-         {
             "type":"checkbox",
             "id":"collection_tags_enable",
             "label":"Show collection tags"
@@ -1365,9 +1350,18 @@
             "label":"Show product vendor"
          },
          {
-            "type":"image",
-            "id":"collection_m49_banner.jpg",
-            "label":"M49 Banner"
+           "type":"header",
+           "content":"M49 Specifications"
+         },
+         {
+            "type":"text",
+            "id":"collection_m49_banner_header",
+            "label":"M49 Banner Header"
+         },
+         {
+            "type":"text",
+            "id":"collection_m49_banner_text",
+            "label":"M49 Banner Text"
          },
          {
            "type":"header",
@@ -1713,6 +1707,21 @@
            "type":"text",
            "id":"filter_5_option_10",
            "label":"Option"
+         },
+         {
+            "type":"select",
+            "id":"collection_products_grid",
+            "label":"Grid style",
+            "options":[
+               {
+                  "value":"collage",
+                  "label":"Collage"
+               },
+               {
+                  "value":"grid",
+                  "label":"Grid"
+               }
+            ]
          }
       ]
    },
@@ -1855,12 +1864,6 @@
             "info":"https:\/\/vimeo.com\/shopify"
          },
          {
-            "type":"text",
-            "id":"social_fancy_link",
-            "label":"Fancy",
-            "info":"http:\/\/fancy.com\/Shopify"
-         },
-         {
             "type":"header",
             "content":"Sharing"
          },
@@ -1888,11 +1891,6 @@
             "type":"checkbox",
             "id":"share_pinterest",
             "label":"Pin on Pinterest"
-         },
-         {
-            "type":"checkbox",
-            "id":"share_fancy",
-            "label":"Add to Fancy"
          },
          {
             "type":"checkbox",

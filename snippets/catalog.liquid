@@ -1,10 +1,9 @@
 <div class="grid catalog">
   {% if current_tags contains 'M49' or current_tags contains 'm49' %}
-    <h2>M49</h2>
-    {% comment %}
-      # Leaving this here in case this changes back
-      {{ 'collection_m49_banner.jpg' | asset_url | img_tag }}
-    {% endcomment %}
+    <div class="grid__item large--whole m49__banner">
+      <h2>{{ settings.collection_m49_banner_header }}</h2>
+      <p>{{ settings.collection_m49_banner_text }}</p>
+    </div>
   {% endif %}
 
   {% include 'sidebar' %}
@@ -30,15 +29,29 @@
             <a href="/collections/{{ collection.handle }}" class="btn">&times;&ensp;Clear Filters</a>
           {% endif %}
         </div>
-        <h4>
           {% for tag in current_tags %}
             {% assign tag_words = tag | split: " " %}
-            {% for word in tag_words %}
-              {{ word | capitalize }}
-            {% endfor %}
-            {% unless forloop.last %}|{% endunless %}
+              {% for word in tag_words %}
+                <h4 class="catalog__tags--active">
+                  {{ word | capitalize }}
+
+                  {% if collection.handle == 'all' %}
+                    <a href="/collections" class="catalog__tags--close">
+                      <svg viewBox="0 -9 40 40">
+                        <path class="close-x" d="M 10,10 L 30,30 M 30,10 L 10,30"></path>
+                      </svg>
+                    </a>
+                  {% else %}
+                    <a href="/collections" class="catalog__tags--close">
+                      <svg viewBox="0 -9 40 40">
+                        <path class="close-x" d="M 10,10 L 30,30 M 30,10 L 10,30"></path>
+                      </svg>
+                    </a>
+                  {% endif %}
+                </h4>
+              {% endfor %}
+            {% unless forloop.last %}{% endunless %}
           {% endfor %}
-        </h4>
       {% endif %}
       {% for type in collection.all_types %}
         {% assign handle = type | handleize %}
