@@ -13,7 +13,39 @@
           {{ page.content }}
         </div>
 
-        <div class="rte rte--nomargin rte--indented-images">
+        <div class="rte rte--nomargin">
+          <ul class="contact__documents no-bullets">
+            <li>
+              {% unless settings.contact_document_title-1 == blank %}
+                <h4><a href="http://{{ settings.contact_document_link-1 }}"> {{ settings.contact_document_title-1 }}</a></h4>
+              {% endunless %}
+            </li>
+            <li>
+              {% unless settings.contact_document_title-2 == blank %}
+                <h4><a href="http://{{ settings.contact_document_link-2 }}"> {{ settings.contact_document_title-2 }}</a></h4>
+              {% endunless %}
+            </li>
+            <li>
+              {% unless settings.contact_document_title-3 == blank %}
+                <h4><a href="http://{{ settings.contact_document_link-3 }}"> {{ settings.contact_document_title-3 }}</a></h4>
+              {% endunless %}
+            </li>
+            <li>
+              {% unless settings.contact_document_title-4 == blank %}
+                <h4><a href="http://{{ settings.contact_document_link-4 }}"> {{ settings.contact_document_title-4 }}</a></h4>
+              {% endunless %}
+            </li>
+            <li>
+              {% unless settings.contact_document_title-5 == blank %}
+                <h4><a href="http://{{ settings.contact_document_link-5 }}"> {{ settings.contact_document_title-5 }}</a></h4>
+              {% endunless %}
+            </li>
+            <li>
+              {% unless settings.contact_document_title-6 == blank %}
+                <h4><a href="http://{{ settings.contact_document_link-6 }}"> {{ settings.contact_document_title-6 }}</a></h4>
+              {% endunless %}
+            </li>
+          </ul>
           {% for i in (1..6) %}
             {% unless settings.contact_document_title-[i] == blank %}
               <h4>{{ settings.contact_document_title-[i] }}</h4>
@@ -21,6 +53,11 @@
             {% unless settings.contact_document_link-[i] == blank %}
               <p>{{ settings.contact_document_link-[i] }}</p>
             {% endunless %}
+
+            <!-- <script type="text/javascript">
+              var l = "settings.contact_document_title-{{ i }}"
+              console.log(l)
+            </script> -->
           {% endfor %}
         </div>
 
