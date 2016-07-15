@@ -13,6 +13,17 @@
           {{ page.content }}
         </div>
 
+        <div class="rte rte--nomargin rte--indented-images">
+          {% for i in (1..6) %}
+            {% unless settings.contact_document_title-[i] == blank %}
+              <h4>{{ settings.contact_document_title-[i] }}</h4>
+            {% endunless %}
+            {% unless settings.contact_document_link-[i] == blank %}
+              <p>{{ settings.contact_document_link-[i] }}</p>
+            {% endunless %}
+          {% endfor %}
+        </div>
+
         <div class="form-vertical">
           {% form 'contact' %}
 

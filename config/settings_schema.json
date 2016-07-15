@@ -1726,47 +1726,112 @@
       ]
    },
    {
-      "name":"Heritage page",
+    "name":"Heritage page",
+    "settings":[
+       {
+          "type":"checkbox",
+          "id":"heritage_enable",
+          "label":"Enable"
+       },
+       {
+          "type":"image",
+          "id":"heritage_cover.jpg",
+          "label":"Heritage Cover",
+          "max-width":1200,
+          "info":"1200px wide required"
+       },
+       {
+          "type":"select",
+          "id":"heritage_text_color",
+          "label":"Text color",
+          "options":[
+             {
+                "value":"is-light",
+                "label":"Light"
+             },
+             {
+                "value":"is-dark",
+                "label":"Dark"
+             }
+          ]
+       },
+       {
+          "type":"text",
+          "id":"heritage_subheading",
+          "label":"Subheading text"
+       },
+       {
+          "type":"text",
+          "id":"heritage_heading",
+          "label":"Heading text"
+       }
+     ]
+   },
+   {
+      "name":"Contact Documents",
       "settings":[
          {
-            "type":"checkbox",
-            "id":"heritage_enable",
-            "label":"Enable"
-         },
-         {
-            "type":"image",
-            "id":"heritage_cover.jpg",
-            "label":"Heritage Cover",
-            "max-width":1200,
-            "info":"1200px wide required"
-         },
-         {
-            "type":"select",
-            "id":"heritage_text_color",
-            "label":"Text color",
-            "options":[
-               {
-                  "value":"is-light",
-                  "label":"Light"
-               },
-               {
-                  "value":"is-dark",
-                  "label":"Dark"
-               }
-            ]
+            "type":"text",
+            "id":"contact_document_title-1",
+            "label":"Document 1 Title"
          },
          {
             "type":"text",
-            "id":"heritage_subheading",
-            "label":"Subheading text"
+            "id":"contact_document_link-1",
+            "label":"Document 1 Link"
          },
          {
             "type":"text",
-            "id":"heritage_heading",
-            "label":"Heading text"
+            "id":"contact_document_title-2",
+            "label":"Document 2 Title"
+         },
+         {
+            "type":"text",
+            "id":"contact_document_link-2",
+            "label":"Document 2 Link"
+         },
+         {
+            "type":"text",
+            "id":"contact_document_title-3",
+            "label":"Document 3 Title"
+         },
+         {
+            "type":"text",
+            "id":"contact_document_link-3",
+            "label":"Document 3 Link"
+         },
+         {
+            "type":"text",
+            "id":"contact_document_title-4",
+            "label":"Document 4 Title"
+         },
+         {
+            "type":"text",
+            "id":"contact_document_link-4",
+            "label":"Document 4 Link"
+         },
+         {
+            "type":"text",
+            "id":"contact_document_title-5",
+            "label":"Document 5 Title"
+         },
+         {
+            "type":"text",
+            "id":"contact_document_link-5",
+            "label":"Document 5 Link"
+         },
+         {
+            "type":"text",
+            "id":"contact_document_title-6",
+            "label":"Document 6 Title"
+         },
+         {
+            "type":"text",
+            "id":"contact_document_link-6",
+            "label":"Document 6 Link"
          }
-       ]
-     },
+      ]
+   },
    {
       "name":"Cart page",
       "settings":[
