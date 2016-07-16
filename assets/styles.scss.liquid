@@ -70,7 +70,6 @@ $large: 769px;
   z-index: 1000;
   opacity: 1;
 }
-
 .main-content {
   padding-top: 90px;
 }
@@ -79,6 +78,19 @@ $large: 769px;
 }
 .catalog .catalog-content {
   border-left: 0;
+}
+hr.divider__line {
+  width: 100%;
+  border-top: 1px solid #ddd;
+
+  &.space--top {
+    margin-top: 6em;
+  }
+}
+h1 {
+  font-size: 3em;
+  margin-top: 1em;
+  margin-bottom: 1em;
 }
 
 /*------ Navbar -------*/
@@ -571,12 +583,24 @@ html[lang=it] {
 }
 
 /*================ CONTACT ================*/
+.contact h1 {
+  margin-bottom: 0;
+}
+.contact h2 {
+  text-align: left;
+  font-size: 1.4em;
+  margin-top: 1em;
+  margin-bottom: 2em;
+}
 .contact .rte .p1 {
   color: #F5321E;
   margin-bottom: .5em;
 }
 .contact .rte .p2 {
   margin-bottom: .5em;
+}
+.contact .rte table {
+  margin-bottom: 0;
 }
 .contact .rte td {
   padding: 15px 30px;
