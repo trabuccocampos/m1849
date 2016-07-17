@@ -15,23 +15,10 @@
     <div class="lookbook__body__content rte rte--indented-images" itemprop="articleBody">
       {{ article.content }}
     </div>
+    <div id="microtrends"></div>
     <div class="grid lookbook">
       <div class="grid__item large--one-whole">
         <img src="{{ article.image | img_url: "1024x1024" }}" alt="{{ article.title }} | Mazzucchelli1849" class="lookbook__microtrend__main__img">
-      </div>
-      <div class="grid__item large--one-whole">
-        <div class="materials lookbook__microtrend__materials" data-relatable="article.products" data-relatable-id="{{ article.id }}">
-          {% raw %}
-            {{#products}}
-              <a href="/products/{{handle}}">
-                <figure class="product-card">
-                  <img src="{{#img_url.medium}}{{image.src}}{{/img_url.medium}}" alt="{{title}} | Mazzucchelli1849">
-                </figure>
-                <!-- <p>{{title}}</p> -->
-              </a>
-            {{/products}}
-          {% endraw %}
-        </div>
       </div>
       <div class="grid__item large--one-whole lookbook__microtrend__footer">
 
@@ -149,3 +136,51 @@
 <div class="text-center">
   <a href="{{ blog.url }}" class="return-link">&larr; {{ 'blogs.article.back_to_blog' | t: title: blog.title }}</a>
 </div>
+
+<script type="template/mustache" id="microtrends">
+  {% raw %}
+    {{#articles}}
+      <div class="microtrend grid__item one-whole" data-id="{{id}}">
+        <div class="grid">
+          <div class="microtrend grid__item large--two-thirds medium--two-thirds small--one-half" data-id="{{id}}">
+            <h3 class="microtrend--title">{{title}}</h3>
+          </div>
+          <div class="grid__item large--one-third medium--one-third small--one-half lookbook__PDF">
+              <a href="{{attachment}}" type="print" name="print" class="btn">Download the PDF</a>
+          </div>
+          <div class="grid__item one-whole">
+            <div class="images">
+              <div>
+                <img src="{{#img_url.1024x1024}}{{image.src}}{{/img_url.1024x1024}}" alt="" class="lookbook__microtrend__img">
+              </div>
+              {{#images}}
+                <div><img src="{{.}}" alt=""></div>
+              {{/images}}
+            </div>
+            <div class="materials lookbook__microtrend__materials"></div>
+          </div>
+        </div>
+      </div>
+    {{/articles}}
+  {% endraw %}
+</script>
+<script type="template/mustache" id="materials">
+  {% raw %}
+    {{#products}}
+        <a href="/products/{{handle}}">
+        <figure class="product-card">
+          {{#image}}
+            <img src="{{#img_url.medium}}{{image.src}}{{/img_url.medium}}" alt="{{title}} Mazzucchelli1849">
+          {{/image}}
+          {{^image}}
+            {% endraw %}{{ "no-image-compact.png" | asset_url | img_tag }}{% raw %}
+          {{/image}}
+        </figure>
+        </a>
+    {{/products}}
+  {% endraw %}
+</script>
+<script type="text/javascript">
+  Shopify.article_ids = ["{{ article.id }}"];
+</script>
+{{ 'article.js' | asset_url | script_tag }}

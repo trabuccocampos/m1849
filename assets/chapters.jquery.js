@@ -17,6 +17,10 @@ $.fn.chapters = function(options) {
   var $nav = this.find(options.nav),
       $headings = this.find([options.header, options.subHeader].join(','));
 
+  if (!$nav.length) {
+    return this;
+  }
+
   function buildNav() {
     var $ul = $('<ul/>');
 

@@ -22,7 +22,7 @@
 
     function scrollNav() {
       setListHeight();
-
+      
       $lookbook.chapters({
         nav: '.lookbook__list',
         header: '.lookbook__microtrend--title',
