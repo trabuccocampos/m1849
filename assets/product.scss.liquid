@@ -143,7 +143,7 @@ $red: #F5321E;
     position: relative;
 
     @media (max-width: $small) {
-      height: 340px !important;
+      height: 300px !important;
 
       .image-view-title {
         padding-top: 30px;
@@ -160,8 +160,15 @@ $red: #F5321E;
       margin-bottom: 80px;
 
       .toggle-views {
-        right: 0;
+        right: 36%;
         width: 30%;
+        bottom: -62px;
+        bottom: -73px;
+        z-index: 1000;
+      }
+    }
+    @media (max-width: $small) {
+      .toggle-views {
         bottom: -62px;
       }
     }
@@ -189,6 +196,10 @@ $red: #F5321E;
 
         .image-view-title {
           visibility: visible;
+        }
+
+        footer {
+          text-align: right;
         }
       }
     }
@@ -334,6 +345,10 @@ $red: #F5321E;
       padding: 0;
       position: relative;
 
+      @media (max-width: $small) {
+        width: 13px;
+      }
+
       img {
         height: 100%;
         max-width: none;
@@ -341,7 +356,7 @@ $red: #F5321E;
         left: -60%;
 
         @media (max-width: $small) {
-          left: -985%;
+          left: -1365%;
         }
       }
     }

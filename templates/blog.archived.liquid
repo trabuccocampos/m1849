@@ -4,7 +4,7 @@
   {% for i in (1..30) %}
     {% assign setting_id = "filter_3_option_" | append: i %}
     {% assign tag = settings[setting_id] %}
-    
+
     {% unless tag == blank %}
       {% unless tags == blank %}
         {% assign tags = tags | append: "," %}
@@ -12,9 +12,9 @@
       {% assign tags = tags | append: tag %}
     {% endunless %}
   {% endfor %}
-  
+
   {% assign tags = tags | split: "," %}
-  <aside class="grid__item large--one-quarter filters">
+  <aside class="grid__item large--one-quarter medium--one-quarter filters">
     <h2>Filters</h2>
     <ul class="sidemenu-list">
       <li><a href="/blogs/{{ blog.handle }}">All</a></li>
@@ -24,7 +24,7 @@
     </ul>
   </aside>
   {% if current_tags == blank %}
-    <div class="grid__item large--three-quarters archive-tags">
+    <div class="grid__item large--three-quarters medium--three-quarters archive-tags">
       {% for tag in tags %}
         <div class="category">
           <h1><a href="/blogs/{{ blog.handle }}/tagged/{{tag | handleize}}">{{ tag }}</a></h1>
@@ -48,7 +48,7 @@
         </div>
       {% endif %}
     {% endpaginate %}
-  
+
   {% endif %}
 
 </div>
@@ -72,12 +72,12 @@
     // Just so we know we have MustacheJS
     Relatable.ready(function() {
       var template = $('#article-grid').html();
-      
+
       $('[data-category-tag]').each(function() {
         var self = $(this),
             tag = $(this).data('category-tag'),
             path = '/blogs/archived/tagged/' + tag + '?view=json';
-        
+
         $.getJSON(path, function(blog) {
           for (var i=0; i < blog.articles.length; i++) {
             // Set thumb image
@@ -85,17 +85,17 @@
               var image = new Relatable.image(blog.articles[i].image.src, true);
               blog.articles[i].thumb = image.resized("medium");
             }
-            
+
             // Strip summary
             var summary = $.parseHTML(blog.articles[i].summary_html);
             blog.articles[i].summary = $(summary).text().slice(0, 100);
           };
-          
+
           // Set tag
           blog.tag = tag;
-          
+
           var output = Mustache.render(template, blog);
-          
+
           self.html($.parseHTML(output));
         })
       });

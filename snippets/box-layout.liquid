@@ -96,7 +96,7 @@
     {% capture box_link %}box_{{ i }}_link{% endcapture %}
 
     {% if settings[box] %}
-        <div class="grid__item large--two-thirds medium--one-whole {{ settings[box_text_color] }}" data-color="{{ settings[box_text_color] }}">
+        <div class="grid__item large--two-thirds medium--one-half {{ settings[box_text_color] }}" data-color="{{ settings[box_text_color] }}">
           <div class="box-aspect-ratio-wide">
             <div class="box__content">
               <a href="{{ settings[box_link] }}" class="box__img__link">

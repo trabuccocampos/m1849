@@ -170,6 +170,17 @@ h1 {
   .grid--table {
     @include transition(all 0.4s ease-in-out);
   }
+  .site-header__logo img {
+    margin: 0 !important;
+  }
+  .site-nav--mobile .icon {
+    font-size: 1.3em;
+  }
+  .site-nav__link.cart-link img {
+    height: 25px;
+  }
+
+  // SHRINK STYLES
   .site-header.shrink {
     .grid--table {
       height: 50px;
@@ -179,41 +190,50 @@ h1 {
       margin-top: 10px;
     }
     .site-nav__link.cart-link img {
-      height: 30px;
+      height: 22px;
     }
     .cart-link__bubble--visible {
       right: -120%;
-      top: 15%;
+      top: 13%;
+      height: 16px;
+      width: 16px;
+      font-size: 10px;
     }
   }
+
   .site-nav--mobile {
     opacity: 1 !important;
-  }
-  .site-nav__link.cart-link img {
-    height: 35px;
   }
   .site-header {
     margin-bottom: 2em;
   }
   .cart-link__bubble--visible {
-    right: 7%;
+    right: -5%;
   }
 }
 @media screen and (max-width: $small) {
   .site-header {
     margin-bottom: 1em;
   }
+  .site-nav__link {
+    margin-right: 7px !important;
+    margin-left: 7px !important;
+  }
   .site-header__logo img {
-    max-width: 210px !important;
-    margin-top: 20px;
+    max-width: 190px !important;
   }
   .site-nav__link.cart-link img {
-      height: 35px;
       padding-bottom: 0;
   }
   // .cart-link__bubble--visible {
   //   right: 7%;
   // }
+}
+
+@media screen and (max-width: 320) {
+  .site-header__logo img {
+    max-width: 210px !important;
+  }
 }
 .site-nav__link {
     padding: 0;
@@ -355,6 +375,11 @@ h1 {
 .large--two-thirds .box__title {
   font-size: 2.65em;
   margin: .2em auto;
+
+  @media (max-width: $small) {
+    font-size: 1.4em;
+    line-height: 1.1em;
+  }
 }
 .box-aspect-ratio-wide .box__title {
   font-size: 1.4em;
@@ -383,7 +408,7 @@ h1 {
 }
 
 .box__content:hover .box__image {
-	opacity: 0.5;
+	opacity: 0.2;
 	-webkit-transform: scale(1.05,1.05);
 	transform: scale(1.05,1.05);
 }
@@ -704,10 +729,10 @@ html[lang=it] {
   }
   .product-single .product-images footer {
     // width: 100px;
-    text-align: left;
+    text-align: center;
   }
   .side-view-container+footer {
-    left: -110px;
+    left: 0;
   }
   .related-products__wrapper {
     margin-top: 0;
@@ -744,10 +769,19 @@ html[lang=it] {
     margin-bottom: 2em;
   }
 }
+@media screen and (max-width: $small) {
+  .product-single .product-images footer {
+    // width: 100px;
+    text-align: left;
+  }
+  .product-single .product-images .side-view-images footer {
+    text-align: center;
+  }
+}
 
 .related-product.product-card.slick-slide {
   width: 60px !important;
-  margin-right: 10px;
+  margin-right: 9px;
 }
 .related-products .related-product.product-card.slick-slide a {
   padding: 0;
@@ -997,6 +1031,11 @@ html[lang=it] {
       font-weight: 400;
     }
   }
+  @media screen and (max-width: $small) {
+    aside {
+      display: none;
+    }
+  }
 }
 
 // Microtrend Article Page
@@ -1207,9 +1246,17 @@ body {
   margin-top: 100px;
   padding-bottom: 20px;
 
+  .site-header__logo img {
+    margin: 0 auto .5em !important;
+  }
+
   p {
     color: #666;
     font-size: 14px;
+
+    @media (max-width: $medium) {
+      text-align: center;
+    }
   }
 
   .copyright {
@@ -1238,7 +1285,7 @@ body {
   }
   body {
     font-size: 12px;
-    border: 10px solid $red !important;
+    // border: 10px solid $red !important;
     height: 100%;
     overflow: hidden;
   }
