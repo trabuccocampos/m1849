@@ -138,10 +138,10 @@
   var throttleScroll;
 
   $(window).scroll(function() {
-  clearTimeout(throttleScroll);
+    clearTimeout(throttleScroll);
 
-  throttleScroll = setTimeout(function() {
-    setListHeight();
-  }, 200);
-});
+    throttleScroll = setTimeout(function() {
+      setListHeight();
+    }, 200);
+  });
 })(jQuery);

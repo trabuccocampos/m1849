@@ -15,13 +15,15 @@
 
   {% assign tags = tags | split: "," %}
   <aside class="grid__item large--one-quarter medium--one-quarter filters">
-    <h2>Filters</h2>
-    <ul class="sidemenu-list">
-      <li><a href="/blogs/{{ blog.handle }}">All</a></li>
-      {% for tag in tags %}
-        <li><a href="/blogs/{{ blog.handle }}/tagged/{{ tag | replace: " ", "" | handleize }}">{{ tag | capitalized }}</a></li>
-      {% endfor %}
-    </ul>
+    <div class="filters-container">
+      <h2>Filters</h2>
+      <ul class="sidemenu-list">
+        <li><a href="/blogs/{{ blog.handle }}">All</a></li>
+        {% for tag in tags %}
+          <li><a href="/blogs/{{ blog.handle }}/tagged/{{ tag | replace: " ", "" | handleize }}">{{ tag | capitalized }}</a></li>
+        {% endfor %}
+      </ul>
+    </div>
   </aside>
   {% if current_tags == blank %}
     <div class="grid__item large--three-quarters medium--three-quarters archive-tags">
@@ -67,8 +69,45 @@
     </footer>
   {% endraw %}
 </script>
+<script type="text/javascript">
+  jQuery(function($) {
+    var $archives = $('.archives'),
+        $filters = $('.archives .filters-container');
+
+    var prevArchivesHeight = 0;
+
+    function setListHeight() {
+      var newHeight = $archives.height();
+
+      if (prevArchivesHeight != newHeight) {
+        $archives.find('.filters').height($archives.height());
+
+        $(document.body).trigger("sticky_kit:recalc");
+
+        prevArchivesHeight = $archives.height();
+      }
+    }
+
+    setListHeight();
+
+    $filters.stick_in_parent({
+      offset_top: 60
+    });
+
+    var throttleScroll;
+
+    $(window).scroll(function() {
+      clearTimeout(throttleScroll);
+
+      throttleScroll = setTimeout(function() {
+        setListHeight();
+      }, 200);
+    });
+  });
+</script>
 {% if current_tags == blank %}
   <script type="text/javascript">
+
     // Just so we know we have MustacheJS
     Relatable.ready(function() {
       var template = $('#article-grid').html();
@@ -99,6 +138,7 @@
           self.html($.parseHTML(output));
         })
       });
+
     });
   </script>
 {% endif %}
