@@ -30,27 +30,30 @@
           {% endif %}
         </div>
           {% for tag in current_tags %}
-            {% assign tag_words = tag | split: " " %}
-              {% for word in tag_words %}
-                <h4 class="catalog__tags--active">
-                  {{ word | capitalize }}
-
-                  {% if collection.handle == 'all' %}
-                    <a href="/collections" class="catalog__tags--close">
-                      <svg viewBox="0 -9 40 40">
-                        <path class="close-x" d="M 10,10 L 30,30 M 30,10 L 10,30"></path>
-                      </svg>
-                    </a>
-                  {% else %}
-                    <a href="/collections" class="catalog__tags--close">
-                      <svg viewBox="0 -9 40 40">
-                        <path class="close-x" d="M 10,10 L 30,30 M 30,10 L 10,30"></path>
-                      </svg>
-                    </a>
-                  {% endif %}
-                </h4>
-              {% endfor %}
-            {% unless forloop.last %}{% endunless %}
+            <h4 class="catalog__tags--active">
+              {{ tag }}
+              {% if collection.handle == 'all' %}
+                <a href="/collections" class="catalog__tags--close">
+                  <svg viewBox="0 -9 40 40">
+                    <path class="close-x" d="M 10,10 L 30,30 M 30,10 L 10,30"></path>
+                  </svg>
+                </a>
+              {% else %}
+                {% capture new_tags %}
+                  {% for _tag in current_tags %}
+                    {% unless _tag == tag %}
+                      +{{ _tag | handleize }}
+                    {% endunless %}
+                  {% endfor %}
+                {% endcapture %}
+                {% assign new_tags = new_tags | remove_first: "+" | replace: " ", "" | strip_newlines %}
+                <a href="{{ new_tags }}" class="catalog__tags--close">
+                  <svg viewBox="0 -9 40 40">
+                    <path class="close-x" d="M 10,10 L 30,30 M 30,10 L 10,30"></path>
+                  </svg>
+                </a>
+              {% endif %}
+            </h4>
           {% endfor %}
       {% endif %}
       {% for type in collection.all_types %}
