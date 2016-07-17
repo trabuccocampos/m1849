@@ -20,7 +20,7 @@
       <ul class="sidemenu-list">
         <li><a href="/blogs/{{ blog.handle }}">All</a></li>
         {% for tag in tags %}
-          <li><a href="/blogs/{{ blog.handle }}/tagged/{{ tag | replace: " ", "" | handleize }}">{{ tag | capitalized }}</a></li>
+          <li data-tag="{{ tag | handleize }}"><a href="/blogs/{{ blog.handle }}/tagged/{{ tag | handleize }}">{{ tag | capitalized }}</a></li>
         {% endfor %}
       </ul>
     </div>
@@ -28,7 +28,7 @@
   {% if current_tags == blank %}
     <div class="grid__item large--three-quarters medium--three-quarters archive-tags">
       {% for tag in tags %}
-        <div class="category">
+        <div class="category" data-tag="{{ tag | handleize }}">
           <h1><a href="/blogs/{{ blog.handle }}/tagged/{{tag | handleize}}">{{ tag }}</a></h1>
           <div class="grid grid-uniform" data-category-tag="{{ tag | handleize }}"></div>
         </div>
@@ -101,7 +101,7 @@
 
       throttleScroll = setTimeout(function() {
         setListHeight();
-      }, 200);
+      }, 100);
     });
   });
 </script>
@@ -117,25 +117,33 @@
             tag = $(this).data('category-tag'),
             path = '/blogs/archived/tagged/' + tag + '?view=json';
 
-        $.getJSON(path, function(blog) {
-          for (var i=0; i < blog.articles.length; i++) {
-            // Set thumb image
-            if (blog.articles[i].image) {
-              var image = new Relatable.image(blog.articles[i].image.src, true);
-              blog.articles[i].thumb = image.resized("medium");
-            }
+        $.ajax({
+          url: path,
+          method: 'get',
+          dataType: 'json',
+          success: function(blog) {
+            for (var i=0; i < blog.articles.length; i++) {
+              // Set thumb image
+              if (blog.articles[i].image) {
+                var image = new Relatable.image(blog.articles[i].image.src, true);
+                blog.articles[i].thumb = image.resized("medium");
+              }
 
-            // Strip summary
-            var summary = $.parseHTML(blog.articles[i].summary_html);
-            blog.articles[i].summary = $(summary).text().slice(0, 100);
-          };
+              // Strip summary
+              var summary = $.parseHTML(blog.articles[i].summary_html);
+              blog.articles[i].summary = $(summary).text().slice(0, 100);
+            };
 
-          // Set tag
-          blog.tag = tag;
+            // Set tag
+            blog.tag = tag;
 
-          var output = Mustache.render(template, blog);
+            var output = Mustache.render(template, blog);
 
-          self.html($.parseHTML(output));
+            self.html($.parseHTML(output));
+          },
+          error: function() {
+            $('[data-tag="'+tag+'"]').remove();
+          }
         })
       });
 

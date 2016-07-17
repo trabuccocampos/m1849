@@ -142,6 +142,6 @@
 
     throttleScroll = setTimeout(function() {
       setListHeight();
-    }, 200);
+    }, 100);
   });
 })(jQuery);
