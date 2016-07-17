@@ -1,7 +1,11 @@
 <!-- /snippets/social-sharing.liquid -->
-{% if template contains 'article' or template contains 'blog' %}
+{% if template contains 'article' %}
   {% capture permalinkURL %}{{ shop.url }}{{ article.url }}{% endcapture %}
   {% capture shareTitle %}{{ article.title | url_param_escape }}{% endcapture %}
+
+{% elsif template contains 'blog' %}
+  {% capture permalinkURL %}{{ shop.url }}{{ blog.url }}{% endcapture %}
+  {% capture shareTitle %}{{ blog.title | url_param_escape }}{% endcapture %}
 
 {% elsif template contains 'product' %}
   {% capture permalinkURL %}{{ shop.url }}{{ product.url }}{% endcapture %}
@@ -18,11 +22,12 @@
 <div class="social-sharing {{ shareButtonStyle }}" data-permalink="{{ permalinkURL }}">
 
   {% if settings.share_facebook %}
-    <a target="_blank" href="//www.facebook.com/sharer.php?u={{ permalinkURL }}" class="share-facebook">
+    <!-- <a target="_blank" href="//www.facebook.com/sharer.php?u={{ permalinkURL }}" class="share-facebook">
       <span class="icon icon-facebook" aria-hidden="true"></span>
-      <span class="share-title">{{ 'general.social.share_on_facebook' | t }}</span>
-      <span class="share-count">0</span>
-    </a>
+      <span class="share-title">{{ 'general.social.share_on_facebook' | t }}</span> -->
+      <!-- <span class="share-count">0</span> -->
+    <!-- </a> -->
+    <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>
   {% endif %}
 
   {% if settings.share_twitter %}
@@ -38,7 +43,7 @@
       <a target="_blank" href="//pinterest.com/pin/create/button/?url={{ permalinkURL }}&amp;media={{ product.featured_image | product_img_url: '1024x1024' }}&amp;description={{ shareTitle }} &ndash; {{ page_title }} &ndash; {{ shop.name }}" class="share-pinterest">
         <span class="icon icon-pinterest" aria-hidden="true"></span>
         <span class="share-title">{{ 'general.social.share_on_pinterest' | t }}</span>
-        <span class="share-count">0</span>
+        <!-- <span class="share-count">0</span> -->
       </a>
     {% endif %}
 
@@ -51,10 +56,10 @@
 
   {% else %}
     {% if settings.share_pinterest %}
-      <a target="_blank" href="//pinterest.com/pin/create/button/?url={{ shop.url }}{{ article.url }}&amp;media=http:{{ article.image | img_url: "1024x1024" }}&amp;description={{ article.title }} &#124; {{ page_title }} &#124; {{ shop.name }}" class="share-pinterest">
+      <a target="_blank" data-pin-do="buttonBookmark" href="//pinterest.com/pin/create/button/?url={{ shop.url }}&amp;description={{ page_title }} &#124; {{ shop.name }}" class="share-pinterest">
         <span class="icon icon-pinterest" aria-hidden="true"></span>
         <span class="share-title">{{ 'general.social.share_on_pinterest' | t }}</span>
-        <span class="share-count">0</span>
+        <!-- <span class="share-count">0</span> -->
       </a>
     {% endif %}
   {% endif %}

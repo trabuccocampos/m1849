@@ -24,6 +24,16 @@
   <meta name="description" content="{{ page_description | escape }}">
   {% endif %}
 
+  {% include 'find-current-url' %}
+
+  <!-- Open Graph ================================================== -->
+  <meta property="og:url"           content="{{ current_url }}" />
+	<meta property="og:type"          content="website" />
+	<meta property="og:title"         content="{{ shop.name }}" />
+	<meta property="og:description"   content="{{ page_description | escape }}" />
+	<meta property="og:image"         content="{{ 'sharing-cover.jpg' | asset_url }}" />
+
+
   <!-- Helpers ================================================== -->
   {% include 'social-meta-tags' %}
   <link rel="canonical" href="{{ canonical_url }}">
@@ -45,14 +55,17 @@
   {{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' | script_tag }}
   {{ 'modernizr.min.js' | asset_url | script_tag }}
 
-  {% comment %}
-    If you store has customer accounts disabled, you can remove the following JS file
-  {% endcomment %}
-  {% if template contains 'customers' %}
-    {{ 'shopify_common.js' | shopify_asset_url | script_tag }}
-  {% endif %}
 
   {{ 'chapters.jquery.js' | asset_url | script_tag }}
+
+  <div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.7";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
 
   <!-- Begin Relatable -->
   <style>*[data-relatable]{visibility:hidden;}*[data-relatable].rendered{visibility:visible;}</style>
@@ -654,6 +667,8 @@
   {{ 'slick.js' | asset_url | script_tag }}
   {{ 'theme.js' | asset_url | script_tag }}
   {{ 'shop.js' | asset_url | script_tag }}
+
+  <script async defer data-pin-hover="false" data-pin-save="true" src="//assets.pinterest.com/js/pinit.js"></script>
 
   {% comment %}
     Template-specific js

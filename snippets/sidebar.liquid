@@ -3,8 +3,9 @@
 {% else %}
   {% assign collection_handle = "all" %}
 {% endif %}
-<aside class="sidemenu grid__item large--one-fifth">
-  <form class="filters m49" action="/collections/{{collection_handle}}">
+<aside class="grid__item large--one-fifth">
+  <div class="sidemenu">
+    <form class="filters m49" action="/collections/{{collection_handle}}">
     <div class="check-buttons">
       <!-- <input type="checkbox" id="classical" name="classical">
       <label for="classical">Classical</label> -->
@@ -56,25 +57,27 @@
       <li class="filter-by-color">
         <span class="filter">Color</span>
         <section>
-          <input type="checkbox" name="black">
-          <input type="checkbox" name="white">
-          <input type="checkbox" name="brown">
-          <input type="checkbox" name="blue">
-          <input type="checkbox" name="red">
-          <input type="checkbox" name="green">
-          <input type="checkbox" name="purple">
           <input type="checkbox" name="yellow">
-          <input type="checkbox" name="pink">
-          <input type="checkbox" name="gold">
-          <input type="checkbox" name="silver">
-          <input type="checkbox" name="ivory">
-          <input type="checkbox" name="light-blue">
           <input type="checkbox" name="orange">
+          <input type="checkbox" name="red">
+          <input type="checkbox" name="pink">
+          <input type="checkbox" name="purple">
+          <input type="checkbox" name="brown">
+          <input type="checkbox" name="light-blue">
+          <input type="checkbox" name="blue">
+          <input type="checkbox" name="green">
+          <input type="checkbox" name="grey">
+          <input type="checkbox" name="silver">
+          <input type="checkbox" name="gold">
           <input type="checkbox" name="crystal">
+          <input type="checkbox" name="white">
+          <input type="checkbox" name="ivory">
+          <input type="checkbox" name="black">
         </section>
       </li>
     </ul>
   </form>
+</div>
 </aside>
 <script type="text/javascript">
   Shopify.current_tags = [

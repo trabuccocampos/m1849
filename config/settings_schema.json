@@ -1771,14 +1771,27 @@
       "name":"Contact Documents",
       "settings":[
          {
+           "type": "header",
+           "content": "Document 1"
+         },
+         {
             "type":"text",
             "id":"contact_document_title-1",
             "label":"Document 1 Title"
          },
          {
             "type":"text",
-            "id":"contact_document_link-1",
-            "label":"Document 1 Link"
+            "id":"contact_document_link-en-1",
+            "label":"Document 1 URL / English"
+         },
+         {
+            "type":"text",
+            "id":"contact_document_link-it-1",
+            "label":"Document 1 URL / Italiano"
+         },
+         {
+           "type": "header",
+           "content": "Document 2"
          },
          {
             "type":"text",
@@ -1787,8 +1800,17 @@
          },
          {
             "type":"text",
-            "id":"contact_document_link-2",
-            "label":"Document 2 Link"
+            "id":"contact_document_link-en-2",
+            "label":"Document 2 URL / English"
+         },
+         {
+            "type":"text",
+            "id":"contact_document_link-it-2",
+            "label":"Document 2 URL / Italiano"
+         },
+         {
+           "type": "header",
+           "content": "Document 3"
          },
          {
             "type":"text",
@@ -1797,8 +1819,17 @@
          },
          {
             "type":"text",
-            "id":"contact_document_link-3",
-            "label":"Document 3 Link"
+            "id":"contact_document_link-en-3",
+            "label":"Document 3 URL / English"
+         },
+         {
+            "type":"text",
+            "id":"contact_document_link-it-3",
+            "label":"Document 3 URL / Italiano"
+         },
+         {
+           "type": "header",
+           "content": "Document 4"
          },
          {
             "type":"text",
@@ -1807,8 +1838,17 @@
          },
          {
             "type":"text",
-            "id":"contact_document_link-4",
-            "label":"Document 4 Link"
+            "id":"contact_document_link-en-4",
+            "label":"Document 4 URL / English"
+         },
+         {
+            "type":"text",
+            "id":"contact_document_link-it-4",
+            "label":"Document 4 URL / Italiano"
+         },
+         {
+           "type": "header",
+           "content": "Document 5"
          },
          {
             "type":"text",
@@ -1817,8 +1857,17 @@
          },
          {
             "type":"text",
-            "id":"contact_document_link-5",
-            "label":"Document 5 Link"
+            "id":"contact_document_link-en-5",
+            "label":"Document 5 URL / English"
+         },
+         {
+            "type":"text",
+            "id":"contact_document_link-it-5",
+            "label":"Document 5 URL / Italiano"
+         },
+         {
+           "type": "header",
+           "content": "Document 6"
          },
          {
             "type":"text",
@@ -1827,8 +1876,13 @@
          },
          {
             "type":"text",
-            "id":"contact_document_link-6",
-            "label":"Document 6 Link"
+            "id":"contact_document_link-en-6",
+            "label":"Document 6 URL / English"
+         },
+         {
+            "type":"text",
+            "id":"contact_document_link-it-6",
+            "label":"Document 6 URL / Italiano"
          }
       ]
    },

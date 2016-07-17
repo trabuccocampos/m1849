@@ -564,11 +564,18 @@ html[lang=en] {
   .language-select__en {
     font-weight: bold;
   }
+
+  .lang__it {
+    display: none;
+  }
 }
 html[lang=it] {
   // CSS rules for Italian
   .language-select__it {
     font-weight: bold;
+  }
+  .lang__en {
+    display: none;
   }
 }
 
@@ -826,11 +833,34 @@ html[lang=it] {
   }
 }
 
+.fb_iframe_widget {
+  // background-color: transparent;
+  display: block !important;
+  margin-bottom: .5em;
+}
+
 /*================ LOOKBOOK ================*/
 #lookbook .main-content,
 .lookbook {
   position: relative;
 }
+
+.lookbook__social {
+  position: absolute;
+  z-index: 100;
+  right: 40px;
+
+  .social-sharing {
+    position: fixed;
+
+    a {
+      background-color: transparent;
+      display: block;
+      margin-bottom: 1em;
+    }
+  }
+}
+
 // Sidebar
 .lookbook__list {
   // position: fixed;
@@ -1022,6 +1052,7 @@ html[lang=it] {
   h1 {
     font-size: 2em;
     font-weight: 400;
+    text-transform: capitalize;
   }
   .article {
     margin-bottom: 15px;

@@ -21,7 +21,7 @@ $large: 769px;
 }
 
 .sidemenu {
-  
+
 }
 
 .catalog, .archives {
@@ -304,10 +304,24 @@ $large: 769px;
   }
 
   label {
-    height: 20px;
-    width: 20px;
+    height: 2.5vw;
+    width: 2.5vw;
+    height: 40px;
+    width: 40px;
     display: inline-block;
     margin: 5px;
+    position: relative;
+
+    &:hover {
+      &:after {
+        content: attr(name);
+        position: absolute;
+        left: -50%;
+        bottom: 100%;
+        white-space: nowrap;
+        background: #1976d2;
+      }
+    }
   }
 
   input[type="checkbox"] {
@@ -318,50 +332,53 @@ $large: 769px;
   }
   .white {
     background: white;
-    border: 1px solid #ddd;
+    border: 1px solid $soft-grey;
   }
   .brown {
-    background: #a17431;
+    background: #663A2A;
   }
   .blue {
-    background: blue;
+    background: #445FA2;
   }
   .red {
-    background: red;
+    background: #B22B3B;
   }
   .green {
-    background: green;
+    background: #238B4B;
   }
   .purple {
-    background: purple;
+    background: #924D87;
   }
   .yellow {
-    background: yellow;
+    background: #F9D003;
   }
   .pink {
-    background: fuchsia;
+    background: #EBAAC5;
   }
   .grey {
-    background: #666;
+    background: #646569;
   }
   .gold {
-    background: #FFD700;
+    background: #977C4F;
+    background: url('gold-texture.png');
+  }
+  .orange {
+    background: #F47F45;
   }
   .silver {
-    background: #c0c0c0;
+    background: #A7A9A9;
+    background: url('silver-texture.png');
   }
   .ivory {
     background: #fffff0;
-    border: 1px solid #ddd;
+    border: 1px solid $soft-grey;
   }
   .light-blue {
-    background: #add8e6;
-  }
-  .orange {
-    background: #ffa500;
+    background: #75ADC1;
   }
   .crystal {
     background: #f5f5f5;
+    border: 1px solid $soft-grey;
   }
 }
 

@@ -8,7 +8,11 @@
     <div class="lookbook__list">
     </div>
   </aside>
-
+  <div class="lookbook__social">
+    {% if settings.social_sharing_products %}
+      {% include 'social-sharing' %}
+    {% endif %}
+  </div>
     <!-- <header class="section-header text-center">
       <h1>
         {% if current_tags %}
@@ -101,10 +105,10 @@
           <div class="grid__item one-whole">
             <div class="images">
               <div>
-                <img src="{{#img_url.1024x1024}}{{image.src}}{{/img_url.1024x1024}}" alt="" class="lookbook__microtrend__img">
+                <img src="{{#img_url.1024x1024}}{{image.src}}{{/img_url.1024x1024}}" alt="" class="lookbook__microtrend__img" data-pin-no-hover="true" />
               </div>
               {{#images}}
-                <div><img src="{{.}}" alt=""></div>
+                <div><img src="{{.}}" alt="" data-pin-no-hover="true" /></div>
               {{/images}}
             </div>
             <div class="materials lookbook__microtrend__materials"></div>
@@ -120,7 +124,7 @@
         <a href="/products/{{handle}}">
         <figure class="product-card">
           {{#image}}
-            <img src="{{#img_url.medium}}{{image.src}}{{/img_url.medium}}" alt="{{title}} Mazzucchelli1849">
+            <img src="{{#img_url.medium}}{{image.src}}{{/img_url.medium}}" alt="{{title}} Mazzucchelli1849" data-pin-no-hover="true">
           {{/image}}
           {{^image}}
             {% endraw %}{{ "no-image-compact.png" | asset_url | img_tag }}{% raw %}
