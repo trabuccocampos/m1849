@@ -10,7 +10,6 @@
     if (prevLookbookHeight != newHeight) {
       $('.lookbook__list').height($lookbook.height());
 
-      console.log("recalc!")
       $(document.body).trigger("sticky_kit:recalc");
 
       prevLookbookHeight = $lookbook.height();

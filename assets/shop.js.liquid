@@ -52,7 +52,10 @@ var AssetImage = function(url, is_original) {
     $filters = $('.filters');
     $filters.find('.filter').click(function() {
       $(this).toggleClass('active').next().slideToggle(200);
+      $(document.body).trigger("sticky_kit:recalc");
     });
+
+    $('.sidemenu').stick_in_parent();
 
     // For each tag, open up that category with input checked
     $(Shopify.current_tags).each(function() {
