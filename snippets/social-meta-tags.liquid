@@ -4,7 +4,7 @@
 {% endcomment %}
 {% if template == 'index' %}
   <meta property="og:type" content="website">
-  <meta property="og:title" content="{{ page_title }}">
+  <meta property="og:title" content="{{ page_title }} ">
   <meta property="og:url" content="{{ canonical_url }}">
   {% if home_page_content_enabled %}
     <meta property="og:description" content="{{ pages[settings.home_page_content].content | strip_html | escape }}">
@@ -47,19 +47,19 @@
   <meta property="og:url" content="{{ shop.url }}">
   <meta property="og:description" content="{% unless shop.description == blank %}{{ shop.description | escape }}{% else %}{{ shop.name | escape }}{% endunless %}">
   {% if settings.logo_use_image %}
-    <meta property="og:image" content="http:{{ 'logo.png' | asset_url }}">
-    <meta property="og:image:secure_url" content="https:{{ 'logo.png' | asset_url }}">
+    <meta property="og:image" content="http:{{ 'sharing-cover.jpg' | asset_url }}">
+    <meta property="og:image:secure_url" content="https:{{ 'sharing-cover.jpg' | asset_url }}">
   {% endif %}
 {% else %}
   <meta property="og:type" content="website">
-  <meta property="og:title" content="{{ page_title | escape }}">
+  <meta property="og:title" content="{{ page_title | escape }} &#124; {{ shop.name }}">
   <meta property="og:url" content="{{ canonical_url }}">
   {% if page_description %}
     <meta property="og:description" content="{{ page_description | escape }}">
   {% endif %}
   {% if settings.logo_use_image %}
-    <meta property="og:image" content="http:{{ 'logo.png' | asset_url }}">
-    <meta property="og:image:secure_url" content="https:{{ 'logo.png' | asset_url }}">
+    <meta property="og:image" content="http:{{ 'sharing-cover.jpg' | asset_url }}">
+    <meta property="og:image:secure_url" content="https:{{ 'sharing-cover.jpg' | asset_url }}">
   {% endif %}
 {% endif %}
 <meta property="og:site_name" content="{{ shop.name }}">

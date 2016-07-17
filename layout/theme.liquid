@@ -24,16 +24,6 @@
   <meta name="description" content="{{ page_description | escape }}">
   {% endif %}
 
-  {% include 'find-current-url' %}
-
-  <!-- Open Graph ================================================== -->
-  <meta property="og:url"           content="{{ current_url }}" />
-	<meta property="og:type"          content="website" />
-	<meta property="og:title"         content="{{ shop.name }}" />
-	<meta property="og:description"   content="{{ page_description | escape }}" />
-	<meta property="og:image"         content="{{ 'sharing-cover.jpg' | asset_url }}" />
-
-
   <!-- Helpers ================================================== -->
   {% include 'social-meta-tags' %}
   <link rel="canonical" href="{{ canonical_url }}">
