@@ -9,6 +9,7 @@ $.fn.chapters = function(options) {
     header: 'h1',
     subHeader: 'h2',
     offset: 20,
+    scrollOffset: 80,
     easing: 'linear',
     speed: 200
   }, options);
@@ -43,7 +44,7 @@ $.fn.chapters = function(options) {
 
         scrubbing = true;
         $('html,body').animate({
-          scrollTop: $heading.offset().top + "px"
+          scrollTop: ($heading.offset().top - options.scrollOffset) + "px"
         }, options.speed, options.easing, function() {
           scrubbing = false;
         });
