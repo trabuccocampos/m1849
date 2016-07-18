@@ -817,26 +817,36 @@ html[lang=it] {
 
 
 /*================ SHARING ================*/
-.social-sharing.clean a span {
-  margin-top: 1em;
-  color: $mid-grey;
-  @include transition(color 0.3s ease-in-out);
+.social-sharing.clean {
+  @include transition(opacity 0.3s ease-in-out);
+  opacity: 0.3;
 
-  &.icon-facebook:hover {
-    color: #3b5998;
+  &:hover {
+    opacity: 1;
   }
-  &.icon-twitter:hover {
-    color: #55acee;
-  }
-  &.icon-pinterest:hover {
-    color: #bd081c;
+
+  a span {
+    margin-top: 1em;
+    color: $mid-grey;
+    @include transition(color 0.3s ease-in-out);
+
+    &.icon-facebook:hover {
+      color: #3b5998;
+    }
+    &.icon-twitter:hover {
+      color: #55acee;
+    }
+    &.icon-pinterest:hover {
+      color: #bd081c;
+    }
   }
 }
 
 .fb_iframe_widget {
   // background-color: transparent;
   display: block !important;
-  margin-bottom: .5em;
+  margin-bottom: .3em;
+  margin-top: .3em;
 }
 
 /*================ LOOKBOOK ================*/

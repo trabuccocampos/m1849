@@ -149,7 +149,7 @@
         {% comment %}
           If customer accounts are enabled, provide login and create account links
         {% endcomment %}
-        {% if shop.customer_accounts_enabled %}
+        <!-- {% if shop.customer_accounts_enabled %}
           {% if customer %}
             <li class="mobile-nav__item mobile-nav__item--secondary">
               <a href="/account">{{ 'layout.customer.account' | t }}</a>
@@ -170,7 +170,7 @@
         {% endif %}
         {% for link in linklists.footer.links %}
           <li class="mobile-nav__item mobile-nav__item--secondary"><a href="{{ link.url }}">{{ link.title }}</a></li>
-        {% endfor %}
+        {% endfor %} -->
       </ul>
       {% include 'language-select' %}
       <!-- //mobile-nav -->
