@@ -22,7 +22,7 @@
 
     function scrollNav() {
       setListHeight();
-      
+
       $lookbook.chapters({
         nav: '.lookbook__list',
         header: '.lookbook__microtrend--title',
@@ -133,6 +133,21 @@
     })
   });
 
+  function loadImages() {
+    // Get all images below screen
+    var $images = $lookbook.find('img[data-src]').filter(function() {
+      // Bottom of the browser
+      var bottom = $(window).height() + window.scrollY;
+      var offset = 100;
+
+      var inView = $(this).offset().top < (bottom + offset);
+
+      if (inView && $(this).attr('src') != $(this).data('src')) {
+        $(this).attr('src', $(this).data('src'));
+      }
+    });
+  }
+
   $(window).resize(setListHeight);
 
   var throttleScroll;
@@ -141,6 +156,10 @@
     clearTimeout(throttleScroll);
 
     throttleScroll = setTimeout(function() {
+      // Lazy load images
+      loadImages();
+
+      // Set sidebar height for sticky kit
       setListHeight();
     }, 100);
   });

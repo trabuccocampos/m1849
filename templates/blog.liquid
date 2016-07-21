@@ -105,10 +105,10 @@
           <div class="grid__item one-whole">
             <div class="images">
               <div>
-                <img src="{{#img_url.1024x1024}}{{image.src}}{{/img_url.1024x1024}}" alt="" class="lookbook__microtrend__img" data-pin-no-hover="true" />
+                <img data-src="{{#img_url.1024x1024}}{{image.src}}{{/img_url.1024x1024}}" alt="" class="lookbook__microtrend__img" data-pin-no-hover="true" />
               </div>
               {{#images}}
-                <div><img src="{{.}}" alt="" data-pin-no-hover="true" /></div>
+                <div><img data-src="{{.}}" alt="" data-pin-no-hover="true" /></div>
               {{/images}}
             </div>
             <div class="materials lookbook__microtrend__materials"></div>
@@ -124,7 +124,7 @@
         <a href="/products/{{handle}}">
         <figure class="product-card">
           {{#image}}
-            <img src="{{#img_url.medium}}{{image.src}}{{/img_url.medium}}" alt="{{title}} Mazzucchelli1849" data-pin-no-hover="true">
+            <img data-src="{{#img_url.medium}}{{image.src}}{{/img_url.medium}}" src="{% endraw %}{{ "no-image-compact.png" | asset_url }}{% raw %}" alt="{{title}} Mazzucchelli1849" data-pin-no-hover="true">
           {{/image}}
           {{^image}}
             {% endraw %}{{ "no-image-compact.png" | asset_url | img_tag }}{% raw %}
