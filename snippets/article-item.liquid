@@ -1,5 +1,6 @@
 <div class="grid__item article large--one-third medium--one-half small--one-half">
-  {{ article.image | img_url: "medium" | img_tag }}
-  <h3><a href="{{ article.url }}"><strong>{{ article.title }}</strong></a></h3>
+  <a href="{{ article.url }}">
+    <img src="{{ article.image.src | img_url: "medium" }}" alt="{{ article.title }}" data-pin-description="{{ article.title }} | Mazzucchelli 1849" />
+  <h3><strong>{{ article.title }}</strong></h3></a>
   <p>{{ article.excerpt | strip_html | truncate: "100" }}</p>
 </div>
