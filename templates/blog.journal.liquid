@@ -11,7 +11,7 @@
 {% paginate blog.articles by 40 %}
   {% if paginate.current_page < 2 %}
     <div class="grid">
-      <div class="grid__item large--five-sixths push--large--one-twelfth">
+      <div class="grid__item large--five-sixths push--large--one-twelfth journal__coverImg">
         {% assign article = blog.articles.first %}
         {% assign article_content = article.excerpt_or_content %}
         {% assign featured_image_src = '' %}

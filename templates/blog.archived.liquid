@@ -58,9 +58,10 @@
 <script id="article-grid" type="template/mustache">
   {% raw %}
     {{#articles}}
-      <div class="grid__item article large--one-third">
-        <img src="{{thumb}}" alt="{{title}}">
-        <h3><a href="/blogs/archived/{{id}}"><strong>{{ title }}</strong></a></h3>
+      <div class="grid__item article large--one-third medium-down--one-half">
+        <a href="/blogs/archived/{{id}}">
+        <img src="{{thumb}}" alt="{{title}}" data-pin-url="https://www.mazzucchelli1849.it/blogs/archived/{{id}}" data-pin-description="{{ title }} | Mazzucchelli 1849">
+        <h3><strong>{{ title }}</strong></h3></a>
         <p>{{summary}}</p>
       </div>
     {{/articles}}

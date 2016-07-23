@@ -40,8 +40,8 @@
               </div>
             </div>
 
-            <label for="ContactFormPhone" class="hidden-label">{{ 'contact.form.phone' | t }}</label>
-            <input type="tel" id="ContactFormPhone" class="input-full" name="contact[phone]" placeholder="{{ 'contact.form.phone' | t }}" pattern="[0-9\-]*" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}">
+            <label for="ContactFormCompany" class="hidden-label">{{ 'contact.form.company' | t }}</label>
+            <input type="text" id="ContactFormCompany" class="input-full" name="contact[company]" placeholder="Company Name" value="{% if form.company %}{{ form.company }}{% elsif customer %}{{ customer.company }}{% endif %}">
 
             <label for="ContactFormMessage" class="hidden-label">{{ 'contact.form.message' | t }}</label>
             <textarea rows="10" id="ContactFormMessage" class="input-full" name="contact[body]" placeholder="{{ 'contact.form.message' | t }}">{% if form.body %}{{ form.body }}{% endif %}</textarea>

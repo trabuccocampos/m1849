@@ -32,9 +32,6 @@
 
   <!-- CSS ================================================== -->
   {{ 'timber.scss.css' | asset_url | stylesheet_tag }}
-  {{ 'article.scss.css' | asset_url | stylesheet_tag }}
-  {{ 'catalog.scss.css' | asset_url | stylesheet_tag }}
-  {{ 'product.scss.css' | asset_url | stylesheet_tag }}
   {{ 'slick.css' | asset_url | stylesheet_tag }}
   {{ 'styles.scss.css' | asset_url | stylesheet_tag }}
 
@@ -672,9 +669,14 @@
   {{ 'theme.js' | asset_url | script_tag }}
   {{ 'shop.js' | asset_url | script_tag }}
 
-<!--[if gte IE 10]>
+<!--[if gt IE 10]>
   <script async defer data-pin-hover="false" data-pin-save="true" src="//assets.pinterest.com/js/pinit.js"></script>
 <!-- <![endif]-->
+
+<!--[if !IE]> -->
+  <script async defer data-pin-hover="false" data-pin-save="true" src="//assets.pinterest.com/js/pinit.js"></script>
+<!-- <![endif]-->
+
 
   {% comment %}
     Template-specific js

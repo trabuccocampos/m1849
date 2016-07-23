@@ -9,7 +9,7 @@ $.fn.chapters = function(options) {
     header: 'h1',
     subHeader: 'h2',
     offset: 20,
-    scrollOffset: 80,
+    scrollOffset: 50,
     easing: 'linear',
     speed: 200
   }, options);
