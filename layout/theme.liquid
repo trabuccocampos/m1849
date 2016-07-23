@@ -38,13 +38,26 @@
   {{ 'slick.css' | asset_url | stylesheet_tag }}
   {{ 'styles.scss.css' | asset_url | stylesheet_tag }}
 
+
   <!-- Header hook for plugins ================================================== -->
   {{ content_for_header }}
   {% include 'oldIE-js' %}
 
-  {{ '//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js' | script_tag }}
+  {{ 'jquery.min.js' | asset_url | script_tag }}
   {{ 'modernizr.min.js' | asset_url | script_tag }}
 
+  <!-- IE ================================================== -->
+  <!--[if lte IE 10]>
+    {{ 'matchMedia.js' | asset_url | script_tag }}
+    {{ 'matchMedia.addListener.js' | asset_url | script_tag }}
+
+    <style>
+      .template-index .header-wrapper,
+      .site-nav, .site-nav--mobile {
+        opacity: 1 !important;
+      }
+    </style>
+  <![endif]-->
 
   {{ 'chapters.jquery.js' | asset_url | script_tag }}
 
@@ -75,6 +88,7 @@
       rememberLanguage: true
     });
   </script>
+
 </head>
 
 {% comment %}
@@ -462,19 +476,19 @@
            </div>
 
            <div class="grid__item large--one-quarter medium--one-whole">
-             <p>via S. e P. Mazzucchelli<br>Castiglione Olona<br>Varese Italia</p>
+             <p>via S. e P. Mazzucchelli 7<br>21043&nbsp;Castiglione&nbsp;Olona<br>Varese &ndash; Italia</p>
            </div>
 
            <div class="grid__item large--one-quarter medium--one-whole">
-             <p>info@mazzucchelli1849.it<br>tel +39 0331 82611<br>fax +39 0331 82613
+             <p>tel&nbsp;+39&nbsp;0331 826111<br>fax&nbsp;+39&nbsp;0331&nbsp;826213<br>info@mazzucchelli1849.it
              </p>
            </div>
 
            <div class="grid__item large--one-quarter medium--one-whole">
             <p>
-              C.F. e P.IVA IT 02768280121 <br>
-               REA di Varese 286045 <br>
-             Capitale Sociale Euro 20.000.000
+              C.F. e P.IVA IT 02768280121<br>
+              REA di Varese 286045<br>
+              Capitale Sociale Euro 20.000.000
             </p>
            </div>
         </div>
@@ -658,7 +672,9 @@
   {{ 'theme.js' | asset_url | script_tag }}
   {{ 'shop.js' | asset_url | script_tag }}
 
+<!--[if gte IE 10]>
   <script async defer data-pin-hover="false" data-pin-save="true" src="//assets.pinterest.com/js/pinit.js"></script>
+<!-- <![endif]-->
 
   {% comment %}
     Template-specific js
