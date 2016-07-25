@@ -104,7 +104,7 @@
           <div class="grid__item one-whole">
             <div class="images">
               <div>
-                <img data-src="{{#img_url.1024x1024}}{{image.src}}{{/img_url.1024x1024}}" alt="{{title}} | Mazzucchelli 1849" class="lookbook__microtrend__img" data-pin-no-hover="true" data-pin-description="{{title}} | Mazzucchelli 1849" />
+                <img data-src="{{#img_url.1024x1024}}{{image.src}}{{/img_url.1024x1024}}" src="{% endraw %}{{ "lookbook-placeholder.png" | asset_url }}{% raw %}" alt="{{title}} | Mazzucchelli 1849" class="lookbook__microtrend__img" data-pin-no-hover="true" data-pin-description="{{title}} | Mazzucchelli 1849" />
               </div>
               {{#images}}
                 <div><img data-src="{{.}}" alt="{{title}} | Mazzucchelli 1849" data-pin-no-hover="true" data-pin-description="{{title}} | Mazzucchelli 1849" /></div>
