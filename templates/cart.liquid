@@ -24,7 +24,7 @@
         </div>
         {% for item in cart.items %}
           <input type="hidden" name="contact[product_{{item.id}}]" value="{{item.title}}">
-          <div class="grid__item large--one-quarter text-center">
+          <div class="grid__item large--one-quarter medium--one-third small--one-half text-center">
                 <a href="{{ item.url | within: collections.all }}" class="cart__image">
                   <img src="{{ item | img_url: 'medium' }}" alt="{{ item.title | escape }}">
 
@@ -80,8 +80,11 @@
               </div>
             </div>
 
-            <label for="ContactFormPhone" class="hidden-label">{{ 'contact.form.phone' | t }}</label>
-            <input type="tel" id="ContactFormPhone" class="input-full" name="contact[phone]" placeholder="{{ 'contact.form.phone' | t }}" pattern="[0-9\-]*" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}">
+            <!-- <label for="ContactFormPhone" class="hidden-label">{{ 'contact.form.phone' | t }}</label>
+            <input type="tel" id="ContactFormPhone" class="input-full" name="contact[phone]" placeholder="{{ 'contact.form.phone' | t }}" pattern="[0-9\-]*" value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"> -->
+
+            <label for="ContactFormCompany" class="hidden-label">{{ 'contact.form.company' | t }}</label>
+            <input type="text" id="ContactFormCompany" class="input-full" name="contact[company]" placeholder="Company Name" value="{% if form.company %}{{ form.company }}{% elsif customer %}{{ customer.company }}{% endif %}">
 
             <label for="ContactFormMessage" class="hidden-label">{{ 'contact.form.message' | t }}</label>
             <textarea rows="10" id="ContactFormMessage" class="input-full" name="contact[body]" placeholder="{{ 'contact.form.message' | t }}">{% if form.body %}{{ form.body }}{% endif %}</textarea>

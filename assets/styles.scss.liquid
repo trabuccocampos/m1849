@@ -163,6 +163,13 @@ $stack_offset: 80;
   .product-single__meta--wrapper {
     margin: 0;
     padding-right: 15px;
+
+    @media (max-width: $medium) {
+      margin-top: 3em;
+    }
+    @media (max-width: $small) {
+      margin-top: 2em;
+    }
   }
   .product-single__meta {
     padding-top: 0;
@@ -208,24 +215,23 @@ $stack_offset: 80;
 
     .toggle-views {
       position: absolute;
-      bottom: -72px;
-      right: -112px;
+      bottom: -7em;
+      text-align: center;
+      width: 100%;
     }
 
     @media (max-width: $medium) {
       margin-bottom: 80px;
 
       .toggle-views {
-        right: 36%;
-        width: 30%;
-        bottom: -62px;
-        bottom: -73px;
+        width: 100%;
         z-index: 1000;
+        bottom: -7.5em;
       }
     }
     @media (max-width: $small) {
       .toggle-views {
-        bottom: -62px;
+        bottom: -6.5em;
       }
     }
 
@@ -255,9 +261,45 @@ $stack_offset: 80;
         }
 
         footer {
-          text-align: right;
+          text-align: center;
         }
       }
+    }
+  }
+
+  .switch-image-view {
+    display: inline-block;
+    background: transparentize($soft-grey, .8);
+    color: transparentize($mid-grey, .8);
+    padding: 1em 1.6em 1em;
+    margin-right: -5px;
+    cursor: default;
+    font-size: .6em;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    min-width: 20%;
+    border: 1px solid $soft-grey;
+
+    &:before {
+      content: '';
+    }
+
+    &.active {
+      opacity: 1;
+      cursor: pointer;
+      background: transparent;
+      color: $mid-grey;
+
+      &:before {
+        content: 'See ';
+      }
+    }
+
+    @media (max-width: $small) {
+      width: 50%;
+      line-height: 1;
+      padding: 1em 1em 1em !important;
     }
   }
 
@@ -268,7 +310,7 @@ $stack_offset: 80;
     left: 0;
     height: 100%;
     width: 70%;
-    transition: opacity 0.3s ease;
+    @include transition(opacity 0.35s ease);
 
     &:not([data-image-count="1"]):not([data-image-count="2"]):hover {
       opacity: 0;
@@ -310,13 +352,13 @@ $stack_offset: 80;
     position: absolute;
     width: 70%;
     box-sizing: border-box;
-    transition: opacity 0.3s ease;
+    @include transition(opacity 0.35s ease);
 
     .product-card {
       display: inline-block;
       position: relative;
       vertical-align: top;
-      transition: margin-left 0.3s ease;
+      @include transition(margin-left 0.35s ease);
       border-radius: 13px;
       box-shadow: 0 4px 8px rgba(0,0,0,0.4);
       height: auto;
@@ -459,6 +501,7 @@ $stack_offset: 80;
 
   h3 {
     color: {{ settings.light_color_body_text }};
+    font-size: 0.8em;
   }
 
   .attachments {
@@ -517,7 +560,7 @@ $stack_offset: 80;
   }
 }
 .related-lookbooks a {
-  transition: color 0.3s ease;
+  @include transition(color 0.35s ease);
 
   svg#icon-specifications polygon,
   svg#icon-specifications polyline,
@@ -528,12 +571,11 @@ $stack_offset: 80;
     stroke: $mid-grey;
     stroke-width: 1.5px;
     fill: none;
-    transition: stroke 0.4s ease;
-
+    @include transition(stroke 0.4s ease);
   }
   svg#icon-print rect {
     fill: $mid-grey;
-    transition: fill 0.4s ease;
+    @include transition(fill 0.4s ease);
   }
 
   &:hover {
@@ -653,6 +695,7 @@ h1 {
   margin-top: 1em;
   margin-bottom: 1em;
 }
+
 .text-link {
   color: $mid-grey;
 }
@@ -706,13 +749,13 @@ h1 {
   }
 }
 .site-header__logo img {
-  @include transition(all 0.3s ease-in-out);
+  @include transition(all 0.35s ease-in-out);
 }
 .site-nav {
   font-weight: 400;
 }
 .site-nav__link.cart-link {
-  @include transition(all 0.3s ease-in-out);
+  @include transition(all 0.35s ease-in-out);
 }
 .site-nav__link--icon.cart-link img {
     height: 22px;
@@ -728,11 +771,11 @@ h1 {
   width: 20px;
   border: 1px $red solid;
   color: $red;
-  @include transition(all 0.3s ease-in-out);
+  @include transition(all 0.35s ease-in-out);
 }
 @media screen and (max-width: $medium) {
   .grid--table {
-    @include transition(all 0.4s ease-in-out);
+    @include transition(all 0.3.5s ease-in-out);
   }
   .site-header__logo img {
     margin: 0 !important;
@@ -815,9 +858,7 @@ h1 {
   color: $dark-color;
   padding: 6px 16px 5px;
   border-radius: 4px;
-
-  -webkit-transition: -webkit-all 0.35s;
-  transition: all 0.35s;
+  @include transition(all 0.35s ease);
 }
 
 .btn-red {
@@ -1621,7 +1662,7 @@ html[lang=it] {
     display: block;
     margin-bottom: 20px;
     background: transparent;
-    transition: all 0.4s ease-in-out;
+    @include transition(all 0.4s ease-in-out);
 
     &:hover,
     &:focus {
@@ -1731,7 +1772,7 @@ html[lang=it] {
 
 .image-view-title {
   font-weight: 400;
-  line-height: 2;
+  line-height: 1.2;
   color: #A6A8AB;
   img {
     height: 30px;
@@ -1766,18 +1807,21 @@ html[lang=it] {
   padding-left: 0;
 }
 .product-single__add-to-cart {
-  display: inline-block;
-
+  display: block;
 }
 .product-single__add-to-cart .btn {
   border-color: $red;
   color: $red;
+  width: 100%;
 
   &:hover {
     background-color: $red;
     color: white;
   }
 }
+
+/*================ CATALOG: RELATED ================*/
+
 @media screen and (max-width: $medium) {
   .catalog-content {
     padding-left: 0;
@@ -1817,18 +1861,11 @@ html[lang=it] {
   .social-sharing.clean {
     text-align: center;
   }
-  .social-sharing.clean {
-    margin-top: -5px;
-  }
   .product-single {
     margin-bottom: 2em;
   }
 }
 @media screen and (max-width: $small) {
-  .product-single .product-images footer {
-    // width: 100px;
-    text-align: left;
-  }
   .product-single .product-images .side-view-images footer {
     text-align: center;
   }
@@ -1862,6 +1899,21 @@ html[lang=it] {
   }
 }
 
+/*================ CATALOG: OTHER IN COLLECTION ================*/
+.related-products {
+  .slick-slider,
+  .slick-list,
+  .slick-track {
+    min-width: 100% !important;
+  }
+  @media screen and (max-width: $small) {
+    .more-styles {
+      float: none;
+      display: block;
+    }
+  }
+}
+
 
 
 /*================ SHARING ================*/
@@ -1889,12 +1941,26 @@ html[lang=it] {
     }
   }
 }
-
+.product-single__meta {
+  .social-sharing {
+    span {
+      margin-top: .4em;
+    }
+    @media screen and (max-width: $medium) {
+      margin-top: 1em;
+    }
+  }
+}
 .fb_iframe_widget {
   // background-color: transparent;
   display: block !important;
   margin-bottom: .3em;
   margin-top: .3em;
+
+  @media screen and (max-width: $medium) {
+    display: inline-block !important;
+    margin-top: 0em;
+  }
 }
 
 /*================ LOOKBOOK ================*/
@@ -1960,7 +2026,7 @@ html[lang=it] {
     list-style-type: none;
     cursor: pointer;
     color: gray;
-    transition: color 0.1s ease;
+    @include transition(color 0.1s ease);
 
     &.chapter-header {
       font-weight: bold;
@@ -1983,13 +2049,10 @@ html[lang=it] {
     }
   }
 }
-
-
 #lookbook .main-content,
 .lookbook {
   position: relative;
 }
-
 .lookbook__social {
   position: absolute;
   z-index: 100;
@@ -2042,11 +2105,6 @@ html[lang=it] {
 
   & > ul+div {
     z-index: -1;
-  }
-}
-@media screen and (max-width: $medium) {
-  .lookbook__list {
-    display: none;
   }
 }
 
@@ -2258,6 +2316,74 @@ html[lang=it] {
 }
 
 
+// LOOKBOOK Responsive navigation
+
+@media screen and (max-width: $medium) {
+  .lookbook__list__wrapper {
+    overflow: scroll;
+    white-space: nowrap;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
+  }
+  .lookbook__list {
+    position: relative !important;
+    height: 50px !important;
+    z-index: 10000 !important;
+    border-top: 1px solid $soft-grey;
+    border-bottom: 1px solid $soft-grey;
+    opacity: 1 !important;
+
+    &>ul {
+    margin: 0;
+    padding: 11px 0 0 7px;
+
+      &::before {
+        content: 'Collections';
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-size: 12px;
+        font-weight: 600;
+        color: $mid-grey;
+        margin-right: 10px;
+      }
+    }
+    .is_stuck {
+      width: 100% !important;
+      left: 0 !important;
+      position: fixed !important;
+      top: 50px !important;
+      height: 50px;
+      background-color: #ffffff;
+      background-color: rgba(255,255,255,0.84);
+
+      overflow: scroll;
+      white-space: nowrap;
+
+      &::-webkit-scrollbar {
+          display: none;
+      }
+    }
+
+    .chapter-header {
+      display: inline-block;
+      margin-right: 15px;
+
+      &.active ul {
+        display: none !important;
+      }
+    }
+  }
+  .lookbook__content {
+    margin-top: 1.5em;
+  }
+  // .lookbook__social {
+  //   top: 4.5em;
+  // }
+}
+
+
 /*================ HERITAGE ================*/
 .heritage h2 {
   font-size: 2em;
@@ -2281,6 +2407,10 @@ html[lang=it] {
 /*================ JOURNAL ================*/
 .section-header {
   margin-bottom: 0;
+
+  h1 {
+    margin-bottom: 0;
+  }
 }
 .date {
   font-style: normal;
@@ -2296,8 +2426,7 @@ html[lang=it] {
   position: relative;
   background-color: $soft-grey;
   height: 100px;
-  -webkit-transition: -webkit-all 0.35s;
-  transition: all 0.35s;
+  @include transition(all 0.35s ease);
 
   &:hover {
     background-color: $red;
@@ -2350,8 +2479,7 @@ html[lang=it] {
   border-radius: 4px;
   background: transparent;
 
-  -webkit-transition: -webkit-all 0.35s;
-  transition: all 0.35s;
+  @include transition(all 0.35s ease);
 
   &:hover {
     background-color: $dark-color;
@@ -2386,8 +2514,7 @@ html[lang=it] {
   color: white;
   border-radius: 4px;
   background: transparent;
-  -webkit-transition: -webkit-all 0.35s;
-  transition: all 0.35s;
+  @include transition(all 0.35s ease);
 
   &:hover {
     background-color: $light-color;
