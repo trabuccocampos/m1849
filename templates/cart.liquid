@@ -14,7 +14,7 @@
         <hr class="hr--small">
       </header>
       {% form 'contact' %}
-        <input type="hidden" name="contact[reason]" value="Requesting samples">
+        <input type="hidden" name="contact[reason]" value="{{ settings.wishlist_email_subject }}">
         <div class="grid__item">
           {% if form.posted_successfully? %}
             <p class="note form-success">

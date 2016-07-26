@@ -290,10 +290,6 @@ $stack_offset: 80;
       cursor: pointer;
       background: transparent;
       color: $mid-grey;
-
-      &:before {
-        content: 'See ';
-      }
     }
 
     @media (max-width: $small) {
@@ -1173,6 +1169,9 @@ html[lang=en] {
   .lang__it {
     display: none;
   }
+  .switch-image-view.active:before {
+    content: 'See ';
+  }
 }
 html[lang=it] {
   // CSS rules for Italian
@@ -1181,6 +1180,9 @@ html[lang=it] {
   }
   .lang__en {
     display: none;
+  }
+  .switch-image-view.active:before {
+    content: 'Vedi ';
   }
 }
 
@@ -1248,7 +1250,8 @@ html[lang=it] {
   border: 0;
 }
 
-.contact .note.form-success {
+.contact .note.form-success,
+.template-cart .note.form-success {
   color: $dark-color;
   background-color: transparent;
   font-size: 1.6em;
@@ -1256,6 +1259,9 @@ html[lang=it] {
   border: 0;
   font-weight: bold;
   margin-top: -1em;
+}
+.template-cart .note.form-success {
+  margin-top: 1em;
 }
 
 /*================ CATALOG ================*/
@@ -2210,7 +2216,9 @@ html[lang=it] {
 .lookbook__microtrend__img {
   min-width: 100%;
 }
-
+.lookbook__microtrend__materials .product-card img {
+  border-radius: 3px;
+}
 
 .materials {
   // text-align: center;

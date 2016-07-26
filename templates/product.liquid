@@ -175,7 +175,7 @@
       <div class="grid__item large--one-third small--one-whole vertically--center">
         <div class="attachments">
           {% if product.tags contains 'M49' %}
-            <a href="{{ settings.global_m49_spec_url }}">
+            <a href="{{ settings.global_m49_spec_url }}" target="_blank">
               <h3>Technical-Commercial Doc</h3>
               <svg width="53px" height="74px" viewBox="976 777 53 74" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="icon-specifications">
                   <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
@@ -193,7 +193,7 @@
               </svg>
             </a>
           {% else %}
-            <a href="{{ settings.global_spec_url }}">
+            <a href="{{ settings.global_spec_url }}" target="_blank">
               <h3>Technical-Commercial Doc</h3>
               <svg width="53px" height="74px" viewBox="976 777 53 74" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" id="icon-specifications">
                   <!-- Generator: Sketch 3.8.3 (29802) - http://www.bohemiancoding.com/sketch -->
@@ -213,7 +213,7 @@
           {% endif %}
           {% for attachment in product.metafields.attachments %}
             {% unless attachment == blank %}
-              <a href="{{ attachment[1] }}" class="btn">{{ attachment[0] | capitalize }}</a>
+              <a href="{{ attachment[1] }}" class="btn" target="_blank">{{ attachment[0] | capitalize }}</a>
             {% endunless %}
           {% endfor %}
         </div>

@@ -27,7 +27,8 @@
       <span class="share-title">{{ 'general.social.share_on_facebook' | t }}</span> -->
       <!-- <span class="share-count">0</span> -->
     <!-- </a> -->
-    <div class="fb-like" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div>
+    <!-- <div class="fb-like" data-href="{{ permalinkURL }}" data-layout="button" data-action="like" data-size="small" data-show-faces="false" data-share="false"></div> -->
+    <div class="fb-share-button" data-href="{{ permalinkURL }}" data-layout="button" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fmazzucchelli1849.it%2F&amp;src=sdkpreparse">Share</a></div>
   {% endif %}
 
   {% if settings.share_twitter %}
