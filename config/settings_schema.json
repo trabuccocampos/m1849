@@ -1887,7 +1887,7 @@
       ]
    },
    {
-      "name":"Cart page",
+      "name":"Wishlist page",
       "settings":[
          {
             "type":"select",
@@ -1902,12 +1902,21 @@
                   "label":"Drawer"
                }
             ],
-            "label":"Cart type"
+            "label":"Wishlist type"
          },
          {
             "type":"checkbox",
             "id":"cart_notes_enable",
             "label":"Enable order notes"
+         },
+         {
+           "type": "header",
+           "content": "Wishlist email Subject"
+         },
+         {
+            "type":"textarea",
+            "id":"wishlist_email_subject",
+            "label":"The subject which will appear on the header of the Wishlist email"
          }
       ]
    },
@@ -1981,6 +1990,16 @@
             "id":"social_vimeo_link",
             "label":"Vimeo",
             "info":"https:\/\/vimeo.com\/shopify"
+         },
+         {
+            "type":"header",
+            "content":"Product Description"
+         },
+         {
+            "type":"textarea",
+            "id":"social_facebook_description",
+            "label":"Facebook Description",
+            "info":"The description that will go on a share card should go here"
          },
          {
             "type":"header",
