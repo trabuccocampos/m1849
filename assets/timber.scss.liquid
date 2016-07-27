@@ -347,14 +347,14 @@ $passwordPageUseBgImage: true;
   {% assign accent_weight = 400 %}
 {% endif %}
 
-$headerFontStack: {{ header_family }};
+$headerFontStack: {{ header_family }}, sans-serif;
 $headerFontWeight: {{ header_weight }};
 $headerBaseFontSize: {{ settings.type_header_base_size }};
 
-$bodyFontStack: {{ base_family }};
+$bodyFontStack: {{ base_family }}, sans-serif;
 $baseFontSize: {{ settings.type_base_size }}; // Henseforth known as 1em
 
-$accentFontStack: {{ accent_family }};
+$accentFontStack: {{ accent_family }}, sans-serif;
 $accentFontWeight: {{ accent_weight }};
 
 @font-face {

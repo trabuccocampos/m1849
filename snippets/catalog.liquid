@@ -34,9 +34,15 @@
               {{ tag }}
               {% if collection.handle == 'all' %}
                 <a href="/collections" class="catalog__tags--close">
-                  <svg viewBox="0 -9 40 40">
+                  <!-- <svg viewBox="0 -9 40 40">
                     <path class="close-x" d="M 10,10 L 30,30 M 30,10 L 10,30"></path>
-                  </svg>
+                  </svg> -->
+
+                  &times;
+
+                  <!--[if IE]>
+                    &times;
+                  <![endif]-->
                 </a>
               {% else %}
                 {% capture new_tags %}
