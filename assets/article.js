@@ -62,6 +62,18 @@
       }, function(articles) {
         for (id in articles) {
           if (articles.hasOwnProperty(id)) {
+            article = articles[id];
+
+            // Do this because for whatever reason IE doens't like mustache
+            // methods
+            for (product in article.products) {
+              var _p = article.products[product];
+
+              var pattern = /\.(jpg|jpeg|png|gif)\?/;
+              var url = _p.image.src.replace(pattern, '_medium.$1?');
+              article.products[product].image_url = url;
+            }
+            
             var output = Mustache.render($material, articles[id]);
             var $html = $.parseHTML(output);
 
@@ -137,7 +149,7 @@
     // Get all images below screen
     var $images = $lookbook.find('img[data-src]').filter(function() {
       // Bottom of the browser
-      var bottom = $(window).height() + window.scrollY;
+      var bottom = $(window).height() + $(window).scrollTop();
       var offset = 100;
 
       var inView = $(this).offset().top < (bottom + offset);
@@ -146,6 +158,7 @@
         $(this).attr('src', $(this).data('src'));
       }
     });
+
   }
 
   $(window).resize(setListHeight);

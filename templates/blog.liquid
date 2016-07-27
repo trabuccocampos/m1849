@@ -123,7 +123,7 @@
         <a href="/products/{{handle}}">
         <figure class="product-card">
           {{#image}}
-            <img data-src="{{#img_url.medium}}{{image.src}}{{/img_url.medium}}" src="{% endraw %}{{ "no-image-compact.png" | asset_url }}{% raw %}" alt="{{title}} | Mazzucchelli 1849" data-pin-no-hover="true" data-pin-description="{{title}} | Mazzucchelli 1849">
+            <img data-src="{{image_url}}" src="{% endraw %}{{ "no-image-compact.png" | asset_url }}{% raw %}" alt="{{title}} | Mazzucchelli 1849" data-pin-no-hover="true" data-pin-description="{{title}} | Mazzucchelli 1849">
           {{/image}}
           {{^image}}
             {% endraw %}{{ "no-image-compact.png" | asset_url | img_tag }}{% raw %}
