@@ -21,6 +21,12 @@ $.fn.chapters = function(options) {
     return this;
   }
 
+  function setHash($elem) {
+    if ($elem.attr('id')) {
+      history.pushState(null, null, "#" + $elem.attr('id'));
+    }
+  }
+
   function buildNav() {
     var $ul = $('<ul/>');
 
@@ -47,6 +53,9 @@ $.fn.chapters = function(options) {
         event.stopPropagation();
 
         scrubbing = true;
+
+        setHash($heading);
+
         $('html,body').animate({
           scrollTop: ($heading.offset().top - options.scrollOffset) + "px"
         }, options.speed, options.easing, function() {
@@ -85,6 +94,8 @@ $.fn.chapters = function(options) {
 
     $nav.find('ul li.active').removeClass('active');
     var $header = $nav.find('ul li').eq(active.index).addClass('active');
+
+    setHash($headings.eq(active.index));
 
     if ($header.hasClass('chapter-sub-header')) {
       $header.parent('ul').parent('li').addClass('active');
