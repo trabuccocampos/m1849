@@ -3,80 +3,82 @@
 {% else %}
   {% assign collection_handle = "all" %}
 {% endif %}
-<aside class="grid__item large--one-fifth">
-  <div class="sidemenu">
-    <form class="filters m49" action="/collections/{{collection_handle}}">
-    <div class="check-buttons">
-      <!-- <input type="checkbox" id="classical" name="classical">
-      <label for="classical">Classical</label> -->
-      <input type="checkbox" id="m49" name="m49-bioplastic">
-      <label class="btn__m49" for="m49">Be Green</label>
-    </div>
-  </form>
-  <ul class="sidemenu-list">
-    {% for link in linklists.collections.links %}
-      <li>
-        <a href="{{ link.url }}/{{ current_tags | join: "+"}}" class="{% if link.active %}active{% endif %}">{{ link.title }}</a>
-      </li>
-    {% endfor %}
-  </ul>
-  <form class="filters" action="/collections/{{collection_handle}}">
-    <h2>Filters</h2>
-    <ul>
-      <li>
-        <a class="filter" href="/collections/all/new">Latest Arrivals</a>
-      </li>
-      {% for filter in (1..5) %}
-        {% assign filter_name = "filter_" | append: filter | append: "_name" %}
-        {% unless settings[filter_name] == blank %}
-          <li>
-            <span class="filter">{{ settings[filter_name] }}</span>
-            <section>
-              {% for option in (1..20) %}
-                {% assign option_field = "filter_" | append: filter | append: "_option_" | append: option %}
-                {% unless settings[option_field] == blank %}
-                  <div class="btn__filter">
-                    <label>
-                      {% assign field = settings[option_field] %}
-
-                      {% if field == "Italy & Asia" %}
-                        <input type="checkbox" name="italy+asia">
-                      {% else %}
-                        <input type="checkbox" name="{{ field | handleize }}">
-                      {% endif %}
-                      <span></span>
-                      {{ settings[option_field] }}
-                    </label>
-                  </div>
-                {% endunless %}
-              {% endfor %}
-            </section>
-          </li>
-        {% endunless %}
+<aside class="grid__item large--one-fifth catalog-sidebar">
+  <div class="sidemenu-container">
+    <div class="sidemenu">
+      <form class="filters m49" action="/collections/{{collection_handle}}">
+      <div class="check-buttons">
+        <!-- <input type="checkbox" id="classical" name="classical">
+        <label for="classical">Classical</label> -->
+        <input type="checkbox" id="m49" name="m49-bioplastic">
+        <label class="btn__m49" for="m49">Be Green</label>
+      </div>
+    </form>
+    <ul class="sidemenu-list">
+      {% for link in linklists.collections.links %}
+        <li>
+          <a href="{{ link.url }}/{{ current_tags | join: "+"}}" class="{% if link.active %}active{% endif %}">{{ link.title }}</a>
+        </li>
       {% endfor %}
-      <li class="filter-by-color">
-        <span class="filter">Color</span>
-        <section>
-          <input type="checkbox" name="yellow">
-          <input type="checkbox" name="orange">
-          <input type="checkbox" name="red">
-          <input type="checkbox" name="pink">
-          <input type="checkbox" name="purple">
-          <input type="checkbox" name="brown">
-          <input type="checkbox" name="light-blue">
-          <input type="checkbox" name="blue">
-          <input type="checkbox" name="green">
-          <input type="checkbox" name="grey">
-          <input type="checkbox" name="silver">
-          <input type="checkbox" name="gold">
-          <input type="checkbox" name="crystal">
-          <input type="checkbox" name="white">
-          <input type="checkbox" name="ivory">
-          <input type="checkbox" name="black">
-        </section>
-      </li>
     </ul>
-  </form>
+    <form class="filters" action="/collections/{{collection_handle}}">
+      <h2>Filters</h2>
+      <ul>
+        <li>
+          <a class="filter" href="/collections/all/new">Latest Arrivals</a>
+        </li>
+        {% for filter in (1..5) %}
+          {% assign filter_name = "filter_" | append: filter | append: "_name" %}
+          {% unless settings[filter_name] == blank %}
+            <li>
+              <span class="filter">{{ settings[filter_name] }}</span>
+              <section>
+                {% for option in (1..20) %}
+                  {% assign option_field = "filter_" | append: filter | append: "_option_" | append: option %}
+                  {% unless settings[option_field] == blank %}
+                    <div class="btn__filter">
+                      <label>
+                        {% assign field = settings[option_field] %}
+
+                        {% if field == "Italy & Asia" %}
+                          <input type="checkbox" name="italy+asia">
+                        {% else %}
+                          <input type="checkbox" name="{{ field | handleize }}">
+                        {% endif %}
+                        <span></span>
+                        {{ settings[option_field] }}
+                      </label>
+                    </div>
+                  {% endunless %}
+                {% endfor %}
+              </section>
+            </li>
+          {% endunless %}
+        {% endfor %}
+        <li class="filter-by-color">
+          <span class="filter">Color</span>
+          <section>
+            <input type="checkbox" name="yellow">
+            <input type="checkbox" name="orange">
+            <input type="checkbox" name="red">
+            <input type="checkbox" name="pink">
+            <input type="checkbox" name="purple">
+            <input type="checkbox" name="brown">
+            <input type="checkbox" name="light-blue">
+            <input type="checkbox" name="blue">
+            <input type="checkbox" name="green">
+            <input type="checkbox" name="grey">
+            <input type="checkbox" name="silver">
+            <input type="checkbox" name="gold">
+            <input type="checkbox" name="crystal">
+            <input type="checkbox" name="white">
+            <input type="checkbox" name="ivory">
+            <input type="checkbox" name="black">
+          </section>
+        </li>
+      </ul>
+    </form>
+  </div>
 </div>
 </aside>
 <script type="text/javascript">
@@ -86,4 +88,38 @@
       "{{ tag | handleize }}"
     {% endfor %}
   ];
+
+  $(function() {
+    var $sidebar = $('.sidemenu-container'),
+        $catalog = $('.catalog-content');
+
+    var prevCatalogHeight = 0;
+
+    function setSidebarHeight() {
+      var newHeight = $catalog.height();
+
+      if (prevCatalogHeight != newHeight) {
+        $sidebar.height($catalog.height());
+
+        $(document.body).trigger("sticky_kit:recalc");
+
+        prevCatalogHeight = $catalog.height();
+      }
+    }
+
+    var throttleScroll;
+    
+    $('.sidemenu').stick_in_parent();
+
+    $(window).scroll(function() {
+      clearTimeout(throttleScroll);
+
+      throttleScroll = setTimeout(function() {
+        // Set sidebar height for sticky kit
+        setSidebarHeight();
+      }, 100);
+    });
+
+    setSidebarHeight();
+  });
 </script>
