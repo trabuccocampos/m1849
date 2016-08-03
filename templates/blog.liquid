@@ -90,49 +90,8 @@
 {% endfor %}
 </div>
 
-<script type="template/mustache" id="microtrends">
-  {% raw %}
-    {{#articles}}
-      <div class="microtrend grid__item one-whole" data-id="{{id}}">
-        <div class="grid">
-          <div class="microtrend grid__item large--two-thirds medium--two-thirds small--one-half" data-id="{{id}}">
-            <h3 class="microtrend--title" id="{{handle}}">{{title}}</h3>
-          </div>
-          <div class="grid__item large--one-third medium--one-third small--one-half lookbook__PDF">
-              <a target="_blank" href="{{attachment}}" type="print" name="print" class="btn">Download the PDF</a>
-          </div>
-          <div class="grid__item one-whole">
-            <div class="images">
-              <div>
-                <img data-src="{{#img_url.1024x1024}}{{image.src}}{{/img_url.1024x1024}}" src="{% endraw %}{{ "lookbook-placeholder.png" | asset_url }}{% raw %}" alt="{{title}} | Mazzucchelli 1849" class="lookbook__microtrend__img" data-pin-no-hover="true" data-pin-description="{{title}} | Mazzucchelli 1849" />
-              </div>
-              {{#images}}
-                <div><img data-src="{{.}}" alt="{{title}} | Mazzucchelli 1849" data-pin-no-hover="true" data-pin-description="{{title}} | Mazzucchelli 1849" /></div>
-              {{/images}}
-            </div>
-            <div class="materials lookbook__microtrend__materials"></div>
-          </div>
-        </div>
-      </div>
-    {{/articles}}
-  {% endraw %}
-</script>
-<script type="template/mustache" id="materials">
-  {% raw %}
-    {{#products}}
-        <a href="/products/{{handle}}">
-        <figure class="product-card">
-          {{#image}}
-            <img data-src="{{image_url}}" src="{% endraw %}{{ "no-image-compact.png" | asset_url }}{% raw %}" alt="{{title}} | Mazzucchelli 1849" data-pin-no-hover="true" data-pin-description="{{title}} | Mazzucchelli 1849">
-          {{/image}}
-          {{^image}}
-            {% endraw %}{{ "no-image-compact.png" | asset_url | img_tag }}{% raw %}
-          {{/image}}
-        </figure>
-        </a>
-    {{/products}}
-  {% endraw %}
-</script>
+{% include 'microtrends' %}
+
 <!-- <h4 class="material--title"><a href="/products/{{handle}}">{{title}}</a></h4> -->
 <script type="text/javascript">
   Shopify.article_ids = "{{ blog.articles | map: "id" | join: "," }}";

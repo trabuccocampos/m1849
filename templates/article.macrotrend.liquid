@@ -5,8 +5,8 @@
   {% assign number_of_comments = article.comments_count | plus: 1 %}
 {% endif %}
 
-<div class="grid">
-  <article class="grid__item large--five-sixths push--large--one-twelfth article" itemscope itemtype="http://schema.org/Article">
+<div class="grid lookbook">
+  <article class="grid__item large--five-sixths push--large--one-twelfth article lookbook__macrotrend" data-id="{{article.id}}" itemscope itemtype="//schema.org/Article">
 
     <header class="section-header text-center">
       <h1>{{ article.title }}</h1>
@@ -19,22 +19,8 @@
       <div class="grid__item large--one-whole">
         <img src="{{ article.image | img_url: "1024x1024" }}" alt="{{ article.title }} | Mazzucchelli1849" class="lookbook__microtrend__main__img">
       </div>
-      <div class="grid__item large--one-whole">
-        <div class="materials lookbook__microtrend__materials" data-relatable="article.products" data-relatable-id="{{ article.id }}">
-          {% raw %}
-            {{#products}}
-              <a href="/products/{{handle}}">
-                <figure class="product-card">
-                  <img src="{{#img_url.medium}}{{image.src}}{{/img_url.medium}}" alt="{{title}} | Mazzucchelli1849">
-                </figure>
-                <!-- <p>{{title}}</p> -->
-              </a>
-            {{/products}}
-          {% endraw %}
-        </div>
-      </div>
       <div class="grid__item large--one-whole lookbook__microtrend__footer">
-
+        <div class="microtrends"></div>
         <ul class="tags tags--article inline-list">
           {% include 'tags-article' %}
         </ul>
@@ -145,7 +131,8 @@
   </article>
 </div>
 
-<hr class="hr--medium hr--clear">
-<div class="text-center">
-  <a href="{{ blog.url }}" class="return-link">&larr; {{ 'blogs.article.back_to_blog' | t: title: blog.title }}</a>
-</div>
+{% include 'microtrends'%}
+<script type="text/javascript">
+  Shopify.article_ids = [{{article.id}}];
+</script>
+{{ 'article.js' | asset_url | script_tag }}

@@ -73,7 +73,7 @@
               var url = _p.image.src.replace(pattern, '_medium.$1?');
               article.products[product].image_url = url;
             }
-            
+
             var output = Mustache.render($material, articles[id]);
             var $html = $.parseHTML(output);
 
@@ -117,7 +117,7 @@
           if (articles.hasOwnProperty(id)) {
             var output = Mustache.render($micro, articleImages(articles[id]));
             var $html = $.parseHTML(output);
-
+            
             var $macrotrend = $('.lookbook__macrotrend[data-id="'+id+'"]');
             var $header = $macrotrend.find('.macrotrend-header');
             var $microtrends = $macrotrend.find('.microtrends');
