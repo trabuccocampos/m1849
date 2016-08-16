@@ -27,7 +27,7 @@
                 <a href="/products/{{handle}}">
                 <figure class="product-card">
                   {{#image}}
-                    <img src="{{#img_url.medium}}{{image.src}}{{/img_url.medium}}" alt="{{title}} Mazzucchelli1849">
+                    <img src="{{image.src}}" alt="{{title}} Mazzucchelli1849">
                   {{/image}}
                   {{^image}}
                     {% endraw %}{{ "no-image-compact.png" | asset_url | img_tag }}{% raw %}
