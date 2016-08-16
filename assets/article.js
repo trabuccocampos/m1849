@@ -34,7 +34,6 @@
       $images.slick({
         infinite: true,
         dots: true,
-        easing: 'easeOutQuint',
         speed: 600,
         autoplay: true
       })
@@ -117,7 +116,7 @@
           if (articles.hasOwnProperty(id)) {
             var output = Mustache.render($micro, articleImages(articles[id]));
             var $html = $.parseHTML(output);
-            
+
             var $macrotrend = $('.lookbook__macrotrend[data-id="'+id+'"]');
             var $header = $macrotrend.find('.macrotrend-header');
             var $microtrends = $macrotrend.find('.microtrends');

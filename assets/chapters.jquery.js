@@ -22,7 +22,7 @@ $.fn.chapters = function(options) {
   }
 
   function setHash($elem) {
-    if ($elem.attr('id')) {
+    if ($elem.attr('id') && history.pushState) {
       history.pushState(null, null, "#" + $elem.attr('id'));
     }
   }
@@ -55,12 +55,18 @@ $.fn.chapters = function(options) {
         scrubbing = true;
 
         setHash($heading);
+        var distance = $heading.offset().top - options.scrollOffset;
 
-        $('html,body').animate({
-          scrollTop: ($heading.offset().top - options.scrollOffset) + "px"
-        }, options.speed, options.easing, function() {
-          scrubbing = false;
-        });
+        if (window.scrollY) {
+          $('html,body').animate({
+            scrollTop: distance + "px"
+          }, options.speed, options.easing, function() {
+            scrubbing = false;
+          });
+        } else {
+          $(window).scrollTop(distance);
+          setActiveHeading();
+        }
       });
     });
 
@@ -74,7 +80,7 @@ $.fn.chapters = function(options) {
   // Find the closest heading and set active
   function setActiveHeading() {
     var distances = $headings.map(function(index, heading) {
-      var offset = Math.abs($(this).offset().top - window.scrollY)
+      var offset = Math.abs($(this).offset().top - $(window).scrollTop())
       return {
         index: index,
         distance: Math.round(offset)
