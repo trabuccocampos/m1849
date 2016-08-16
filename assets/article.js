@@ -16,6 +16,13 @@
     }
   }
 
+  function resizeImage(image, size) {
+    var pattern = /\.(jpg|jpeg|png|gif)\?/;
+    var url = image.replace(pattern, '_'+size+'.$1?');
+
+    return url;
+  }
+
   function init() {
     var $micro = $('#microtrends').html();
     var $material = $('#materials').html();
@@ -67,9 +74,8 @@
             // methods
             for (product in article.products) {
               var _p = article.products[product];
+              var url = resizeImage(_p.image.src, 'medium');
 
-              var pattern = /\.(jpg|jpeg|png|gif)\?/;
-              var url = _p.image.src.replace(pattern, '_medium.$1?');
               article.products[product].image_url = url;
             }
 
@@ -86,6 +92,7 @@
       for (a in article.articles) {
         if (article.articles.hasOwnProperty(a)) {
           var _article = article.articles[a];
+          _article.image = resizeImage(_article.image.src, '1024x1024');
           _article.images = [];
 
           for (meta in _article.metafields) {
@@ -94,7 +101,11 @@
 
             if (_article.metafields.hasOwnProperty(meta) && value.trim() != '') {
               if (metafield.namespace == 'images') {
-                _article.images.push(value);
+                // Do this because for whatever reason IE doens't like mustache
+                // methods
+                var url = resizeImage(value, '1024x1024');
+
+                _article.images.push(url);
               } else if (metafield.key == 'attachment') {
                 _article.attachment = value;
               }
