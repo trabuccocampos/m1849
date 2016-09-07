@@ -109,7 +109,12 @@
                             <td {% if key == "color_code" %}data-color-code="{{ field }}"{% endif %}>
                               {% assign link_keys = "temple,front" | split: ","  %}
                               {% if link_keys contains key %}
-                                <a href="/products/{{ field }}">{{ field }}</a>
+                                {% assign key_url_field = key | append: "_url" %}
+                                {% assign path = product.metafields[place][key_url_field] %}
+                                {% if path == blank %}
+                                  {% assign path = field %}
+                                {% endif %}
+                                <a href="/products/{{ path }}">{{ field }}</a>
                               {% else %}
                                 {{ field }}
                               {% endif %}

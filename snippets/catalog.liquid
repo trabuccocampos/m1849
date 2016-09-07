@@ -53,6 +53,9 @@
                   {% endfor %}
                 {% endcapture %}
                 {% assign new_tags = new_tags | remove_first: "+" | replace: " ", "" | strip_newlines %}
+                {% if new_tags == blank %}
+                  {% assign new_tags = "/collections/" | append: collection.handle %}
+                {% endif %}
                 <a href="{{ new_tags }}" class="catalog__tags--close">
                   <svg viewBox="0 -9 40 40">
                     <path class="close-x" d="M 10,10 L 30,30 M 30,10 L 10,30"></path>
