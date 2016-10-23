@@ -4,7 +4,7 @@
     <section class="front-view-container">
       <figure class="product-card">
         <span class="color-code">{{ product.title }}</span>
-        <img src="{% if image_count > 0 %}{{ product.featured_image | img_url: "grande" }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
+        <img src="{% if image_count > 0 %}{{ product.featured_image | img_url: "grande" }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" data-pin-description="{{ product.title | escape }} | Mazzucchelli1849" />
       </figure>
     </section>
     <footer>
@@ -19,7 +19,7 @@
       {% for image in product.images reversed %}
         {% if forloop.index != 1 and forloop.index != product.images.size %}
           <figure class="product-card" data-image-count="{{ image_count }}">
-            <img src="{% if image_count > 0 %}{{ image.src | img_url: 'large' }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
+            <img src="{% if image_count > 0 %}{{ image.src | img_url: 'large' }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" data-pin-description="{{ product.title | escape }} | Mazzucchelli1849" data-pin-nopin="true" />
           </figure>
         {% endif %}
       {% endfor %}
@@ -33,7 +33,7 @@
     <div class="side-view-images">
       <section class="side-view-container">
         <figure>
-          <img src="{% if image_count > 0 %}{{ product.featured_image | img_url: "grande" }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
+          <img src="{% if image_count > 0 %}{{ product.featured_image | img_url: "grande" }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" data-pin-description="{{ product.title | escape }} | Mazzucchelli1849" data-pin-nopin="true" />
         </figure>
       </section>
       <footer>
@@ -49,7 +49,7 @@
     <div class="side-view-images" data-image-count="{{ image_count }}">
       <section class="side-view-container">
         <figure>
-          {{ product.images.last | img_url: "grande" | img_tag }}
+          <img src="{{ product.images.last | img_url: "grande" }}" alt="{{ product.title | escape }}" data-pin-description="{{ product.title | escape }} | Mazzucchelli1849" data-pin-nopin="true" />
         </figure>
       </section>
       <footer>
@@ -67,7 +67,7 @@
         {% for image in product.images %}
           {% if forloop.index != 1 and forloop.index != product.images.size %}
             <figure>
-              <img src="{% if image_count > 0 %}{{ image.src | img_url: 'large' }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" />
+              <img src="{% if image_count > 0 %}{{ image.src | img_url: 'large' }}{% else %}{{ 'no-image-compact.png' | asset_url }}{% endif %}" alt="{{ product.title | escape }}" data-pin-description="{{ product.title | escape }} | Mazzucchelli1849" data-pin-nopin="true" />
             </figure>
           {% endif %}
         {% endfor %}
@@ -82,8 +82,9 @@
   {% endif %}
   <div class="back-view-image" data-image-count="{{ image_count }}">
     <section class="back-view-container">
-      <figure class="product-card">
-        {{ product.images.last | img_url: "grande" | img_tag }}
+      <figure class="product-card" data-pin-nopin="true">
+        <!-- {{ product.images.last | img_url: "grande" | img_tag }} -->
+        <img src="{{ product.images.last | img_url: "grande" }}" alt="{{ product.title | escape }}" data-pin-description="{{ product.title | escape }} | Mazzucchelli1849" data-pin-nopin="true" />
       </figure>
     </section>
     <footer>

@@ -43,7 +43,7 @@
     {% if settings.share_pinterest %}
       <a target="_blank" href="//pinterest.com/pin/create/button/?url={{ permalinkURL }}&amp;media={{ product.featured_image | product_img_url: '1024x1024' }}&amp;description={{ shareTitle }} &ndash; {{ page_title }} &ndash; {{ shop.name }}" class="share-pinterest">
         <span class="icon icon-pinterest" aria-hidden="true"></span>
-        <span class="share-title">{{ 'general.social.share_on_pinterest' | t }}</span>
+        <!-- <span class="share-title">{{ 'general.social.share_on_pinterest' | t }}</span> -->
         <!-- <span class="share-count">0</span> -->
       </a>
     {% endif %}
@@ -59,7 +59,7 @@
     {% if settings.share_pinterest %}
       <a target="_blank" data-pin-do="buttonBookmark" href="//pinterest.com/pin/create/button/?url={{ shop.url }}&amp;description={{ page_title }} &#124; {{ shop.name }}" class="share-pinterest">
         <span class="icon icon-pinterest" aria-hidden="true"></span>
-        <span class="share-title">{{ 'general.social.share_on_pinterest' | t }}</span>
+        <!-- <span class="share-title">{{ 'general.social.share_on_pinterest' | t }}</span> -->
         <!-- <span class="share-count">0</span> -->
       </a>
     {% endif %}
